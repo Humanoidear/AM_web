@@ -1,0 +1,250 @@
+:root {
+	--accent: #2337ff;
+	--accent-dark: #000d8a;
+	--black: 15, 18, 25;
+	--gray: 96, 115, 159;
+	--gray-light: 229, 233, 240;
+	--gray-dark: 34, 41, 57;
+	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
+	--box-shadow: 0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
+		0 16px 32px rgba(var(--gray), 33%);
+	--background-primary: 0, 0, 0;
+}
+@font-face {
+	font-family: 'MGNHumble';
+	src: url('/fonts/MGNHumbleRegular.otf');
+}
+@font-face {
+	font-family: 'InstrumentSans';
+	src: url('/fonts/InstrumentSans-Regular.ttf');
+	font-weight: 400;
+}
+@font-face {
+	font-family: 'InstrumentSans';
+	src: url('/fonts/InstrumentSans-SemiBold.ttf');
+	font-weight: 600;
+}
+@font-face {
+	font-family: 'InstrumentSans';
+	src: url('/fonts/InstrumentSans-Bold.ttf');
+	font-weight: 700;
+}
+@font-face {
+	font-family: 'InstrumentSans';
+	src: url('/fonts/InstrumentSans-Black.ttf');
+	font-weight: 900;
+}
+@font-face {
+	font-family: 'InstrumentSans';
+	src: url('/fonts/InstrumentSans-Italic.ttf');
+	font-style: italic;
+}
+@font-face {
+	font-family: 'InstrumentSans';
+	src: url('/fonts/InstrumentSans-SemiBoldItalic.ttf');
+	font-weight: 600;
+	font-style: italic;
+}
+@font-face {
+	font-family: 'InstrumentSans';
+	src: url('/fonts/InstrumentSans-BoldItalic.ttf');
+	font-weight: 700;
+	font-style: italic;
+}
+@font-face {
+	font-family: 'InstrumentSans';
+	src: url('/fonts/InstrumentSans-BlackItalic.ttf');
+	font-weight: 900;
+	font-style: italic;
+}
+
+
+body {
+	font-family: 'InstrumentSans', sans-serif;
+	margin: 0;
+	padding: 0;
+	text-align: left;
+	background: rgb(var(--background-primary));
+	background-size: 100% 600px;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	color: rgb(var(--gray-dark));
+	font-size: 20px;
+	line-height: 1.7;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0 0 0.5rem 0;
+	color: rgb(var(--black));
+	line-height: 1.2;
+}
+h1 {
+	font-family: 'MGNHumble';
+	font-size: 3.052em;
+}
+h2 {
+	font-size: 2.441em;
+}
+h3 {
+	font-size: 1.953em;
+}
+h4 {
+	font-size: 1.563em;
+}
+h5 {
+	font-size: 1.25em;
+}
+strong,
+b {
+	font-weight: 700;
+}
+a {
+	color: var(--accent);
+}
+a:hover {
+	color: var(--accent);
+}
+p {
+	font-family: 'InstrumentSans', system-ui;
+	font-weight: 400;
+}
+.fadeup {
+	animation: fadeup 0.1s ease-in-out forwards ;
+}
+.fadeout {
+	animation: fadeout 0.1s ease-in-out forwards ;
+}
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeup {
+	from {
+		opacity: 0;
+		top: 20px;
+	}
+	to {
+		opacity: 1;
+		top: 0px;
+	}
+}
+@keyframes fadeout {
+	from {
+		opacity: 1;
+		transform: translateY(0);
+	}
+	to {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+}
+.outline-text {
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: #ffffff;
+	/* mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1.0) 50%, transparent 100%); */
+    color: transparent;
+}
+.work-hover:hover a .arrow {
+	opacity: 1;
+	transition: 0.4s;
+}
+.work-hover a .arrow {
+	opacity: 0;
+	transition: 0.4s;
+}
+.work-hover:hover a div img {
+	transform: scale(1.1);
+	filter: brightness(0.6) blur(4px) grayscale(1);
+	transition: 0.4s;
+}
+.work-hover a div img {
+	transition: 0.4s;
+}
+.work-hover a h3 {
+	transition: 0.4s;
+}
+.work-hover:hover a h3 {
+	/* margin-left: 30px; */
+	transition: 0.4s;
+}
+.work-hover:hover a div:nth-child(1) {
+	border: 3px solid white;
+	transition: 0.2s;
+}
+.work-hover a div:nth-child(1) {
+	border: 3px solid transparent;
+	transition: 0.2s;
+}
+.follower {
+	transform: translate(-50%, -50%);
+}
+.prose p {
+	margin-bottom: 2em;
+}
+textarea {
+	width: 100%;
+	font-size: 16px;
+}
+input {
+	font-size: 16px;
+}
+table {
+	width: 100%;
+}
+code {
+	padding: 2px 5px;
+	background-color: rgb(var(--gray-light));
+	border-radius: 2px;
+}
+pre {
+	padding: 1.5em;
+	border-radius: 8px;
+}
+pre > code {
+	all: unset;
+}
+blockquote {
+	border-left: 4px solid var(--accent);
+	padding: 0 0 0 20px;
+	margin: 0px;
+	font-size: 1.333em;
+}
+hr {
+	border: none;
+	border-top: 1px solid rgb(var(--gray-light));
+}
+@media (max-width: 720px) {
+	body {
+		font-size: 18px;
+	}
+	main {
+		padding: 1em;
+	}
+}
+
+.sr-only {
+	border: 0;
+	padding: 0;
+	margin: 0;
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	/* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
+	clip: rect(1px 1px 1px 1px);
+	/* maybe deprecated but we need to support legacy browsers */
+	clip: rect(1px, 1px, 1px, 1px);
+	/* modern browsers, clip-path works inwards from each corner */
+	clip-path: inset(50%);
+	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
+	white-space: nowrap;
+}

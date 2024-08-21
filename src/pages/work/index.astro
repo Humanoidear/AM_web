@@ -1,0 +1,197 @@
+---
+import BaseHead from "../../components/BaseHead.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
+import { getCollection } from "astro:content";
+import FormattedDate from "../../components/FormattedDate.astro";
+
+const posts = (await getCollection("work")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <img class="opacity-30 absolute" src="/img/blob-2.avif" />
+    <main class="pt-48 flex flex-col items-center justify-center relative">
+      <div
+        class="mb-6 max-w-[900px] w-[95%] flex sm:flex-row flex-col items-center justify-between gap-20 z-10 relative"
+      >
+        <h1 class="m-0 text-6xl font-[MGNHumble] text-white translate-y-3">
+          Work
+        </h1>
+        <p
+          class="m-0 opacity-60 text-white sm:text-right font-[InstrumentSans]"
+        >
+          From personal branding to television work, here you can get a glimpse
+          of some of the work I've done along the years.
+        </p>
+      </div>
+      <div class="w-[95%] max-w-[900px] flex flex-row items-start gap-3 z-10 relative" id="filter"></div>
+	  <hr class="w-[95%] max-w-[900px] mt-5 opacity-10">
+      <section class="max-w-[900px] w-[95%] relative">
+        <ul class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+          {
+            posts.map((post, index) => (
+              <li
+                data-type={post.data.type}
+                class={`work-hover mt-3 hover:shadow-xl shadow-white z-0 hover:z-10 relative ${index === 0 ? "col-span-2 row-span-2" : ""} fade-in`}
+                style={`animation-delay: ${index * 0.1}s;`}
+              >
+                <a
+                  class="flex flex-row items-start justify-between gap-5 relative"
+                  href={`/work/${post.slug}/`}
+                >
+                  <div class="w-full h-full overflow-hidden relative">
+                    <img
+                      src={"/img/" + post.data.preview}
+                      alt=""
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <img
+                    src="https://unpkg.com/pixelarticons@1.8.1/svg/arrow-right.svg"
+                    class={`${index === 0 ? "top-5 right-5" : "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"} arrow w-10 invert absolute`}
+                  />
+                  <div
+                    class={`${index === 0 ? "left-5 bottom-5 items-start justify-start" : "follower w-[600px] opacity-0 items-center justify-center"} flex flex-col gap-3 pointer-events-none absolute`}
+                  >
+                    <h3
+                      class={`flex ${index === 0 ? "text-left" : "text-center"} m-0 fadeup font-[MGNHumble] text-white z-10 relative`}
+                      transition:name={`work-title-${post.data.title}`}
+                    >
+                      {post.data.title}
+                    </h3>
+                    <div
+                      class={`flex ${index === 0 ? "flex-col items-start" : "flex-row items-center gap-3"}`}
+                    >
+                      <p
+                        class={`${index === 0 ? "" : "px-3 py-1 backdrop-blur-md rounded-full bg-gray-600/60"} text-white text-2xl font-semibold`}
+                        transition:name={`work-title-${post.data.title}-type`}
+                      >
+                        {post.data.type}
+                      </p>
+                      <p
+                        class={`${index === 0 ? "" : "px-3 py-1 backdrop-blur-md rounded-full bg-gray-600/60"} text-white`}
+                        transition:name={`work-title-${post.data.title}-year`}
+                      >
+                        {post.data.year}
+                      </p>
+                    </div>
+                  </div>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<script is:inline>
+  document.querySelectorAll(".work-hover").forEach((item) => {
+    item.addEventListener("mouseenter", (e) => {
+      const follower = item.querySelector(".follower");
+      if (follower) {
+        follower.style.display = "flex";
+        follower.style.opacity = "1";
+        follower.style.pointerEvents = "none";
+        item.style.transition = "transform 0.2s ease";
+      }
+    });
+
+    item.addEventListener("mousemove", (e) => {
+      const follower = item.querySelector(".follower");
+      if (follower) {
+        const rect = item.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        follower.style.left = `${x}px`;
+        follower.style.top = `${y}px`;
+
+        const translateX = (x / rect.width - 0.5) * 20;
+        const translateY = (y / rect.height - 0.5) * 20;
+        item.style.transform = `translate(${translateX}px, ${translateY}px) scale(1.05)`;
+        setTimeout(() => {
+          item.style.transition = "transform 0s";
+        }, 200);
+      }
+    });
+
+    item.addEventListener("mouseleave", (e) => {
+      const follower = item.querySelector(".follower");
+      if (follower) {
+        follower.style.display = "none";
+        follower.style.opacity = "0";
+        follower.style.pointerEvents = "none";
+        item.style.transition = "transform 0.3s ease";
+
+        // Reset translation
+        item.style.transform = "translate(0, 0)";
+      }
+    });
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const filterContainer = document.querySelector("#filter");
+    const items = document.querySelectorAll(".work-hover");
+
+    // Create filters from data-type attribute and also say how many items are there for each filter
+    const types = new Set();
+	types.add("All");
+    items.forEach((item) => {
+      types.add(item.dataset.type);
+    });
+    types.forEach((type) => {
+      const count = Array.from(items).filter(
+        (item) => item.dataset.type === type || type === "All"
+      ).length;
+      const filter = document.createElement("button");
+      filter.classList.add(
+        "filter",
+        "bg-white/20",
+		"flex",
+		"flex-row",
+		"items-center",
+		"gap-5",
+        "text-white",
+        "px-3",
+        "py-1",
+        "font-semibold",
+        "hover:bg-white/30",
+        "hover:text-white",
+        "hover:shadow-lg",
+        "transition",
+        "duration-200"
+      );
+      filter.dataset.type = type;
+      filter.innerHTML = `<b>${type}</b> <p class="opacity-30">${count}</p>`;
+      filterContainer.appendChild(filter);
+    });
+
+    // Re-select filters after they are added to the DOM
+    const filters = document.querySelectorAll(".filter");
+
+    // Filter items
+    filters.forEach((filter) => {
+      filter.addEventListener("click", () => {
+        const type = filter.dataset.type;
+        items.forEach((item) => {
+          if (type === "All" || item.dataset.type === type) {
+            item.style.display = "block";
+          } else {
+            item.style.display = "none";
+          }
+        });
+      });
+    });
+  });
+</script>
