@@ -1,5 +1,5 @@
 ---
-title: 'Cerca de ti (RTVE)2'
+title: 'Cerca de ti (RTVE)'
 type: 'Personal project'
 services: 
     - Branding
@@ -7,7 +7,7 @@ services:
     - TV Set
 year: '2022 - 2024'
 pubDate: 'Jul 08 2022'
-preview: '/preview/crosss-test.png'
+preview: '/preview/cdt.avif'
 heroImage: '/cardedeu-test.png'
 ---
 

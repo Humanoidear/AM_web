@@ -18,8 +18,8 @@ const posts = (await getCollection("work")).sort(
   </head>
   <body>
     <Header />
-    <img class="opacity-30 absolute" src="/img/blob-2.avif" />
-    <main class="pt-48 flex flex-col items-center justify-center relative">
+    <img class="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 rotate-90 opacity-30 absolute" src="/img/blob-1.webp" />
+    <main class="pt-36 flex flex-col items-center justify-center relative">
       <div
         class="mb-6 max-w-[900px] w-[95%] flex sm:flex-row flex-col items-center justify-between gap-20 z-10 relative"
       >
@@ -27,21 +27,21 @@ const posts = (await getCollection("work")).sort(
           Work
         </h1>
         <p
-          class="m-0 opacity-60 text-white sm:text-right font-[InstrumentSans]"
+          class="m-0 opacity-0 text-white sm:text-right font-[InstrumentSans]"
         >
           From personal branding to television work, here you can get a glimpse
           of some of the work I've done along the years.
         </p>
       </div>
       <div class="w-[95%] max-w-[900px] flex flex-row items-start gap-3 z-10 relative" id="filter"></div>
-	  <hr class="w-[95%] max-w-[900px] mt-5 opacity-10">
+	  <hr class="w-[95%] max-w-[900px] mt-3 mb-1 opacity-10">
       <section class="max-w-[900px] w-[95%] relative">
-        <ul class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+        <ul class="mt-3 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
           {
             posts.map((post, index) => (
               <li
                 data-type={post.data.type}
-                class={`work-hover mt-3 hover:shadow-xl shadow-white z-0 hover:z-10 relative ${index === 0 ? "col-span-2 row-span-2" : ""} fade-in`}
+                class={`work-hover hover:shadow-xl shadow-white z-0 hover:z-10 relative ${index === 0 ? "col-span-2 row-span-2" : ""} fade-in`}
                 style={`animation-delay: ${index * 0.1}s;`}
               >
                 <a
@@ -53,6 +53,7 @@ const posts = (await getCollection("work")).sort(
                       src={"/img/" + post.data.preview}
                       alt=""
                       class="w-full h-full object-cover"
+					  transition:name={`work-title-${post.data.title}-image`}
                     />
                   </div>
                   <img
@@ -60,7 +61,7 @@ const posts = (await getCollection("work")).sort(
                     class={`${index === 0 ? "top-5 right-5" : "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"} arrow w-10 invert absolute`}
                   />
                   <div
-                    class={`${index === 0 ? "left-5 bottom-5 items-start justify-start" : "follower w-[600px] opacity-0 items-center justify-center"} flex flex-col gap-3 pointer-events-none absolute`}
+                    class={`${index === 0 ? "left-5 bottom-5 items-start justify-start" : "follower w-[600px] gap-3 opacity-0 items-center justify-center"} flex flex-col pointer-events-none absolute`}
                   >
                     <h3
                       class={`flex ${index === 0 ? "text-left" : "text-center"} m-0 fadeup font-[MGNHumble] text-white z-10 relative`}
@@ -157,7 +158,6 @@ const posts = (await getCollection("work")).sort(
       const filter = document.createElement("button");
       filter.classList.add(
         "filter",
-        "bg-white/20",
 		"flex",
 		"flex-row",
 		"items-center",
@@ -166,7 +166,7 @@ const posts = (await getCollection("work")).sort(
         "px-3",
         "py-1",
         "font-semibold",
-        "hover:bg-white/30",
+        "hover:bg-white/10",
         "hover:text-white",
         "hover:shadow-lg",
         "transition",
@@ -183,6 +183,8 @@ const posts = (await getCollection("work")).sort(
     // Filter items
     filters.forEach((filter) => {
       filter.addEventListener("click", () => {
+		filters.forEach((f) => f.classList.remove("bg-white/20"));
+		filter.classList.add("bg-white/20");
         const type = filter.dataset.type;
         items.forEach((item) => {
           if (type === "All" || item.dataset.type === type) {

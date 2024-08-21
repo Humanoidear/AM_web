@@ -1,13 +1,13 @@
 ---
-title: 'Ratafia TV2'
-type: 'Television'
+title: 'alex malvehy'
+type: 'Personal project'
 services: 
     - Branding
     - GFX Package
     - TV Set
 year: '2022 - 2024'
 pubDate: 'Jul 08 2022'
-preview: '/preview/ratafia-test.png'
+preview: '/preview/alexmalvehy.avif'
 heroImage: '/cardedeu-test.png'
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: 'Gerard Llobet2'
+title: 'Gerard Llobet 2'
 type: 'Website'
 services: 
     - Branding

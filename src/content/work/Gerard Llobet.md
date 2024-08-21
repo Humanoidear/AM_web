@@ -7,7 +7,7 @@ services:
     - TV Set
 year: '2022 - 2024'
 pubDate: 'Jul 08 2022'
-preview: '/preview/gerard-test.png'
+preview: '/preview/gerard.avif'
 heroImage: '/cardedeu-test.png'
 ---
 

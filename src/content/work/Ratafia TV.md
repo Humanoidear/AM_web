@@ -6,8 +6,8 @@ services:
     - GFX Package
     - TV Set
 year: '2022 - 2024'
-pubDate: 'Jul 08 2022'
-preview: '/preview/ratafia-test.png'
+pubDate: 'Jul 08 2024'
+preview: '/preview/ratafia.avif'
 heroImage: '/cardedeu-test.png'
 ---
 
