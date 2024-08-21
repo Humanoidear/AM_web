@@ -153,6 +153,9 @@ p {
 	/* mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1.0) 50%, transparent 100%); */
     color: transparent;
 }
+.work-hover:hover a div div p {
+	backdrop-filter: blur(4px);
+}
 .work-hover:hover a .arrow {
 	opacity: 1;
 	transition: 0.4s;

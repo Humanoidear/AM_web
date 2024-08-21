@@ -1,6 +1,6 @@
 ---
 title: 'Cardedeu Informatiu'
-type: 'Personal project'
+type: 'Category test'
 services: 
     - Branding
     - GFX Package

@@ -19,24 +19,24 @@ const posts = (await getCollection("work")).sort(
   <body>
     <Header />
     <img class="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 rotate-90 opacity-30 absolute" src="/img/blob-1.webp" />
-    <main class="pt-36 flex flex-col items-center justify-center relative">
+    <main class="pt-20 sm:pt-36 flex flex-col items-center justify-center relative">
       <div
-        class="mb-6 max-w-[900px] w-[95%] flex sm:flex-row flex-col items-center justify-between gap-20 z-10 relative"
+        class="mb-6 max-w-[900px] w-[95%] flex flex-row items-center justify-between gap-20 z-10 relative"
       >
         <h1 class="m-0 text-6xl font-[MGNHumble] text-white translate-y-3">
           Work
         </h1>
         <p
-          class="m-0 opacity-0 text-white sm:text-right font-[InstrumentSans]"
+          class="m-0 hidden text-white sm:text-right font-[InstrumentSans]"
         >
           From personal branding to television work, here you can get a glimpse
           of some of the work I've done along the years.
         </p>
       </div>
-      <div class="w-[95%] max-w-[900px] flex flex-row items-start gap-3 z-10 relative" id="filter"></div>
+      <div class="w-[95%] max-w-[900px] sm:overflow-x-visible overflow-x-scroll flex flex-row items-start gap-3 z-10 relative" id="filter"></div>
 	  <hr class="w-[95%] max-w-[900px] mt-3 mb-1 opacity-10">
       <section class="max-w-[900px] w-[95%] relative">
-        <ul class="mt-3 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+        <ul class="mt-3 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 grid-rows-2 gap-3">
           {
             posts.map((post, index) => (
               <li
@@ -73,13 +73,13 @@ const posts = (await getCollection("work")).sort(
                       class={`flex ${index === 0 ? "flex-col items-start" : "flex-row items-center gap-3"}`}
                     >
                       <p
-                        class={`${index === 0 ? "" : "px-3 py-1 backdrop-blur-md rounded-full bg-gray-600/60"} text-white text-2xl font-semibold`}
+                        class={`${index === 0 ? "" : "px-3 py-1 rounded-full bg-gray-600/60"} text-white text-2xl font-semibold`}
                         transition:name={`work-title-${post.data.title}-type`}
                       >
                         {post.data.type}
                       </p>
                       <p
-                        class={`${index === 0 ? "" : "px-3 py-1 backdrop-blur-md rounded-full bg-gray-600/60"} text-white`}
+                        class={`${index === 0 ? "" : "px-3 py-1 rounded-full bg-gray-600/60"} text-white`}
                         transition:name={`work-title-${post.data.title}-year`}
                       >
                         {post.data.year}
@@ -141,59 +141,136 @@ const posts = (await getCollection("work")).sort(
     });
   });
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const filterContainer = document.querySelector("#filter");
-    const items = document.querySelectorAll(".work-hover");
+ document.addEventListener("DOMContentLoaded", () => {
+  const filterContainer = document.querySelector("#filter");
+  const items = document.querySelectorAll(".work-hover");
 
-    // Create filters from data-type attribute and also say how many items are there for each filter
-    const types = new Set();
-	types.add("All");
-    items.forEach((item) => {
-      types.add(item.dataset.type);
-    });
-    types.forEach((type) => {
+  // Create filters from data-type attribute and also say how many items are there for each filter
+  const types = new Set();
+  types.add("All");
+  items.forEach((item) => {
+    types.add(item.dataset.type);
+  });
+
+  const typesArray = Array.from(types);
+  const maxVisibleFilters = 5;
+
+  // Function to create a filter button
+  const createFilterButton = (type, count) => {
+    const filter = document.createElement("button");
+    filter.classList.add(
+      "filter",
+      "flex",
+      "flex-row",
+      "items-center",
+      "gap-5",
+      "text-white",
+      "px-3",
+      "py-1",
+      "font-semibold",
+      "hover:bg-white/10",
+      "hover:text-white",
+      "hover:shadow-lg",
+      "transition",
+      "duration-200"
+    );
+    filter.dataset.type = type;
+    filter.innerHTML = `<b style="white-space: nowrap;">${type}</b> <p class="opacity-30">${count}</p>`;
+    return filter;
+  };
+
+  // Add visible filters
+  typesArray.slice(0, maxVisibleFilters).forEach((type) => {
+    const count = Array.from(items).filter(
+      (item) => item.dataset.type === type || type === "All"
+    ).length;
+    const filter = createFilterButton(type, count);
+    filterContainer.appendChild(filter);
+  });
+
+  // Add remaining filters to dropdown if they exceed maxVisibleFilters
+  if (typesArray.length > maxVisibleFilters) {
+    const dropdown = document.createElement("div");
+    dropdown.classList.add("relative", "inline-block", "text-left");
+
+    const dropdownButton = document.createElement("button");
+    dropdownButton.classList.add(
+      "filter",
+      "flex",
+      "flex-row",
+      "items-center",
+      "gap-5",
+      "text-white",
+      "px-3",
+      "py-1",
+      "font-semibold",
+      "hover:bg-white/10",
+      "hover:text-white",
+      "hover:shadow-lg",
+      "transition",
+      "duration-200"
+    );
+    dropdownButton.innerHTML = `<b><img src="https://unpkg.com/pixelarticons@1.8.1/svg/chevron-down.svg" class="invert w-8 h-8"/></b>`;
+    dropdown.appendChild(dropdownButton);
+
+    const dropdownContent = document.createElement("div");
+    dropdownContent.classList.add(
+      "dropdown-content",
+      "absolute",
+      "hidden",
+      "bg-black",
+	  "border",
+	  "border-white",
+      "text-white",
+      "shadow-lg",
+      "mt-0",
+      "p-1",
+      "z-10"
+    );
+
+    typesArray.slice(maxVisibleFilters).forEach((type) => {
       const count = Array.from(items).filter(
         (item) => item.dataset.type === type || type === "All"
       ).length;
-      const filter = document.createElement("button");
-      filter.classList.add(
-        "filter",
-		"flex",
-		"flex-row",
-		"items-center",
-		"gap-5",
-        "text-white",
-        "px-3",
-        "py-1",
-        "font-semibold",
-        "hover:bg-white/10",
-        "hover:text-white",
-        "hover:shadow-lg",
-        "transition",
-        "duration-200"
-      );
-      filter.dataset.type = type;
-      filter.innerHTML = `<b>${type}</b> <p class="opacity-30">${count}</p>`;
-      filterContainer.appendChild(filter);
+      const filter = createFilterButton(type, count);
+      dropdownContent.appendChild(filter);
     });
 
-    // Re-select filters after they are added to the DOM
-    const filters = document.querySelectorAll(".filter");
+    dropdown.appendChild(dropdownContent);
+    filterContainer.appendChild(dropdown);
 
-    // Filter items
-    filters.forEach((filter) => {
-      filter.addEventListener("click", () => {
-		filters.forEach((f) => f.classList.remove("bg-white/20"));
-		filter.classList.add("bg-white/20");
-        const type = filter.dataset.type;
-        items.forEach((item) => {
-          if (type === "All" || item.dataset.type === type) {
-            item.style.display = "block";
-          } else {
-            item.style.display = "none";
-          }
-        });
+    // Toggle dropdown visibility on hover
+    dropdown.addEventListener("mouseenter", () => {
+      dropdownContent.classList.remove("hidden");
+    });
+
+    dropdown.addEventListener("mouseleave", () => {
+      dropdownContent.classList.add("hidden");
+    });
+  }
+
+  // Re-select filters after they are added to the DOM
+  const filters = document.querySelectorAll(".filter");
+
+  // Filter items
+  filters.forEach((filter) => {
+    filter.addEventListener("click", (event) => {
+      if (filter.innerHTML.includes("img")) {
+        // Prevent "More" button from activating a filter
+        event.preventDefault();
+        return;
+      }
+      filters.forEach((f) => f.classList.remove("bg-white/20"));
+      filter.classList.add("bg-white/20");
+      const type = filter.dataset.type;
+      items.forEach((item) => {
+        if (type === "All" || item.dataset.type === type) {
+          item.style.display = "block";
+        } else {
+          item.style.display = "none";
+        }
       });
     });
   });
+});
 </script>
