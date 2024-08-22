@@ -9,7 +9,7 @@ const { pathname } = Astro.url;
 const subpath = pathname.match(/[^\/]+/g);
 const isActive = href === pathname || href === '/' + subpath?.[0];
 ---
-<a href={href} id={href} class:list={[className, { active: isActive }]} {...props} onmousedown="handleMouseOver({id})">
+<a href={href} id={href.toString()} class:list={[className, { active: isActive }]} {...props} onmousedown="handleMouseOver({id})"></a>
     <slot />
 </a>
 
