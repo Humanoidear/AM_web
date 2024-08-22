@@ -2,49 +2,14 @@
 import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE } from '../consts';
 ---
-<header>
-	<nav>
+<header class="p-8 w-full h-20 z-50 relative">
+	<nav class="flex flex-row items-center justify-between gap-5">
 		<h2><a href="/"><img src="/img/am.svg" alt="Go home" width="70px"></a></h2>
-		<div class="internal-links sm:block hidden">
+		<div class="flex-row items-center gap-6 internal-links sm:flex hidden">
 			<HeaderLink href="/about">about</HeaderLink>
 			<HeaderLink href="/work">work</HeaderLink>
 			<HeaderLink href="/contact">contact</HeaderLink>
+			<button class="btn"><img src="https://unpkg.com/pixelarticons@1.8.1/svg/menu.svg" alt="Socials" class="invert w-8 h-8"/></button>
 		</div>
 	</nav>
 </header>
-<style>
-	header {
-		width: 100%;
-		margin: 0;
-		padding: 0 1em;
-		position: fixed;
-	}
-	h2 {
-		margin: 0;
-		font-size: 1em;
-	}
-
-	h2 a,
-	h2 a.active {
-		text-decoration: none;
-	}
-	nav {
-		display: flex;
-		padding: 0.5em 2em;
-		align-items: center;
-		justify-content: space-between;
-	}
-	nav a {
-		padding: 1em 0.8em;
-		text-decoration: none;
-	}
-	.social-links,
-	.social-links a {
-		display: flex;
-	}
-	@media (max-width: 720px) {
-		.social-links {
-			display: none;
-		}
-	}
-</style>

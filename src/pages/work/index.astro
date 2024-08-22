@@ -4,7 +4,6 @@ import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
 import { getCollection } from "astro:content";
-import FormattedDate from "../../components/FormattedDate.astro";
 
 const posts = (await getCollection("work")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
@@ -24,7 +23,7 @@ const posts = (await getCollection("work")).sort(
 	  alt=""
     />
     <main
-      class="pt-20 sm:pt-36 flex flex-col items-center justify-center relative"
+      class="pt-20 flex flex-col items-center justify-center relative"
     >
       <div
         class="mb-6 max-w-[900px] w-[95%] flex flex-row items-center justify-between gap-20 z-10 relative"
@@ -51,8 +50,7 @@ const posts = (await getCollection("work")).sort(
             posts.map((post, index) => (
               <li
                 data-type={post.data.type}
-                class={`work-hover hover:shadow-xl shadow-white z-0 hover:z-10 relative ${index === 0 ? "col-span-2 row-span-2" : ""} fade-in`}
-                style={`animation-delay: ${index * 0.1}s;`}
+                class={`work-hover hover:shadow-xl shadow-white z-0 hover:z-10 relative ${index === 0 ? "col-span-2 row-span-2" : ""}`}
               >
                 <a
                   class="flex flex-row items-start justify-between gap-5 relative"

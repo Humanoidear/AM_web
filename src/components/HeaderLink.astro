@@ -9,20 +9,47 @@ const { pathname } = Astro.url;
 const subpath = pathname.match(/[^\/]+/g);
 const isActive = href === pathname || href === '/' + subpath?.[0];
 ---
-
-<a href={href} class:list={[className, { active: isActive }]} {...props}>
-	<slot />
+<a href={href} id={href} class:list={[className, { active: isActive }]} {...props} onmousedown="handleMouseOver({id})">
+    <slot />
 </a>
+
 <style>
-	a {
-		font-family: 'InstrumentSans', system-ui;
-		font-weight: 600;
-		font-size: 23px;
-		color: #ffffff60;
-		display: inline-block;
-		text-decoration: none;
-	}
-	a.active {
-		color: #ffffff;
-	}
+    a {
+        font-family: 'InstrumentSans', system-ui;
+        font-weight: 600;
+        font-size: 23px;
+        color: #ffffff60;
+        display: inline-block;
+        text-decoration: none;
+    }
+    a:hover {
+        color: #ffffff90;
+    }
+    a.active {
+        color: #ffffff;
+    }
+    span {
+        display: inline-block;
+        transition: font-family 0.3s ease;
+    }
+    .hovered {
+        font-family: 'MGNHumble', system-ui !important;
+    }
 </style>
+
+<script is:inline>
+    function handleMouseOver(event) {
+        const target = document.getElementById(event.id);
+        const text = target.innerText;
+        const letters = text.split('');
+		console.log(letters);
+        target.innerHTML = letters.map(letter => `<span>${letter}</span>`).join('');
+
+        const spans = target.querySelectorAll('span');
+        spans.forEach(span => {
+            if (Math.random() > 0.7) {
+                span.style.fontFamily = 'MGNHumble';
+            }
+        });
+    }
+</script>
