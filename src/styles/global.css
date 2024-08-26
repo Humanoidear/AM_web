@@ -6,61 +6,69 @@
 	--gray-light: 229, 233, 240;
 	--gray-dark: 34, 41, 57;
 	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
-	--box-shadow: 0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
-		0 16px 32px rgba(var(--gray), 33%);
+	--box-shadow: 0 2px 6px rgba(var(--gray), 25%),
+		0 8px 24px rgba(var(--gray), 33%), 0 16px 32px rgba(var(--gray), 33%);
 	--background-primary: 0, 0, 0;
 }
+
 @font-face {
-	font-family: 'MGNHumble';
-	src: url('/fonts/MGNHumbleRegular.otf');
+	font-family: "MGNHumble";
+	src: url("/fonts/MGNHumbleRegular.otf");
 }
+
 @font-face {
-	font-family: 'InstrumentSans';
-	src: url('/fonts/InstrumentSans-Regular.ttf');
+	font-family: "InstrumentSans";
+	src: url("/fonts/InstrumentSans-Regular.ttf");
 	font-weight: 400;
 }
+
 @font-face {
-	font-family: 'InstrumentSans';
-	src: url('/fonts/InstrumentSans-SemiBold.ttf');
+	font-family: "InstrumentSans";
+	src: url("/fonts/InstrumentSans-SemiBold.ttf");
 	font-weight: 600;
 }
+
 @font-face {
-	font-family: 'InstrumentSans';
-	src: url('/fonts/InstrumentSans-Bold.ttf');
+	font-family: "InstrumentSans";
+	src: url("/fonts/InstrumentSans-Bold.ttf");
 	font-weight: 700;
 }
+
 @font-face {
-	font-family: 'InstrumentSans';
-	src: url('/fonts/InstrumentSans-Black.ttf');
+	font-family: "InstrumentSans";
+	src: url("/fonts/InstrumentSans-Black.ttf");
 	font-weight: 900;
 }
+
 @font-face {
-	font-family: 'InstrumentSans';
-	src: url('/fonts/InstrumentSans-Italic.ttf');
-	font-style: italic;
-}
-@font-face {
-	font-family: 'InstrumentSans';
-	src: url('/fonts/InstrumentSans-SemiBoldItalic.ttf');
-	font-weight: 600;
-	font-style: italic;
-}
-@font-face {
-	font-family: 'InstrumentSans';
-	src: url('/fonts/InstrumentSans-BoldItalic.ttf');
-	font-weight: 700;
-	font-style: italic;
-}
-@font-face {
-	font-family: 'InstrumentSans';
-	src: url('/fonts/InstrumentSans-BlackItalic.ttf');
-	font-weight: 900;
+	font-family: "InstrumentSans";
+	src: url("/fonts/InstrumentSans-Italic.ttf");
 	font-style: italic;
 }
 
+@font-face {
+	font-family: "InstrumentSans";
+	src: url("/fonts/InstrumentSans-SemiBoldItalic.ttf");
+	font-weight: 600;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: "InstrumentSans";
+	src: url("/fonts/InstrumentSans-BoldItalic.ttf");
+	font-weight: 700;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: "InstrumentSans";
+	src: url("/fonts/InstrumentSans-BlackItalic.ttf");
+	font-weight: 900;
+	font-style: italic;
+}
 
 body {
-	font-family: 'InstrumentSans', sans-serif;
+	font-family: "InstrumentSans", sans-serif;
 	margin: 0;
 	padding: 0;
 	text-align: left;
@@ -68,10 +76,10 @@ body {
 	background-size: 100% 600px;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
-	color: rgb(var(--gray-dark));
 	font-size: 20px;
 	line-height: 1.7;
 }
+
 h1,
 h2,
 h3,
@@ -79,156 +87,260 @@ h4,
 h5,
 h6 {
 	margin: 0 0 0.5rem 0;
-	color: rgb(var(--black));
+	color: white;
 	line-height: 1.2;
 }
+
 h1 {
-	font-family: 'MGNHumble';
+	font-family: "MGNHumble";
 	font-size: 3.052em;
 }
+
 h2 {
 	font-size: 2.441em;
 }
+
 h3 {
 	font-size: 1.953em;
 }
+
 h4 {
 	font-size: 1.563em;
 }
+
 h5 {
 	font-size: 1.25em;
 }
+
 strong,
 b {
 	font-weight: 700;
 }
+
 a {
 	color: var(--accent);
 }
+
 a:hover {
 	color: var(--accent);
 }
+
 p {
-	font-family: 'InstrumentSans', system-ui;
+	font-family: "InstrumentSans", system-ui;
 	font-weight: 400;
+	color: white;
 }
+
+.slide-in-left {
+	animation: slideInLeft 0.5s forwards;
+}
+
+.slide-in-right {
+	animation: slideInRight 0.5s forwards;
+}
+
+.slide-out-left {
+	animation: slideOutLeft 0.5s forwards;
+}
+
+.slide-out-right {
+	animation: slideOutRight 0.5s forwards;
+}
+
+@keyframes slideInLeft {
+	from {
+		transform: translateX(-20px);
+		opacity: 0;
+	}
+
+	to {
+		transform: translateX(0);
+		opacity: 1;
+	}
+}
+
+@keyframes slideInRight {
+	from {
+		transform: translateX(20px);
+		opacity: 0;
+	}
+
+	to {
+		transform: translateX(0);
+		opacity: 1;
+	}
+}
+
+@keyframes slideOutLeft {
+	from {
+		transform: translateX(0);
+		opacity: 1;
+	}
+
+	to {
+		transform: translateX(-20px);
+		opacity: 0;
+	}
+}
+
+@keyframes slideOutRight {
+	from {
+		transform: translateX(0);
+		opacity: 1;
+	}
+
+	to {
+		transform: translateX(20px);
+		opacity: 0;
+	}
+}
+
 .fadeup {
-	animation: fadeup 0.1s ease-in-out forwards ;
+	animation: fadeup 0.1s ease-in-out forwards;
 }
+
 .fadeout {
-	animation: fadeout 0.1s ease-in-out forwards ;
+	animation: fadeout 0.1s ease-in-out forwards;
 }
+
 .fade-in {
-  opacity: 0;
-  animation: fadeIn 0.5s forwards;
+	opacity: 0;
+	animation: fadeIn 0.5s forwards;
 }
+
 @keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
+	to {
+		opacity: 1;
+	}
 }
+
 @keyframes fadeup {
 	from {
 		opacity: 0;
 		top: 20px;
 	}
+
 	to {
 		opacity: 1;
 		top: 0px;
 	}
 }
+
 @keyframes fadeout {
 	from {
 		opacity: 1;
 		transform: translateY(0);
 	}
+
 	to {
 		opacity: 0;
 		transform: translateY(20px);
 	}
 }
+
 .outline-text {
-    -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: #ffffff;
+	-webkit-text-stroke-width: 2px;
+	-webkit-text-stroke-color: #ffffff;
 	/* mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1.0) 50%, transparent 100%); */
-    color: transparent;
+	color: transparent;
 }
+
 .work-hover:hover a div div p {
 	backdrop-filter: blur(4px);
 }
+
 .work-hover:hover a .arrow {
 	opacity: 1;
 	transition: 0.4s;
 }
+
 .work-hover a .arrow {
 	opacity: 0;
 	transition: 0.4s;
 }
+
 .work-hover:hover a div img {
 	transform: scale(1.1);
 	filter: brightness(0.6) blur(4px) grayscale(1);
 	transition: 0.4s;
 }
+
 .work-hover a div img {
 	transition: 0.4s;
 }
+
 .work-hover a h3 {
 	transition: 0.4s;
 }
+
 .work-hover:hover a h3 {
 	/* margin-left: 30px; */
 	transition: 0.4s;
 }
+
 .work-hover:hover a div:nth-child(1) {
 	border: 3px solid white;
 	transition: 0.2s;
 }
+
 .work-hover a div:nth-child(1) {
 	border: 3px solid transparent;
 	transition: 0.2s;
 }
+
 .follower {
 	transform: translate(-50%, -50%);
 }
+
 .prose p {
 	margin-bottom: 2em;
 }
+
 textarea {
 	width: 100%;
 	font-size: 16px;
 }
+
 input {
 	font-size: 16px;
 }
+
 table {
 	width: 100%;
 }
+
 code {
 	padding: 2px 5px;
 	background-color: rgb(var(--gray-light));
 	border-radius: 2px;
 }
+
 pre {
 	padding: 1.5em;
 	border-radius: 8px;
 }
-pre > code {
+
+pre>code {
 	all: unset;
 }
+
 blockquote {
 	border-left: 4px solid var(--accent);
 	padding: 0 0 0 20px;
 	margin: 0px;
 	font-size: 1.333em;
 }
+
 hr {
 	border: none;
 	border-top: 1px solid rgb(var(--gray-light));
 }
+
 @media (max-width: 720px) {
 	body {
 		font-size: 18px;
 	}
+
 	main {
 		padding: 1em;
 	}

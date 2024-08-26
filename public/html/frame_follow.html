@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: black;
+            overflow: hidden;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(85, 20px);
+            grid-template-rows: repeat(50, 20px);
+        }
+        .tile {
+            width: 20px;
+            height: 20px;
+            background-color: black;
+            transition: background-color 0.1s;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid" id="grid">
+        <!-- Tiles will be generated here by JavaScript -->
+    </div>
+
+    <script>
+        const grid = document.getElementById('grid');
+        const tiles = [];
+        const gridSizeX = 85;
+        const gridSizeY = 50;
+        const tileSize = 20;
+
+        // Create the grid of tiles
+        for (let i = 0; i < gridSizeX * gridSizeY; i++) {
+            const tile = document.createElement('div');
+            tile.classList.add('tile');
+            grid.appendChild(tile);
+            tiles.push(tile);
+        }
+
+        // Calculate the distance between two points
+        function calculateDistance(x1, y1, x2, y2) {
+            return Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
+        }
+
+        // Mouse move event to light up the tiles
+        document.addEventListener('mousemove', (e) => {
+            const rect = grid.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+            tiles.forEach((tile, index) => {
+                const tileX = (index % gridSizeX) * tileSize + tileSize / 2;
+                const tileY = Math.floor(index / gridSizeX) * tileSize + tileSize / 2;
+                const distance = calculateDistance(mouseX, mouseY, tileX, tileY);
+
+                // Adjust the intensity based on distance
+                const intensity = Math.max(0, 1 - distance / 250);
+                const blueIntensity = Math.floor(intensity * 255); // Darker when far, brighter when close
+                tile.style.backgroundColor = `rgb(0, 0, ${blueIntensity})`;
+            });
+        });
+    </script>
+</body>
+</html>

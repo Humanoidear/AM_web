@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: black;
+            overflow: hidden;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(89, 20px);
+            grid-template-rows: repeat(50, 20px);
+            background-color: black;
+        }
+
+        .tile {
+            width: 20px;
+            height: 20px;
+            background-color: black;
+            transition: background-color 0.1s, opacity 0.1s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="grid" id="grid">
+        <!-- Tiles will be generated here by JavaScript -->
+    </div>
+
+    <script>
+        const grid = document.getElementById('grid');
+        const tiles = [];
+        const gridSizeX = 89;
+        const gridSizeY = 50;
+        const tileSize = 20;
+
+        // Create the grid of tiles
+        for (let i = 0; i < gridSizeX * gridSizeY; i++) {
+            const tile = document.createElement('div');
+            tile.classList.add('tile');
+            grid.appendChild(tile);
+            tiles.push(tile);
+        }
+
+        // Initialize the grid with all cells dead
+        let gridArray = Array.from({ length: gridSizeY }, () => Array.from({ length: gridSizeX }, () => 0));
+
+        // Function to update the grid based on Conway's Game of Life rules
+        function updateGrid() {
+            const newGrid = gridArray.map(arr => [...arr]);
+
+            for (let y = 0; y < gridSizeY; y++) {
+                for (let x = 0; x < gridSizeX; x++) {
+                    const neighbors = countNeighbors(gridArray, x, y);
+                    if (gridArray[y][x] === 1) {
+                        if (neighbors < 2 || neighbors > 3) {
+                            newGrid[y][x] = 0;
+                        }
+                    } else {
+                        if (neighbors === 3) {
+                            newGrid[y][x] = 1;
+                        }
+                    }
+                }
+            }
+
+            gridArray = newGrid;
+            renderGrid();
+        }
+
+        // Function to count the neighbors of a cell
+        function countNeighbors(grid, x, y) {
+            let count = 0;
+            for (let i = -1; i <= 1; i++) {
+                for (let j = -1; j <= 1; j++) {
+                    if (i === 0 && j === 0) continue;
+                    const nx = x + i;
+                    const ny = y + j;
+                    if (nx >= 0 && nx < gridSizeX && ny >= 0 && ny < gridSizeY) {
+                        count += grid[ny][nx];
+                    }
+                }
+            }
+            return count;
+        }
+
+        // Function to render the grid
+        function renderGrid() {
+            const centerX = gridSizeX / 2;
+            const centerY = gridSizeY / 2;
+            const maxDistance = Math.sqrt(centerX * centerX + centerY * centerY);
+
+            tiles.forEach((tile, index) => {
+                const x = index % gridSizeX;
+                const y = Math.floor(index / gridSizeX);
+                const distance = Math.sqrt((x - centerX) ** 2 + (y - centerY) ** 2);
+                const opacity = 0 + (distance / maxDistance) * 0.7;
+
+                tile.style.backgroundColor = gridArray[y][x] === 1 ? `rgba(0, 0, 255, ${opacity})` : 'black';
+            });
+        }
+
+        // Add mousemove event listener to the grid
+        grid.addEventListener('mousemove', (e) => {
+            const rect = grid.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+            const x = Math.floor(mouseX / tileSize);
+            const y = Math.floor(mouseY / tileSize);
+
+            if (x >= 0 && x < gridSizeX && y >= 0 && y < gridSizeY) {
+                gridArray[y][x] = 1; // Set the cell state to 1 (alive)
+                renderGrid();
+            }
+        });
+
+        // Update the grid at regular intervals
+        const intervalId = setInterval(updateGrid, 100);
+
+        // Initial render
+        renderGrid();
+    </script>
+</body>
+
+</html>

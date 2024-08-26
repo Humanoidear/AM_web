@@ -1,6 +1,5 @@
 ---
 import HeaderLink from './HeaderLink.astro';
-import { SITE_TITLE } from '../consts';
 ---
 <header class="p-8 w-full h-20 z-50 relative">
 	<nav class="flex flex-row items-center justify-between gap-5">
@@ -9,7 +8,14 @@ import { SITE_TITLE } from '../consts';
 			<HeaderLink href="/about">about</HeaderLink>
 			<HeaderLink href="/work">work</HeaderLink>
 			<HeaderLink href="/contact">contact</HeaderLink>
-			<button class="btn"><img src="https://unpkg.com/pixelarticons@1.8.1/svg/menu.svg" alt="Socials" class="invert w-8 h-8"/></button>
+			<button class="btn" onclick="document.getElementById('dropdown').classList.toggle('hidden');"><img src="https://unpkg.com/pixelarticons@1.8.1/svg/menu.svg" alt="Socials" class="invert w-8 h-8"/></button>
+			<div id="dropdown" class="top-20 right-8 dropdown-content absolute hidden bg-black border border-white text-white shadow-lg mt-0 p-1 z-10">
+				<a>Twitter</a>
+				<a>Behance</a>
+				<a>YouTube</a>
+				<a>Instagram</a>
+				<a>LinkedIn</a>
+			</div>
 		</div>
 	</nav>
 </header>

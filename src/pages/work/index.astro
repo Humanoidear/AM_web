@@ -17,14 +17,10 @@ const posts = (await getCollection("work")).sort(
   </head>
   <body>
     <Header />
-    <img
-      class="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 rotate-90 opacity-30 absolute"
-      src="/img/blob-1.webp"
-	  alt=""
-    />
-    <main
-      class="pt-20 flex flex-col items-center justify-center relative"
-    >
+    <iframe
+      src="/html/frame_pulse.html"
+      class="top-0 left-0 w-full h-full z-0 transition-all absolute"></iframe>
+    <main class="pt-20 flex flex-col items-center justify-center relative">
       <div
         class="mb-6 max-w-[900px] w-[95%] flex flex-row items-center justify-between gap-20 z-10 relative"
       >
@@ -66,7 +62,7 @@ const posts = (await getCollection("work")).sort(
                   </div>
                   <img
                     src="https://unpkg.com/pixelarticons@1.8.1/svg/arrow-right.svg"
-					alt="Open Project"
+                    alt="Open Project"
                     class={`${index === 0 ? "top-5 right-5" : "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"} arrow w-10 invert absolute`}
                   />
                   <div
@@ -152,7 +148,7 @@ const posts = (await getCollection("work")).sort(
 
   document.addEventListener("astro:page-load", () => {
     const filterContainer = document.querySelector("#filter");
-	filterContainer.innerHTML = "";
+    filterContainer.innerHTML = "";
     const items = document.querySelectorAll(".work-hover");
 
     // Create filters from data-type attribute and also say how many items are there for each filter
@@ -204,7 +200,7 @@ const posts = (await getCollection("work")).sort(
       dropdown.classList.add("relative", "inline-block", "text-left");
 
       const dropdownButton = document.createElement("button");
-	  dropdownButton.setAttribute("aria-label", "More filters");
+      dropdownButton.setAttribute("aria-label", "More filters");
       dropdownButton.classList.add(
         "filter",
         "flex",

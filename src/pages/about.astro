@@ -1,0 +1,72 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main class="w-full h-full flex flex-col items-center jusitfy-center">
+      <iframe
+        src="/html/frame_conway.html"
+        class="top-0 left-0 w-full h-full z-0 transition-all absolute"></iframe>
+      <div class="pt-52 max-w-[700px] flex flex-row items-center gap-3">
+        <div class="fadeup w-[calc(100%-13rem)] z-10 relative">
+          <h1
+            class="translate-x-6 text-[MGNHumble] text-7xl text-white text-right"
+          >
+            about
+          </h1>
+          <p class="text-right">
+            I'm Alex Malvehy, a student and self-taught graphic and motion
+            designer from Barcelona. I specialize in branding, visual identity,
+            and graphics for television and streaming, continually learning and
+            evolving.
+          </p>
+        </div>
+        <div
+          id="hover-space"
+          class="fadeup opacity-0 inline-block relative"
+          style="animation-delay: 200ms;"
+          onmousemove="handleMouseMove(event)"
+        >
+          <img
+            id="am_face"
+            src="/img/am_face.png"
+            class="w-52 h-52 z-10 relative"
+          />
+          <img
+            id="am_bg"
+            src="/img/am_bg.png"
+            class="top-0 w-52 h-52 z-0 absolute"
+          />
+        </div>
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<script is:inline>
+  function handleMouseMove(event) {
+    const hoverSpace = document.getElementById("hover-space");
+    const rect = hoverSpace.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    const moveX = (x - rect.width / 2) / 20;
+    const moveY = (y - rect.height / 2) / 20;
+
+    const amFace = document.getElementById("am_face");
+    const amBg = document.getElementById("am_bg");
+
+    amFace.style.transform = `translate(${moveX}px, ${moveY}px)`;
+    amBg.style.transform = `translate(${moveX / 2}px, ${moveY / 2}px)`;
+  }
+</script>
