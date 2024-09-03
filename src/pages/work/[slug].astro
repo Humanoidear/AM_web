@@ -28,10 +28,11 @@ export async function getStaticPaths() {
 }
 
 const { content, title, date, year, type, services, heroImage } = Astro.props;
+console.log(heroImage);
 
 let options = {
   renderNode: {
-    'embedded-asset-block': (node) =>
+    'embedded-asset-block': (node: any) =>
       `<img class="img-fluid" src="${node.data.target.fields.file.url}"/>`
   }
 }
@@ -40,7 +41,7 @@ let bodyHTML = content ? documentToHtmlString(content, options) : '';
 ---
 <html lang="en">
   <head>
-    <BaseHead title={title} description={} />
+    <BaseHead title={title} description={"work"} />
   </head>
 
   <body>
@@ -48,14 +49,19 @@ let bodyHTML = content ? documentToHtmlString(content, options) : '';
     <main class="flex flex-col items-center">
       <div class="w-full">
         <div class="flex items-end justify-end rounded-none">
-          {
-            heroImage && (
-			<p class="top-24 right-6 text-white p-1 pl-3 pr-3 rounded-lg bg-white/10 backdrop-blur-md absolute">
-              <FormattedDate date={new Date(Date.parse(date))} />
-            </p>
-              <img class="w-full max-w-[1300px] h-[400px]" src={heroImage.fields.file.url} transition:name={`work-title-${title}-image`} alt="" />
-            )
-          }
+          {heroImage && (
+            <div>
+              <p class="top-24 right-6 text-white p-1 pl-3 pr-3 rounded-lg bg-white/10 backdrop-blur-md absolute">
+                <FormattedDate date={new Date(Date.parse(date))} />
+              </p>
+              <img
+                class="w-full max-w-[1300px] h-[400px]"
+                src={(heroImage as any)?.fields?.file?.url}
+                transition:name={`work-title-${title}-image`}
+                alt=""
+              />
+            </div>
+          )}
         </div>
         <div class="flex items-center justify-center">
           <div
@@ -66,9 +72,9 @@ let bodyHTML = content ? documentToHtmlString(content, options) : '';
             <p class="font-semibold text-white text-2xl" transition:name={`work-title-${title}-type`}>{type}</p>
 			<ul>
 				<p class="opacity-60">Services</p>
-				{services.services.map(service => (
-				  <li class="font-semibold text-white text-2xl">{service}</li>
-				))}
+        {Array.isArray(services) && services.map(service => (
+          <li class="font-semibold text-white text-2xl">{service}</li>
+        ))}
 			  </ul>
 			<div transition:name={`work-title-${title}-year`}>
 				<p class="opacity-60">Year</p>

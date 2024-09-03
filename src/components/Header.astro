@@ -1,21 +1,185 @@
 ---
-import HeaderLink from './HeaderLink.astro';
+import HeaderLink from "./HeaderLink.astro";
 ---
+
 <header class="p-8 w-full h-20 z-50 relative">
-	<nav class="flex flex-row items-center justify-between gap-5">
-		<h2><a href="/"><img src="/img/am.svg" alt="Go home" width="70px"></a></h2>
-		<div class="flex-row items-center gap-9 internal-links sm:flex hidden">
-			<HeaderLink href="/about">about</HeaderLink>
-			<HeaderLink href="/work">work</HeaderLink>
-			<HeaderLink href="/contact">contact</HeaderLink>
-			<button class="btn" onclick="document.getElementById('dropdown').classList.toggle('hidden');"><img src="https://unpkg.com/pixelarticons@1.8.1/svg/menu.svg" alt="Socials" class="invert w-8 h-8 opacity-60 hover:opacity-100 transition-all"/></button>
-			<div id="dropdown" class="top-20 right-8 dropdown-content absolute hidden bg-black border border-white text-white shadow-lg opacity-60 hover:opacity-100 mt-0 p-1 z-10">
-				<a>Twitter</a>
-				<a>Behance</a>
-				<a>YouTube</a>
-				<a>Instagram</a>
-				<a>LinkedIn</a>
-			</div>
-		</div>
-	</nav>
+  <nav class="flex flex-row items-center justify-between gap-5">
+    <h2>
+      <a href="/"><img src="/img/am.svg" alt="Go home" width="70px" /></a>
+    </h2>
+    <div class="flex-row items-center gap-9 internal-links sm:flex hidden">
+      <div
+        id="navbar"
+        class="flex-row items-center gap-9 internal-links sm:flex hidden"
+      >
+        <HeaderLink href="/about">about</HeaderLink>
+        <HeaderLink href="/work">work</HeaderLink>
+        <HeaderLink href="/contact">contact</HeaderLink>
+      </div>
+      <button class="btn" id="menuIcon" onclick="toggleDropdown();">
+        <img
+          src="https://unpkg.com/pixelarticons@1.8.1/svg/chevron-down.svg"
+          alt="Socials"
+          class="invert w-8 h-8 opacity-60 hover:opacity-100 transition-all"
+        />
+      </button>
+      <div
+        id="dropdown"
+        class="top-20 right-8 dropdown-content absolute hidden mt-0 p-1 z-10"
+      >
+        <a class="flex flex-row gap-3 items-center justify-end"
+          ><p>Twitter</p>
+          <img
+            src="/img/SVG_socials/twitter.svg"
+            class="h-6 invert hover:opacity-100 opacity-30 transition-all"
+          /></a
+        >
+        <a class="flex flex-row gap-3 items-center justify-end"
+          ><p>Behance</p>
+          <img
+            src="/img/SVG_socials/behance.svg"
+            class="h-6 invert hover:opacity-100 opacity-30 transition-all"
+          /></a
+        >
+        <a class="flex flex-row gap-3 items-center justify-end"
+          ><p>YouTube</p>
+          <img
+            src="/img/SVG_socials/youtube.svg"
+            class="h-6 invert hover:opacity-100 opacity-30 transition-all"
+          /></a
+        >
+        <a class="flex flex-row gap-3 items-center justify-end"
+          ><p>Instagram</p>
+          <img
+            src="/img/SVG_socials/instagram.svg"
+            class="h-6 invert hover:opacity-100 opacity-30 transition-all"
+          /></a
+        >
+        <a class="flex flex-row gap-3 items-center justify-end"
+          ><p>LinkedIn</p>
+          <img
+            src="/img/SVG_socials/linkedin.svg"
+            class="h-6 invert hover:opacity-100 opacity-30 transition-all"
+          /></a
+        >
+      </div>
+
+      <script is:inline>
+        const dropdown = document.getElementById("dropdown");
+        const links = dropdown.querySelectorAll("a");
+        const menuButton = document.getElementById("menuButton");
+        const menuIcon = menuButton.querySelector("img");
+
+        dropdown.addEventListener("mousemove", (e) => {
+          const rect = dropdown.getBoundingClientRect();
+          const mouseY = e.clientY - rect.top;
+
+          links.forEach((link, index) => {
+            const linkRect = link.getBoundingClientRect();
+            const linkCenterY = linkRect.top + linkRect.height / 2 - rect.top;
+            const distance = Math.abs(mouseY - linkCenterY);
+            const scale = Math.max(1, 2 - distance / 50);
+            const margin = Math.max(0, 20 - distance / 2.5);
+            opacity = Math.max(0.6, 1 - distance / 50);
+
+            link.style.transform = `scale(${scale})`;
+            link.style.marginBottom = `${margin}px`;
+            link.style.marginRight = `${margin * 2.5}px`;
+            link.style.opacity = `${opacity}`;
+          });
+        });
+
+        dropdown.addEventListener("mouseleave", () => {
+          links.forEach((link) => {
+            link.style.transform = "scale(1)";
+            link.style.marginBottom = "0";
+            link.style.marginRight = "0";
+            link.style.opacity = "1";
+          });
+        });
+
+        function toggleDropdown() {
+          const dropdown = document.getElementById("dropdown");
+          const navbar = document.getElementById("navbar");
+          const links = dropdown.querySelectorAll("a"); // Assuming links are inside the dropdown
+          const menuIcon = document.getElementById("menuIcon"); // Assuming you have a menuIcon element
+
+          if (dropdown.classList.contains("hidden")) {
+            // Show dropdown and hide navbar
+            dropdown.classList.remove("hidden");
+            dropdown.classList.add("show");
+            navbar.classList.add("hidden");
+            navbar.classList.remove("show");
+
+            menuIcon.style.rotate = "90deg"; // Change to close icon
+            links.forEach((link, index) => {
+              setTimeout(() => {
+                link.style.transition =
+                  "opacity 0.5s ease, transform 0.5s ease";
+                link.style.opacity = "1";
+                link.style.transform = "translateY(0)";
+                setTimeout(() => {
+                  link.style.transition = "none";
+                }, 500); // Remove transition after animation
+              }, index * 100); // Staggered animation delay
+            });
+          } else {
+            // Hide dropdown and show navbar
+            links.forEach((link, index) => {
+              setTimeout(() => {
+                link.style.transition =
+                  "opacity 0.5s ease, transform 0.5s ease";
+                link.style.opacity = "0";
+                link.style.transform = "translateY(-20px)";
+                setTimeout(() => {
+                  link.style.transition = "none";
+                }, 500); // Remove transition after animation
+              }, index * 100); // Staggered animation delay
+            });
+
+            setTimeout(
+              () => {
+                dropdown.classList.add("hidden");
+                dropdown.classList.remove("show");
+                navbar.classList.remove("hidden");
+                navbar.classList.add("show");
+                menuIcon.style.rotate = "0deg"; // Change back to menu icon
+              },
+              links.length * 100 + 500
+            ); // Wait for all animations to complete before hiding
+          }
+        }
+      </script>
+    </div>
+  </nav>
 </header>
+
+<style>
+  a:hover p {
+    transform: translate(0px, 0);
+    opacity: 1;
+    transition: 0.2s;
+  }
+  a:hover img {
+    opacity: 1;
+    transition: opacity 0.2s;
+  }
+  p {
+    transform: translate(20px, 0);
+    opacity: 0;
+    transition: 0.2s;
+  }
+  #dropdown {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  #dropdown a {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  #dropdown.show a {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>

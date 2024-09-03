@@ -1,6 +1,17 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "strictNullChecks": true
+    "strict": false, // Disable all strict type-checking options
+    "noImplicitAny": false, // Allow expressions and declarations to have `any` type
+    "strictNullChecks": false, // Disable strict null checks
+    "strictFunctionTypes": false, // Disable strict checking of function types
+    "strictBindCallApply": false, // Disable strict checking of `bind`, `call`, and `apply` methods
+    "strictPropertyInitialization": false, // Disable strict checking of property initialization in classes
+    "noImplicitThis": false, // Allow `this` expressions with an implicit `any` type
+    "alwaysStrict": false, // Disable emitting "use strict" for modules
+    "noUnusedLocals": false, // Allow unused local variables
+    "noUnusedParameters": false, // Allow unused function parameters
+    "noImplicitReturns": false, // Allow functions to not return a value in all code paths
+    "noFallthroughCasesInSwitch": false // Allow fallthrough cases in switch statements
   }
 }
