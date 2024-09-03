@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Grid</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .grid {
+            width: 100%;
+            height: 80vh;
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            grid-template-rows: repeat(8, 1fr);
+            gap: 5px;
+        }
+
+        .grid div {
+            background: #f4f4f4;
+            width: 100%;
+            height: 100%;
+            aspect-ratio: 1;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="grid" class="grid"></div>
+
+    <script>
+        const grid = document.getElementById('grid');
+
+        for (let i = 0; i < 64; i++) {
+            const div = document.createElement('div');
+            div.style.backgroundImage = `url('https://random.imagecdn.app/500/500?${i}')`;
+            grid.appendChild(div);
+            div.id = i;
+        }
+
+        function chooseRandom() {
+            document.querySelectorAll('.grid div').forEach(div => {
+                div.style.gridColumn = 'span 1';
+                div.style.gridRow = 'span 1';
+            });
+
+            for (let i = 0; i < 3; i++) {
+                const random = Math.floor(Math.random() * 64);
+                let div = document.getElementById(random);
+                div.style.gridColumn = 'span 2';
+                div.style.gridRow = 'span 2';
+            }
+
+        }
+
+        let lastThreshold = 0;
+
+        function adjustGridLayout() {
+            let currentThreshold = 0;
+
+            if (window.innerWidth < 900) {
+                grid.style.gridTemplateColumns = 'repeat(4, 1fr)';
+                grid.style.gridTemplateRows = 'repeat(16, 1fr)';
+                currentThreshold = 900;
+            } else if (window.innerWidth < 1200) {
+                grid.style.gridTemplateColumns = 'repeat(6, 1fr)';
+                grid.style.gridTemplateRows = 'repeat(12, 1fr)';
+                currentThreshold = 1200;
+            } else {
+                grid.style.gridTemplateColumns = 'repeat(8, 1fr)';
+                grid.style.gridTemplateRows = 'repeat(8, 1fr)';
+                currentThreshold = Infinity;
+            }
+
+            if (currentThreshold !== lastThreshold) {
+                chooseRandom();
+                lastThreshold = currentThreshold;
+            }
+        }
+
+        adjustGridLayout();
+
+        window.onresize = adjustGridLayout;
+    </script>
+</body>
+</html>

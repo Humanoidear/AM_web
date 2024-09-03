@@ -1,0 +1,90 @@
+---
+import { contentfulClient } from "../../lib/contentful";
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+import type { work } from "../../lib/contentful";
+import BaseHead from "../../components/BaseHead.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import FormattedDate from "../../components/FormattedDate.astro";
+
+export async function getStaticPaths() {
+  const { items } = await contentfulClient.getEntries<work>({
+    content_type: "work",
+  });
+  const pages = items.map((item) => ({
+    params: { slug: item.fields.slug },
+    props: {
+      title: item.fields.title,
+      content: item.fields.content,
+      date: new Date(item.fields.date).toLocaleDateString(),
+      year: item.fields.year,
+      type: item.fields.type,
+      services: item.fields.services,
+      preview: item.fields.preview,
+      heroImage: item.fields.heroImage
+    },
+  }));
+  return pages;
+}
+
+const { content, title, date, year, type, services, heroImage } = Astro.props;
+
+let options = {
+  renderNode: {
+    'embedded-asset-block': (node) =>
+      `<img class="img-fluid" src="${node.data.target.fields.file.url}"/>`
+  }
+}
+
+let bodyHTML = content ? documentToHtmlString(content, options) : '';
+---
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={} />
+  </head>
+
+  <body>
+    <Header />
+    <main class="flex flex-col items-center">
+      <div class="w-full">
+        <div class="flex items-end justify-end rounded-none">
+          {
+            heroImage && (
+			<p class="top-24 right-6 text-white p-1 pl-3 pr-3 rounded-lg bg-white/10 backdrop-blur-md absolute">
+              <FormattedDate date={new Date(Date.parse(date))} />
+            </p>
+              <img class="w-full max-w-[1300px] h-[400px]" src={heroImage.fields.file.url} transition:name={`work-title-${title}-image`} alt="" />
+            )
+          }
+        </div>
+        <div class="flex items-center justify-center">
+          <div
+            class="top-6 w-[95%] max-w-[1300px] flex sm:flex-row flex-col items-start justify-between gap-5 relative"
+          >
+		  <img class="w-[700px] -translate-x-[150px] -translate-y-[350px] rotate-90 opacity-60 z-0 absolute" src="/img/blob-1.webp" transition:name={`work-title-${title}-blob`}>
+            <h3 class="font-[MGNHumble] text-white text-6xl z-10 relative" transition:name={`work-title-${title}`}>{title}</h3>
+            <p class="font-semibold text-white text-2xl" transition:name={`work-title-${title}-type`}>{type}</p>
+			<ul>
+				<p class="opacity-60">Services</p>
+				{services.services.map(service => (
+				  <li class="font-semibold text-white text-2xl">{service}</li>
+				))}
+			  </ul>
+			<div transition:name={`work-title-${title}-year`}>
+				<p class="opacity-60">Year</p>
+				<p class="font-semibold text-white text-2xl">{year}</p>
+			</div>
+          </div>
+        </div>
+      </div>
+      <article class="mt-14 w-[98%] max-w-[1200px] text-white z-10 relative">
+        <div class="prose">
+          <div class="title">
+          </div>
+          <div set:html={bodyHTML}></div>
+        </div>
+      </article>
+    </main>
+    <Footer />
+  </body>
+</html>

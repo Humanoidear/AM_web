@@ -245,51 +245,43 @@ p {
 	color: transparent;
 }
 
-.work-hover:hover a div div p {
-	backdrop-filter: blur(4px);
+ul,
+li {
+  transition: 0.2s;
 }
 
-.work-hover:hover a .arrow {
-	opacity: 1;
-	transition: 0.4s;
+ul:hover li {
+  opacity: 0.5;
+  transition: 0.2s;
 }
 
-.work-hover a .arrow {
+li:hover .work-hover img {
+	transform: scale(1.05);
+	transition: 0.2s;
+}
+
+img {
+	transition: 0.2s;
+}
+
+.hover-show {
 	opacity: 0;
-	transition: 0.4s;
-}
-
-.work-hover:hover a div img {
-	transform: scale(1.1);
-	filter: brightness(0.6) blur(4px) grayscale(1);
-	transition: 0.4s;
-}
-
-.work-hover a div img {
-	transition: 0.4s;
-}
-
-.work-hover a h3 {
-	transition: 0.4s;
-}
-
-.work-hover:hover a h3 {
-	/* margin-left: 30px; */
-	transition: 0.4s;
-}
-
-.work-hover:hover a div:nth-child(1) {
-	border: 3px solid white;
 	transition: 0.2s;
 }
 
-.work-hover a div:nth-child(1) {
-	border: 3px solid transparent;
+li:hover .hover-show {
+	opacity: 1;
 	transition: 0.2s;
 }
 
-.follower {
-	transform: translate(-50%, -50%);
+ul:not(:has(li:hover)) li {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+ul li:hover {
+  opacity: 1;
+  transition: 0.2s;
 }
 
 .prose p {

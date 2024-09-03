@@ -42,14 +42,15 @@ const isActive = href === pathname || href === '/' + subpath?.[0];
         const target = document.getElementById(event.id);
         const text = target.innerText;
         const letters = text.split('');
-		console.log(letters);
         target.innerHTML = letters.map(letter => `<span>${letter}</span>`).join('');
 
         const spans = target.querySelectorAll('span');
-        spans.forEach(span => {
-            if (Math.random() > 0.7) {
-                span.style.fontFamily = 'MGNHumble';
-            }
+        spans.forEach((span, index) => {
+            span.style.opacity = '0';
+            setTimeout(() => {
+                span.style.transition = 'opacity 0.5s ease-in-out';
+                span.style.opacity = '1';
+            }, index * 100); // Stagger effect with 100ms delay between each span
         });
     }
 </script>
