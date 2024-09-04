@@ -89,6 +89,7 @@
 
         // Update the tiles' colors based on proximity to the paths
         function updateTiles() {
+            const lineThickness = 1; // Adjusts the thickness of the line area
             tiles.forEach((tile, index) => {
                 const tileX = index % gridSizeX;
                 const tileY = Math.floor(index / gridSizeX);
@@ -99,7 +100,12 @@
                 let minDistance = Math.min(minDistance1, minDistance2);
 
                 // Adjust the intensity based on distance
-                const intensity = Math.max(0, 1 - minDistance / 15);
+                let intensity = 0;
+                if (minDistance <= lineThickness) {
+                    intensity = 1; // Full intensity within the line area
+                } else {
+                    intensity = Math.max(0, 1 - (minDistance - lineThickness) / 15); // Gradual fade outside the line area
+                }
                 const blueIntensity = Math.floor(intensity * 255);
                 tile.style.backgroundColor = `rgb(0, 0, ${blueIntensity})`;
             });
@@ -111,7 +117,7 @@
 
         function animatePaths() {
             // Only generate new target paths every 600 frames
-            if (frameCount % 60 === 0) {
+            if (frameCount % 600 === 0) {
                 targetPath1 = generatePath(0, 10, 90, 2, -1);
                 targetPath2 = generatePath(gridSizeX - 9, gridSizeY + 1, 90, 1, -2);
             }
