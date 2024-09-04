@@ -2,11 +2,32 @@
 import HeaderLink from "./HeaderLink.astro";
 ---
 
-<header class="p-8 w-full h-20 z-50 fixed">
+<header class="p-8 w-full h-20 z-50 fixed" is-index>
   <nav class="flex flex-row items-center justify-between gap-5">
-    <h2>
+    <h2 id="home-link">
       <a href="/"><img src="/img/am.svg" alt="Go home" width="70px" /></a>
     </h2>
+    <h1
+      id="wordmark-container"
+      class="flex-row items-center left-1/2 -translate-x-1/2 scale-75 hidden absolute"
+    >
+      <a href="/" id="wordmark-logo-final" class="opacity-0"
+        ><img src="/img/am.svg" alt="Go home" width="70px" /></a
+      >
+      <div
+        id="wordmark-logo-provisional"
+        class="flex flex-row items-center justify-start"
+      >
+        <span></span><span
+          class="w-[100px] flex remove overflow-hidden flex-nowrap relative"
+          >lex</span
+        >
+        <span class="-ml-[14px]">m</span><span
+          class="w-[200px] flex remove overflow-hidden flex-nowrap relative"
+          >alvehy</span
+        >
+      </div>
+    </h1>
     <div class="flex-row items-center gap-9 internal-links sm:flex hidden">
       <div
         id="navbar"
@@ -16,7 +37,11 @@ import HeaderLink from "./HeaderLink.astro";
         <HeaderLink href="/work">work</HeaderLink>
         <HeaderLink href="/contact">contact</HeaderLink>
       </div>
-      <button class="btn" id="menuIcon" onclick="toggleDropdown();">
+      <button
+        class="btn"
+        id="menuIcon"
+        onclick="toggleDropdown();"
+      >
         <img
           src="https://unpkg.com/pixelarticons@1.8.1/svg/chevron-down.svg"
           alt="Socials"
@@ -150,6 +175,53 @@ import HeaderLink from "./HeaderLink.astro";
           }
         }
       </script>
+      <script is:inline>
+        document.addEventListener("scroll", () => {
+          const remove = document.querySelectorAll(".remove");
+          const wordmark = document.getElementById("wordmark-container");
+          const wordmarkLogo = document.getElementById("wordmark-logo-final");
+          const wordmarkProvisional = document.getElementById(
+            "wordmark-logo-provisional"
+          );
+          const scrollTop =
+            window.scrollY || document.documentElement.scrollTop;
+
+          remove.forEach((element) => {
+            if (scrollTop > 0) {
+              element.style.width = 0;
+              wordmark.style.left = "30px";
+              wordmark.style.transform = "translateX(0%)";
+              wordmark.style.transition = "0.5s ease";
+              wordmarkLogo.style.animation = "fadeinlogo 0.5s ease forwards";
+              wordmarkProvisional.style.animation = "fadeoutlogo 0.5s ease forwards";
+            } else {
+              element.style.width = "";
+              wordmark.style.left = "50%";
+              wordmark.style.transform = "translateX(-50%) scale(0.75)";
+              wordmark.style.transition = "0.5s ease";
+              wordmarkLogo.style.animation = "fadeoutlogo 0.5s ease forwards";
+              wordmarkProvisional.style.animation = "fadeinlogo 0.5s ease forwards";
+            }
+            element.style.transition = "0.5s ease";
+          });
+        });
+
+        // Check if the header has the is-index attribute
+        const header = document.querySelector("header[is-index]");
+        if (header) {
+          const homeLink = document.getElementById("home-link");
+          const wordmarkContainer =
+            document.getElementById("wordmark-container");
+
+          // Remove the home link and show the wordmark container
+          if (homeLink) {
+            homeLink.style.opacity = "0";
+          }
+          if (wordmarkContainer) {
+            wordmarkContainer.style.display = "flex";
+          }
+        }
+      </script>
     </div>
   </nav>
 </header>
@@ -181,5 +253,21 @@ import HeaderLink from "./HeaderLink.astro";
   #dropdown.show a {
     opacity: 1;
     transform: translateY(0);
+  }
+  @keyframes fadeinlogo {
+	from {
+	  opacity: 0;
+	}
+	to {
+	  opacity: 1;
+	}
+  }
+  @keyframes fadeoutlogo {
+	from {
+	  opacity: 1;
+	}
+	to {
+	  opacity: 0;
+	}
   }
 </style>

@@ -25,12 +25,12 @@ let posts = entries.items.map((item) => {
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
   </head>
   <body>
-    <Header />
-    <main>
+    <Header is-header/>
+    <main class="overflow-x-hidden">
       <div
-        class="w-screen h-screen flex flex-row items-center justify-center gap-[20%]"
+        class="w-screen h-screen flex sm:flex-row flex-col items-center justify-center sm:gap-[20%]"
       >
-        <h1 class="w-[300px] lg:text-8xl">
+        <h1 class="sm:w-[300px] lg:text-8xl tex-center sm:text-left z-10 relative">
           <span class="ml-3">more</span><br /><span class="ml-10">than</span><br
           /><span id="catchphrase" class="text-[#70F1B0] catchphrase-container"
             >a logo</span
@@ -38,7 +38,7 @@ let posts = entries.items.map((item) => {
         </h1>
         <ul
           id="work-carousel"
-          class="w-[400px] h-[400px] grid grid-cols-2 grid-rows-2 gap-6 relative"
+          class="w-[400px] h-[400px] grid grid-cols-2 grid-rows-2 gap-6 sm:pointer-events-auto pointer-events-none sm:opacity-100 opacity-10 z-0 sm:relative absolute"
         >
         </ul>
 		<span class="w-full bottom-6 flex flex-col items-center absolute">
