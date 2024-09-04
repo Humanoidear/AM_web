@@ -1,19 +1,176 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { contentfulClient } from "../lib/contentful";
+import type { work } from "../lib/contentful";
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+
+const entries = await contentfulClient.getEntries<work>({
+  content_type: "work",
+});
+
+let posts = entries.items.map((item) => {
+  const { slug, preview } = item.fields;
+  return {
+    slug,
+    preview,
+  };
+});
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-		</main>
-		<Footer />
-	</body>
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <div
+        class="w-screen h-screen flex flex-row items-center justify-center gap-[20%]"
+      >
+        <h1 class="w-[300px] lg:text-8xl">
+          <span class="ml-3">more</span><br /><span class="ml-10">than</span><br
+          /><span id="catchphrase" class="text-[#70F1B0] catchphrase-container"
+            >a logo</span
+          >
+        </h1>
+        <ul
+          id="work-carousel"
+          class="w-[400px] h-[400px] grid grid-cols-2 grid-rows-2 gap-6 relative"
+        >
+        </ul>
+		<span class="w-full bottom-6 flex flex-col items-center absolute">
+			<img
+			src="https://unpkg.com/pixelarticons@1.8.1/svg/arrow-down.svg"
+			alt="Arrow Down - View More"
+			class="invert w-8 h-8 opacity-60 hover:opacity-100 transition-all"
+		  />
+      </div>
+	  </span>
+    </main>
+    <Footer />
+    <script define:vars={{ posts }}>
+      function updateCarousel() {
+        let filteredPosts = posts.sort(() => Math.random() - 0.5).slice(0, 4);
+
+        function getRandomTransform() {
+          const randomX = Math.floor(Math.random() * 100) - 50; // Random value between -50 and 50
+          const randomY = Math.floor(Math.random() * 100) - 50; // Random value between -50 and 50
+          return `translate(${randomX}px, ${randomY}px)`;
+        }
+
+        const carousel = document.getElementById("work-carousel");
+
+        // Check if the carousel is being hovered
+        if (carousel.matches(":hover")) {
+          return; // Do not update if the carousel is being hovered
+        }
+
+        // Add fade-out class to all children
+        Array.from(carousel.children).forEach((child, index) => {
+          child.style.animation = `fadeOut 0.5s ease ${index * 0.1}s forwards`;
+        });
+
+        // Wait for the fade-out animation to complete before updating the content
+        setTimeout(
+          () => {
+            carousel.innerHTML = filteredPosts
+              .map(
+                (post, index) => `
+                  <li class="tile w-full h-full flex flex-col items-center justify-center gap-3 grayscale hover:grayscale-0 hover:scale-105 hover:border-4 border-0 border-white/20 overflow-hidden" style="transform: ${getRandomTransform()}; animation: fadeIn 0.5s ease ${index * 0.1}s forwards; opacity:0; aspect-ratio:1;">
+                    <a href="/work/${post.slug}/" class="w-full h-full">
+                    <img src="${post.preview.fields.file.url}" class="w-full h-full object-cover" alt="${post.title}">
+                    </a>
+                  </li>
+                `
+              )
+              .join("");
+          },
+          carousel.children.length * 100 + 500
+        ); // Ensure the timeout matches the duration of the fade-out animation
+        document.querySelectorAll(".tile").forEach((tile) => {
+          tile.style.opacity = 1;
+        });
+      }
+
+      function updateTagline() {
+        const catchphrase = document.getElementById("catchphrase");
+        const catchphrases = [
+          "a logo",
+          "a brand",
+          "a story",
+          "a journey",
+          "an identity",
+          "a vision",
+          "a message",
+        ];
+        const randomIndex = Math.floor(Math.random() * catchphrases.length);
+        const randomCatchphrase = catchphrases[randomIndex];
+        // Break the catchphrase into individual words and animate them
+        const words = randomCatchphrase.split(" ");
+        const animatedWords = words.map((word) => {
+          const letters = word.split("");
+          const animatedLetters = letters
+            .map((letter) => `<span class="letter">${letter}</span>`)
+            .join("");
+          return `<span class="word">${animatedLetters}</span>`;
+        });
+        catchphrase.innerHTML = animatedWords.join(" ");
+        const spans = catchphrase.querySelectorAll(".letter");
+        spans.forEach((span, index) => {
+          span.style.opacity = 0;
+          setTimeout(() => {
+            span.style.transition = "opacity 0.5s ease-in-out";
+            span.style.opacity = 1;
+          }, index * 100); // Stagger effect with 100ms delay between each span
+        });
+      }
+
+      updateCarousel();
+      setInterval(updateCarousel, 5000);
+      setInterval(updateTagline, 5000);
+    </script>
+
+    <style>
+      .catchphrase-container {
+        display: inline-block;
+        white-space: nowrap;
+        max-width: 100%; /* Adjust as needed */
+      }
+
+      .word {
+        display: inline-block;
+      }
+
+      .letter {
+        display: inline-block;
+        width: 1ch; /* Fixed width for each letter */
+        text-align: center; /* Center the letter within the span */
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          margin-top: 20px;
+        }
+        to {
+          opacity: 1;
+          margin-top: 0;
+        }
+      }
+
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
+          margin-top: 0;
+        }
+        to {
+          opacity: 0;
+          margin-top: -20px;
+        }
+      }
+    </style>
+  </body>
 </html>
