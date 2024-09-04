@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: black;
+            overflow: hidden;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(85, 20px);
+            grid-template-rows: repeat(50, 20px);
+        }
+        .tile {
+            width: 20px;
+            height: 20px;
+            background-color: black;
+            transition: background-color 0.1s;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid" id="grid">
+        <!-- Tiles will be generated here by JavaScript -->
+    </div>
+
+    <script>
+        const grid = document.getElementById('grid');
+        const tiles = [];
+        const gridSizeX = 85;
+        const gridSizeY = 50;
+        const tileSize = 20;
+
+        // Create the grid of tiles
+        for (let i = 0; i < gridSizeX * gridSizeY; i++) {
+            const tile = document.createElement('div');
+            tile.classList.add('tile');
+            grid.appendChild(tile);
+            tiles.push(tile);
+        }
+
+        // Generate a random path for a vertical line
+        function generatePath(startX, startY, steps, directionX, directionY) {
+            const path = [];
+            let currentX = startX;
+            let currentY = startY;
+
+            for (let i = 0; i < steps; i++) {
+                path.push([currentX, currentY]);
+                currentX += directionX * (Math.random() > 0.5 ? 1 : 0);
+                currentY += directionY * (Math.random() > 0.5 ? 1 : 0);
+                if (currentX < 0 || currentX >= gridSizeX || currentY < 0 || currentY >= gridSizeY) {
+                    break;
+                }
+            }
+
+            return path;
+        }
+
+        // Interpolate between two points
+        function interpolate(point1, point2, factor) {
+            return [
+                point1[0] + (point2[0] - point1[0]) * factor,
+                point1[1] + (point2[1] - point1[1]) * factor
+            ];
+        }
+
+        // Generate initial paths
+        let path1 = generatePath(0, 10, 90, 2, -1);
+        let path2 = generatePath(gridSizeX - 9, gridSizeY + 1, 90, 1, -2);
+
+        // Generate target paths
+        let targetPath1 = generatePath(0, 10, 90, 2, -1);
+        let targetPath2 = generatePath(gridSizeX - 9, gridSizeY + 1, 90, 1, -2);
+
+        // Calculate the distance between two points
+        function calculateDistance(x1, y1, x2, y2) {
+            return Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
+        }
+
+        // Update the tiles' colors based on proximity to the paths
+        function updateTiles() {
+            tiles.forEach((tile, index) => {
+                const tileX = index % gridSizeX;
+                const tileY = Math.floor(index / gridSizeX);
+
+                // Find the minimum distance from this tile to any point on either path
+                let minDistance1 = Math.min(...path1.map(([x, y]) => calculateDistance(tileX, tileY, x, y)));
+                let minDistance2 = Math.min(...path2.map(([x, y]) => calculateDistance(tileX, tileY, x, y)));
+                let minDistance = Math.min(minDistance1, minDistance2);
+
+                // Adjust the intensity based on distance
+                const intensity = Math.max(0, 1 - minDistance / 15);
+                const blueIntensity = Math.floor(intensity * 255);
+                tile.style.backgroundColor = `rgb(0, 0, ${blueIntensity})`;
+            });
+        }
+
+        // Function to animate the paths smoothly
+        let frameCount = 0;
+        const interpolationFactor = 0.02; // Controls the speed of interpolation
+
+        function animatePaths() {
+            // Only generate new target paths every 600 frames
+            if (frameCount % 60 === 0) {
+                targetPath1 = generatePath(0, 10, 90, 2, -1);
+                targetPath2 = generatePath(gridSizeX - 9, gridSizeY + 1, 90, 1, -2);
+            }
+
+            // Interpolate current path towards the target path
+            path1 = path1.map((point, i) => interpolate(point, targetPath1[i] || point, interpolationFactor));
+            path2 = path2.map((point, i) => interpolate(point, targetPath2[i] || point, interpolationFactor));
+
+            updateTiles();
+
+            frameCount++;
+            // Continue the animation
+            requestAnimationFrame(animatePaths);
+        }
+
+        // Start the animation
+        animatePaths();
+    </script>
+</body>
+</html>
