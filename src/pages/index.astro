@@ -4,6 +4,10 @@ import type { work } from "../lib/contentful";
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import About from "../components/About.astro";
+import Contact from "../components/Contact.astro";
+import Work from "../components/Work.astro";
+
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 
 const entries = await contentfulClient.getEntries<work>({
@@ -25,16 +29,19 @@ let posts = entries.items.map((item) => {
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
   </head>
   <body>
-    <Header is-header/>
-	<iframe
-	src="/html/frame_index.html"
-	class="top-0 left-0 w-full h-full z-0 transition-all fixed"
-	transition:name="bg-iframe"></iframe>
-    <main class="overflow-x-hidden">
+    <Header isIndex="opacity-0" />
+    <iframe
+      id="frame"
+      src="/html/frame_index.html"
+      class="top-0 left-0 w-full h-full z-0 fixed"
+      transition:name="bg-iframe"></iframe>
+    <main class="flex flex-col items-center overflow-x-hidden scroll-snap-y">
       <div
-        class="w-screen h-screen flex sm:flex-row flex-col items-center justify-center sm:gap-[20%]"
+        class="w-screen h-screen mb-52 md:mb-0 flex sm:flex-row flex-col items-center justify-center sm:gap-[20%] scroll-snap-center"
       >
-        <h1 class="sm:w-[300px] lg:text-8xl tex-center sm:text-left z-10 relative">
+        <h1
+          class="sm:w-[300px] lg:text-8xl tex-center sm:text-left z-10 relative"
+        >
           <span class="ml-3">more</span><br /><span class="ml-10">than</span><br
           /><span id="catchphrase" class="text-[#70F1B0] catchphrase-container"
             >a logo</span
@@ -45,14 +52,33 @@ let posts = entries.items.map((item) => {
           class="w-[400px] h-[400px] grid grid-cols-2 grid-rows-2 gap-6 sm:pointer-events-auto pointer-events-none sm:opacity-100 opacity-10 z-0 sm:relative absolute"
         >
         </ul>
-		<span class="w-full bottom-6 flex flex-col items-center absolute">
-			<img
-			src="https://unpkg.com/pixelarticons@1.8.1/svg/arrow-down.svg"
-			alt="Arrow Down - View More"
-			class="invert w-8 h-8 opacity-60 hover:opacity-100 transition-all"
-		  />
+        <a
+          href="#about"
+          class="w-full bottom-6 flex flex-col items-center absolute"
+        >
+          <img
+            src="https://unpkg.com/pixelarticons@1.8.1/svg/arrow-down.svg"
+            alt="Arrow Down - View More"
+            class="invert w-8 h-8 opacity-60 hover:opacity-100 transition-all"
+          />
+        </a>
       </div>
-	  </span>
+      <div
+        id="about"
+        class="flex flex-col items-center justify-center md:w-screen md:h-screen mb-52 md:mb-0 relative scroll-snap-center"
+      >
+        <About />
+      </div>
+      <div
+        class="flex flex-col items-center justify-center md:w-screen md:h-screen mb-52 md:mb-0 relative scroll-snap-center"
+      >
+        <Work />
+      </div>
+      <div
+        class="w-full flex flex-col items-center justify-center md:w-screen md:h-screen relative scroll-snap-center"
+      >
+        <Contact />
+      </div>
     </main>
     <Footer />
     <script define:vars={{ posts }}>
@@ -74,7 +100,7 @@ let posts = entries.items.map((item) => {
 
         // Add fade-out class to all children
         Array.from(carousel.children).forEach((child, index) => {
-          child.style.animation = `fadeOut 0.5s ease ${index * 0.1}s forwards`;
+          child.style.animation = `fadeOut 0.5s cubic-bezier(0,0,0,1) ${index * 0.1}s forwards`;
         });
 
         // Wait for the fade-out animation to complete before updating the content
@@ -83,7 +109,7 @@ let posts = entries.items.map((item) => {
             carousel.innerHTML = filteredPosts
               .map(
                 (post, index) => `
-                  <li class="tile w-full h-full flex flex-col items-center justify-center gap-3 grayscale hover:grayscale-0 hover:scale-105 hover:border-4 border-0 border-white/20 overflow-hidden" style="transform: ${getRandomTransform()}; animation: fadeIn 0.5s ease ${index * 0.1}s forwards; opacity:0; aspect-ratio:1;">
+                  <li transition:name="work-title-${post.title}-image"  class="tile w-full h-full flex flex-col items-center justify-center gap-3 grayscale hover:grayscale-0 hover:scale-105 hover:border-4 border-0 border-white/20 overflow-hidden" style="transform: ${getRandomTransform()}; animation: fadeIn 0.5s cubic-bezier(0,0,0,1) ${index * 0.1}s forwards; opacity:0; aspect-ratio:1;">
                     <a href="/work/${post.slug}/" class="w-full h-full">
                     <img src="${post.preview.fields.file.url}" class="w-full h-full object-cover" alt="${post.title}">
                     </a>
@@ -135,6 +161,11 @@ let posts = entries.items.map((item) => {
       updateCarousel();
       setInterval(updateCarousel, 5000);
       setInterval(updateTagline, 5000);
+
+      window.addEventListener("scroll", function () {
+        var frame = document.getElementById("frame");
+        frame.style.opacity = 1 - window.scrollY / 1000;
+      });
     </script>
 
     <style>
@@ -152,6 +183,12 @@ let posts = entries.items.map((item) => {
         display: inline-block;
         width: 1ch; /* Fixed width for each letter */
         text-align: center; /* Center the letter within the span */
+      }
+      main {
+        scroll-snap-type: y mandatory;
+      }
+      .scroll-snap-center {
+        scroll-snap-align: center;
       }
 
       @keyframes fadeIn {

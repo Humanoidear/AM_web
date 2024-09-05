@@ -1,34 +1,19 @@
 ---
-import HeaderLink from "./HeaderLink.astro";
+import HeaderLink from './HeaderLink.astro';
+
+const { isIndex } = Astro.props;
 ---
 
-<header class="p-8 w-full h-20 z-50 fixed" is-index>
+<header class="p-8 w-full h-20 z-50 fixed">
   <nav class="flex flex-row items-center justify-between gap-5">
-    <h2 id="home-link">
+    <h2 id="home-link" class={isIndex}>
       <a href="/"><img src="/img/am.svg" alt="Go home" width="70px" /></a>
     </h2>
-    <h1
-      id="wordmark-container"
-      class="flex-row items-center left-1/2 -translate-x-1/2 scale-75 hidden absolute"
-    >
-      <a href="/" id="wordmark-logo-final" class="opacity-0"
-        ><img src="/img/am.svg" alt="Go home" width="70px" /></a
-      >
-      <div
-        id="wordmark-logo-provisional"
-        class="flex flex-row items-center justify-start"
-      >
-        <span></span><span
-          class="w-[100px] flex remove overflow-hidden flex-nowrap relative"
-          >lex</span
-        >
-        <span class="-ml-[14px]">m</span><span
-          class="w-[200px] flex remove overflow-hidden flex-nowrap relative"
-          >alvehy</span
-        >
-      </div>
+    <h1 id="wordmark-container" class={`text-6xl left-1/2 -translate-x-1/2 scale-75 flex flex-row items-start justify-start absolute ${isIndex ? '' : 'hidden'}`}>
+      <span></span><span class="w-[85px] flex remove overflow-hidden flex-nowrap relative">lex</span>
+      <span id="movable"></span><span class="w-[190px] flex remove overflow-hidden flex-nowrap relative">alvehy</span>
     </h1>
-    <div class="flex-row items-center gap-9 internal-links sm:flex hidden">
+    <div id={isIndex} class={`flex-row items-center gap-9 internal-links sm:flex transition-all hidden ${isIndex ? 'opacity-0' : ''}`}>
       <div
         id="navbar"
         class="flex-row items-center gap-9 internal-links sm:flex hidden"
@@ -37,11 +22,7 @@ import HeaderLink from "./HeaderLink.astro";
         <HeaderLink href="/work">work</HeaderLink>
         <HeaderLink href="/contact">contact</HeaderLink>
       </div>
-      <button
-        class="btn"
-        id="menuIcon"
-        onclick="toggleDropdown();"
-      >
+      <button class="btn" id="menuIcon" onclick="toggleDropdown();">
         <img
           src="https://unpkg.com/pixelarticons@1.8.1/svg/chevron-down.svg"
           alt="Socials"
@@ -89,11 +70,39 @@ import HeaderLink from "./HeaderLink.astro";
         >
       </div>
 
-      <script is:inline>
+	  <script is:inline>
+		  document.addEventListener("scroll", () => {
+          const remove = document.querySelectorAll(".remove");
+          const wordmark = document.getElementById("wordmark-container");
+		  const movable = document.getElementById("movable");
+		  const links = document.getElementById("opacity-0")
+          const scrollTop = window.scrollY || document.documentElement.scrollTop;
+          remove.forEach((element) => {
+            if (scrollTop > 0) {
+              element.style.opacity = 0;
+              element.style.width = 0;
+              wordmark.style.left = "20px";
+              wordmark.style.transform = "translateX(0%)";
+              wordmark.style.transition = "0.5s ease";
+			  movable.style.transform = "translate(-13.9px, 1px)";
+			  links.style.opacity = 1;
+            } else {
+              element.style.width = "";
+              element.style.opacity = 1;
+              wordmark.style.left = "50%";
+              wordmark.style.transform = "translateX(-50%) scale(0.7)";
+              wordmark.style.transition = "0.5s ease";
+			  movable.style.transform = "translate(0px, 0px)";
+			  links.style.opacity = 0;
+            }
+            element.style.transition = "0.5s ease";
+          });
+        });
+	  </script>
+
+      <script is:inline data-astro-rerun>
         const dropdown = document.getElementById("dropdown");
         const links = dropdown.querySelectorAll("a");
-        const menuButton = document.getElementById("menuButton");
-        const menuIcon = menuButton.querySelector("img");
 
         dropdown.addEventListener("mousemove", (e) => {
           const rect = dropdown.getBoundingClientRect();
@@ -126,17 +135,16 @@ import HeaderLink from "./HeaderLink.astro";
         function toggleDropdown() {
           const dropdown = document.getElementById("dropdown");
           const navbar = document.getElementById("navbar");
-          const links = dropdown.querySelectorAll("a"); // Assuming links are inside the dropdown
-          const menuIcon = document.getElementById("menuIcon"); // Assuming you have a menuIcon element
+          const links = dropdown.querySelectorAll("a");
+          const menuIcon = document.getElementById("menuIcon");
 
           if (dropdown.classList.contains("hidden")) {
-            // Show dropdown and hide navbar
             dropdown.classList.remove("hidden");
             dropdown.classList.add("show");
             navbar.classList.add("hidden");
             navbar.classList.remove("show");
 
-            menuIcon.style.rotate = "90deg"; // Change to close icon
+            menuIcon.style.rotate = "90deg";
             links.forEach((link, index) => {
               setTimeout(() => {
                 link.style.transition =
@@ -145,8 +153,8 @@ import HeaderLink from "./HeaderLink.astro";
                 link.style.transform = "translateY(0)";
                 setTimeout(() => {
                   link.style.transition = "none";
-                }, 500); // Remove transition after animation
-              }, index * 100); // Staggered animation delay
+                }, 500);
+              }, index * 100);
             });
           } else {
             // Hide dropdown and show navbar
@@ -158,8 +166,8 @@ import HeaderLink from "./HeaderLink.astro";
                 link.style.transform = "translateY(-20px)";
                 setTimeout(() => {
                   link.style.transition = "none";
-                }, 500); // Remove transition after animation
-              }, index * 100); // Staggered animation delay
+                }, 500);
+              }, index * 100);
             });
 
             setTimeout(
@@ -168,57 +176,10 @@ import HeaderLink from "./HeaderLink.astro";
                 dropdown.classList.remove("show");
                 navbar.classList.remove("hidden");
                 navbar.classList.add("show");
-                menuIcon.style.rotate = "0deg"; // Change back to menu icon
+                menuIcon.style.rotate = "0deg";
               },
               links.length * 100 + 500
-            ); // Wait for all animations to complete before hiding
-          }
-        }
-      </script>
-      <script is:inline>
-        document.addEventListener("scroll", () => {
-          const remove = document.querySelectorAll(".remove");
-          const wordmark = document.getElementById("wordmark-container");
-          const wordmarkLogo = document.getElementById("wordmark-logo-final");
-          const wordmarkProvisional = document.getElementById(
-            "wordmark-logo-provisional"
-          );
-          const scrollTop =
-            window.scrollY || document.documentElement.scrollTop;
-
-          remove.forEach((element) => {
-            if (scrollTop > 0) {
-              element.style.width = 0;
-              wordmark.style.left = "30px";
-              wordmark.style.transform = "translateX(0%)";
-              wordmark.style.transition = "0.5s ease";
-              wordmarkLogo.style.animation = "fadeinlogo 0.5s ease forwards";
-              wordmarkProvisional.style.animation = "fadeoutlogo 0.5s ease forwards";
-            } else {
-              element.style.width = "";
-              wordmark.style.left = "50%";
-              wordmark.style.transform = "translateX(-50%) scale(0.75)";
-              wordmark.style.transition = "0.5s ease";
-              wordmarkLogo.style.animation = "fadeoutlogo 0.5s ease forwards";
-              wordmarkProvisional.style.animation = "fadeinlogo 0.5s ease forwards";
-            }
-            element.style.transition = "0.5s ease";
-          });
-        });
-
-        // Check if the header has the is-index attribute
-        const header = document.querySelector("header[is-index]");
-        if (header) {
-          const homeLink = document.getElementById("home-link");
-          const wordmarkContainer =
-            document.getElementById("wordmark-container");
-
-          // Remove the home link and show the wordmark container
-          if (homeLink) {
-            homeLink.style.opacity = "0";
-          }
-          if (wordmarkContainer) {
-            wordmarkContainer.style.display = "flex";
+            );
           }
         }
       </script>
@@ -253,21 +214,5 @@ import HeaderLink from "./HeaderLink.astro";
   #dropdown.show a {
     opacity: 1;
     transform: translateY(0);
-  }
-  @keyframes fadeinlogo {
-	from {
-	  opacity: 0;
-	}
-	to {
-	  opacity: 1;
-	}
-  }
-  @keyframes fadeoutlogo {
-	from {
-	  opacity: 1;
-	}
-	to {
-	  opacity: 0;
-	}
   }
 </style>

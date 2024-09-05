@@ -1,0 +1,97 @@
+---
+import { contentfulClient } from "../lib/contentful";
+import type { work } from "../lib/contentful";
+
+const entries = await contentfulClient.getEntries<work>({
+  content_type: "work",
+});
+
+const posts = entries.items.map((item) => {
+  const { title, date, slug, type, year, preview } = item.fields;
+  return {
+    title,
+    slug,
+    type,
+    year,
+    preview,
+    date: new Date(date).toLocaleDateString(),
+  };
+});
+---
+
+<h1 class="w-full max-w-[1100px] m-0 text-6xl font-[MGNHumble] text-white text-left translate-y-3">
+  Work
+</h1>
+<section class="max-w-[1100px] relative">
+  <ul
+    class="mt-3 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 grid-rows-2 gap-3"
+  >
+    {
+      posts.slice(0, 7).map((post, index) => (
+        <li
+          data-type={post.type}
+          class={`work-hover hover:shadow-xl shadow-white z-0 hover:z-10 relative ${index === 0 ? "col-span-2 row-span-2" : ""}`}
+        >
+          <a
+            class="flex flex-row items-start justify-between gap-5 relative"
+            href={`/work/${post.slug}/`}
+          >
+            <div class="w-full h-full overflow-hidden relative">
+              <img
+                src={(post.preview as any)?.fields?.file?.url}
+                alt=""
+                class="w-full h-full object-cover"
+                transition:name={`work-title-${post.title}-image`}
+              />
+            </div>
+          </a>
+        </li>
+      ))
+    }
+
+    <script is:inline data-astro-rerun>
+      document.querySelectorAll(".work-hover").forEach((item) => {
+        item.addEventListener("mouseenter", (e) => {
+          const follower = item.querySelector(".follower");
+          if (follower) {
+            follower.style.display = "flex";
+            follower.style.opacity = "1";
+            follower.style.pointerEvents = "none";
+            item.style.transition = "transform 0.2s ease";
+          }
+        });
+
+        item.addEventListener("mousemove", (e) => {
+          const follower = item.querySelector(".follower");
+          if (follower) {
+            const rect = item.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            follower.style.left = `${x}px`;
+            follower.style.top = `${y}px`;
+
+            const translateX = (x / rect.width - 0.5) * 20;
+            const translateY = (y / rect.height - 0.5) * 20;
+            item.style.transform = `translate(${translateX}px, ${translateY}px) scale(1.05)`;
+            setTimeout(() => {
+              item.style.transition = "transform 0s";
+            }, 200);
+          }
+        });
+
+        item.addEventListener("mouseleave", (e) => {
+          const follower = item.querySelector(".follower");
+          if (follower) {
+            follower.style.display = "none";
+            follower.style.opacity = "0";
+            follower.style.pointerEvents = "none";
+            item.style.transition = "transform 0.3s ease";
+
+            // Reset translation
+            item.style.transform = "translate(0, 0)";
+          }
+        });
+      });
+    </script>
+  </ul>
+</section>
