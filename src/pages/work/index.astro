@@ -11,14 +11,13 @@ const entries = await contentfulClient.getEntries<work>({
 });
 
 const posts = entries.items.map((item) => {
-  const { title, date, slug, type, year, preview } = item.fields;
+  const { title, slug, type, year, preview } = item.fields;
   return {
     title,
     slug,
     type,
     year,
     preview,
-    date: new Date(date).toLocaleDateString(),
   };
 });
 ---
@@ -26,7 +25,7 @@ const posts = entries.items.map((item) => {
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <BaseHead title={`work | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
   </head>
   <body>
     <Header />

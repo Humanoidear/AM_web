@@ -1,11 +1,12 @@
 ---
 import { contentfulClient } from "../../lib/contentful";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer";
 import type { work } from "../../lib/contentful";
 import BaseHead from "../../components/BaseHead.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
-import FormattedDate from "../../components/FormattedDate.astro";
+import { SITE_TITLE } from "../../consts";
 
 export async function getStaticPaths() {
   const { items } = await contentfulClient.getEntries<work>({
@@ -27,7 +28,6 @@ export async function getStaticPaths() {
 }
 
 const { content, title, year, type, services, heroImage } = Astro.props;
-console.log(heroImage);
 
 let options = {
   renderNode: {
@@ -36,16 +36,24 @@ let options = {
   },
 };
 
+let parsedSEOContent = documentToPlainTextString(content);
+if (parsedSEOContent.length > 60) {
+  parsedSEOContent = parsedSEOContent.slice(0, 60) + "...";
+}
 let bodyHTML = content ? documentToHtmlString(content, options) : "";
 ---
 
 <html lang="en">
   <head>
-    <BaseHead title={title} description={"work"} />
+    <BaseHead
+      title={`${title} | work | ${SITE_TITLE}`}
+      description={`${type}\nServices: ${Array.isArray(services) && services.map((service) => service + " ")}\nYear: ${year}\n\n${parsedSEOContent}`}
+      image={(heroImage as any)?.fields?.file?.url}
+    />
   </head>
 
   <body>
-    <Header work={` / ${ title } `} />
+    <Header work={` / ${title} `} />
     <main class="flex flex-col items-center">
       <div class="w-full">
         <div class="flex items-end justify-end rounded-none">
@@ -110,8 +118,8 @@ let bodyHTML = content ? documentToHtmlString(content, options) : "";
 <style>
   .expand {
     animation: auto linear expand both;
-        animation-timeline: view();
-        animation-range: exit;
+    animation-timeline: view();
+    animation-range: exit;
   }
   @keyframes expand {
     0% {

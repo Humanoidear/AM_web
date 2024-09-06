@@ -12,7 +12,7 @@ interface Props {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
+const { title, description, image = "/img/am_seo_bg.png" } = Astro.props;
 ---
 
 <!-- Global Metadata -->
@@ -90,14 +90,21 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
 <title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
+<meta name="author" content="crosss" />
+<meta name="keywords" content="alex malvehy, am, graphic design. graphic designer, graphic, graphics, motion designer, motion design, motion, designer, design, UI, Barcelona, Catalonia, Catalunya, Cataluña, Disseny Gràfic, Diseño Gráfico, Logos, Logotips, Logotipis, freelance, diseño freelance" />
+<meta name="robots" content="index, follow" />
+<meta name="language" content="en" />
 
 <ViewTransitions />
+
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={new URL(image, Astro.url)} />
+<meta property="og:site_name" content="alex malvehy" />
+<meta property="og:locale" content="en_US" />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
@@ -105,3 +112,5 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
+<meta property="twitter:site" content="@alexmalvehy" />
+<meta property="twitter:creator" content="@alexmalvehy" />
