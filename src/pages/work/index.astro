@@ -138,7 +138,7 @@ const posts = entries.items.map((item) => {
 
 <style>
   @keyframes animate-in-and-out {
-    entry -50% {
+    entry 0% {
       opacity: 0;
       scale: 0.8;
     }
@@ -146,7 +146,7 @@ const posts = entries.items.map((item) => {
       opacity: 1;
       scale: 1;
     }
-    exit -50% {
+    exit 0% {
       opacity: 1;
       scale: 1;
     }
@@ -157,6 +157,8 @@ const posts = entries.items.map((item) => {
   }
 
   ul li {
+    opacity: 0;
+    scale: 0.8;
     animation: linear animate-in-and-out;
     animation-timeline: view();
   }
