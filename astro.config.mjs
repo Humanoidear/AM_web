@@ -6,6 +6,6 @@ import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://bcn.am',
+  site: 'https://am-web-ruddy.vercel.app/', // CHANGE ON FINAL RELEASE
   integrations: [mdx(), sitemap(), tailwind()]
 });
