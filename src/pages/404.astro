@@ -1,0 +1,29 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Button from "../components/Button.astro";
+
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header isIndex="opacity-0" />
+    <iframe
+      id="frame"
+      src="/html/frame_index.html"
+      class="top-0 left-0 w-screen h-screen z-0 fixed"
+      transition:name="bg-iframe"></iframe>
+    <div
+      class="w-screen h-screen flex flex-col items-center justify-center gap-3 z-10 relative"
+    >
+      <h1 class="m-0 text-center" style="font-size:100px;">404</h1>
+      <h2 class="m-0 -translate-y-3 text-[#70F1B0] text-5xl font-[InstrumentSans]">page not found</h2>
+      <Button href="/" text="back to home" />
+    </div>
+  </body>
+</html>
