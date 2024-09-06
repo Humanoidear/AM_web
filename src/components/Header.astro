@@ -29,10 +29,7 @@ const { isIndex, work } = Astro.props;
       id={isIndex}
       class={`flex-row items-center gap-9 internal-links sm:flex transition-all hidden ${isIndex ? "opacity-0" : ""}`}
     >
-      <div
-        id="navbar"
-        class="flex-row items-center gap-9 internal-links sm:flex hidden"
-      >
+      <div class="flex-row items-center gap-9 internal-links sm:flex hidden">
         <HeaderLink href="/about">about</HeaderLink>
         <HeaderLink href="/work">work</HeaderLink>
         <HeaderLink href="/contact">contact</HeaderLink>
@@ -46,38 +43,88 @@ const { isIndex, work } = Astro.props;
       </button>
       <div
         id="dropdown"
-        class="top-20 right-8 dropdown-content absolute hidden mt-0 p-1 z-10"
+        class="top-20 right-8 dropdown-content hidden mt-0 p-1 flex flex-col items-end gap-3 z-10 transition-all absolute"
       >
-        <a class="flex flex-row gap-3 items-center justify-end"
-          ><p>Twitter</p>
+        <a
+          href="https://x.com/alexmalvehy"
+          class="flex flex-row gap-3 items-center justify-end opacity-0 -translate-y-[20px] transition-all"
+        >
+          <div class="h-10 -mt-3 flex flex-col items-end gap-0">
+            <p class="p-0 m-0 leading-tight">Twitter</p>
+            <p
+              style="padding:0px; margin:0px; text-align:right; font-size:18px; opacity:30%;"
+            >
+              @alexmalvehy
+            </p>
+          </div>
           <img
             src="/img/SVG_socials/twitter.svg"
             class="h-6 invert hover:opacity-100 opacity-30 transition-all"
           /></a
         >
-        <a class="flex flex-row gap-3 items-center justify-end"
-          ><p>Behance</p>
+        <a
+          href="https://www.behance.net/alexmalvehy"
+          class="flex flex-row gap-3 items-center justify-end opacity-0 -translate-y-[20px] transition-all"
+        >
+          <div class="h-10 -mt-3 flex flex-col items-end gap-0">
+            <p class="p-0 m-0 leading-tight">Behance</p>
+            <p
+              style="padding:0px; margin:0px; text-align:right; font-size:18px; opacity:30%;"
+            >
+              /alexmalvehy
+            </p>
+          </div>
           <img
             src="/img/SVG_socials/behance.svg"
             class="h-6 invert hover:opacity-100 opacity-30 transition-all"
           /></a
         >
-        <a class="flex flex-row gap-3 items-center justify-end"
-          ><p>YouTube</p>
+        <a
+          href="https://www.youtube.com/c/Al3xitu"
+          class="flex flex-row gap-3 items-center justify-end opacity-0 -translate-y-[20px] transition-all"
+        >
+          <div class="h-10 -mt-3 flex flex-col items-end gap-0">
+            <p class="p-0 m-0 leading-tight">YouTube</p>
+            <p
+              style="padding:0px; margin:0px; text-align:right; font-size:18px; opacity:30%;"
+            >
+              @al3xitu
+            </p>
+          </div>
           <img
             src="/img/SVG_socials/youtube.svg"
             class="h-6 invert hover:opacity-100 opacity-30 transition-all"
           /></a
         >
-        <a class="flex flex-row gap-3 items-center justify-end"
-          ><p>Instagram</p>
+        <a
+          href="https://www.instagram.com/alexmalvehy/"
+          class="flex flex-row gap-3 items-center justify-end opacity-0 -translate-y-[20px] transition-all"
+        >
+          <div class="h-10 -mt-3 flex flex-col items-end gap-0">
+            <p class="p-0 m-0 leading-tight">Instagram</p>
+            <p
+              style="padding:0px; margin:0px; text-align:right; font-size:18px; opacity:30%;"
+            >
+              @alexmalvehy
+            </p>
+          </div>
           <img
             src="/img/SVG_socials/instagram.svg"
             class="h-6 invert hover:opacity-100 opacity-30 transition-all"
           /></a
         >
-        <a class="flex flex-row gap-3 items-center justify-end"
-          ><p>LinkedIn</p>
+        <a
+          href="https://www.linkedin.com/company/alexmalvehy/"
+          class="flex flex-row gap-3 items-center justify-end opacity-0 -translate-y-[20px] transition-all"
+        >
+          <div class="h-10 -mt-3 flex flex-col items-end gap-0">
+            <p class="p-0 m-0 leading-tight">LinkedIn</p>
+            <p
+              style="padding:0px; margin:0px; text-align:right; font-size:18px; opacity:30%;"
+            >
+              Alex Malvehy
+            </p>
+          </div>
           <img
             src="/img/SVG_socials/linkedin.svg"
             class="h-6 invert hover:opacity-100 opacity-30 transition-all"
@@ -117,85 +164,33 @@ const { isIndex, work } = Astro.props;
       </script>
 
       <script is:inline data-astro-rerun>
-        const dropdown = document.getElementById("dropdown");
-        const links = dropdown.querySelectorAll("a");
-
-        dropdown.addEventListener("mousemove", (e) => {
-          const rect = dropdown.getBoundingClientRect();
-          const mouseY = e.clientY - rect.top;
-
-          links.forEach((link, index) => {
-            const linkRect = link.getBoundingClientRect();
-            const linkCenterY = linkRect.top + linkRect.height / 2 - rect.top;
-            const distance = Math.abs(mouseY - linkCenterY);
-            const scale = Math.max(1, 2 - distance / 50);
-            const margin = Math.max(0, 20 - distance / 2.5);
-            opacity = Math.max(0.6, 1 - distance / 50);
-
-            link.style.transform = `scale(${scale})`;
-            link.style.marginBottom = `${margin}px`;
-            link.style.marginRight = `${margin * 2.5}px`;
-            link.style.opacity = `${opacity}`;
-          });
-        });
-
-        dropdown.addEventListener("mouseleave", () => {
-          links.forEach((link) => {
-            link.style.transform = "scale(1)";
-            link.style.marginBottom = "0";
-            link.style.marginRight = "0";
-            link.style.opacity = "1";
-          });
-        });
-
         function toggleDropdown() {
           const dropdown = document.getElementById("dropdown");
-          const navbar = document.getElementById("navbar");
           const links = dropdown.querySelectorAll("a");
           const menuIcon = document.getElementById("menuIcon");
 
           if (dropdown.classList.contains("hidden")) {
             dropdown.classList.remove("hidden");
-            dropdown.classList.add("show");
-            navbar.classList.add("hidden");
-            navbar.classList.remove("show");
+            menuIcon.style.transform = "rotate(90deg)";
 
-            menuIcon.style.rotate = "90deg";
             links.forEach((link, index) => {
               setTimeout(() => {
-                link.style.transition =
-                  "opacity 0.5s ease, transform 0.5s ease";
                 link.style.opacity = "1";
                 link.style.transform = "translateY(0)";
-                setTimeout(() => {
-                  link.style.transition = "none";
-                }, 500);
               }, index * 100);
             });
           } else {
-            // Hide dropdown and show navbar
             links.forEach((link, index) => {
               setTimeout(() => {
-                link.style.transition =
-                  "opacity 0.5s ease, transform 0.5s ease";
                 link.style.opacity = "0";
                 link.style.transform = "translateY(-20px)";
-                setTimeout(() => {
-                  link.style.transition = "none";
-                }, 500);
               }, index * 100);
             });
 
-            setTimeout(
-              () => {
-                dropdown.classList.add("hidden");
-                dropdown.classList.remove("show");
-                navbar.classList.remove("hidden");
-                navbar.classList.add("show");
-                menuIcon.style.rotate = "0deg";
-              },
-              links.length * 100 + 500
-            );
+            setTimeout(() => {
+              dropdown.classList.add("hidden");
+              menuIcon.style.transform = "rotate(0deg)";
+            }, links.length * 100);
           }
         }
       </script>
@@ -204,7 +199,7 @@ const { isIndex, work } = Astro.props;
 </header>
 
 <style>
-  a:hover p {
+  a:hover div {
     transform: translate(0px, 0);
     opacity: 1;
     transition: 0.2s;
@@ -213,7 +208,7 @@ const { isIndex, work } = Astro.props;
     opacity: 1;
     transition: opacity 0.2s;
   }
-  p {
+  a div {
     transform: translate(20px, 0);
     opacity: 0;
     transition: 0.2s;
@@ -233,8 +228,8 @@ const { isIndex, work } = Astro.props;
   }
   .animatein {
     animation: auto linear animatein both;
-        animation-timeline: view();
-        animation-range: exit;
+    animation-timeline: view();
+    animation-range: exit;
   }
   @keyframes animatein {
     0% {
