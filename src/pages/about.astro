@@ -2,7 +2,7 @@
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import About from "../components/About.astro";
+import AboutComponent from "../components/About.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 ---
 
@@ -18,7 +18,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
         src="/html/frame_conway.html"
         class="top-0 left-0 w-full h-full z-0 transition-all absolute"
         transition:name="bg-iframe"></iframe>
-        <About />
+        <AboutComponent />
         <Footer />
     </main>
   </body>
