@@ -71,7 +71,11 @@ let posts = entries.items.map((item) => {
       class="fadeInScale flex flex-col items-center justify-center md:w-screen md:h-screen mb-52 md:mb-0 relative scroll-snap-center relative"
     >
       <About />
-      <Button text="Read more" href="/about" />
+      <div
+        class="w-[95%] max-w-[700px] mt-3 flex flex-row items-end justify-end relative"
+      >
+        <Button text="Read more" href="/about" />
+      </div>
     </div>
     <div
       class="fadeInScale flex flex-col items-center justify-center md:w-screen md:h-screen mb-52 md:mb-0 relative scroll-snap-center"

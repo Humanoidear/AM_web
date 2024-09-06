@@ -37,7 +37,10 @@ const posts = entries.items.map((item) => {
       <div
         class="mb-6 max-w-[1400px] w-[95%] flex flex-row items-center justify-between gap-20 z-1 relative"
       >
-        <h1 class="m-0 text-6xl font-[MGNHumble] text-white translate-y-3">
+        <h1
+          class="m-0 text-6xl font-[MGNHumble] text-white translate-y-3"
+          transition:name="work-head-title"
+        >
           Work
         </h1>
       </div>
@@ -107,50 +110,54 @@ const posts = entries.items.map((item) => {
 </html>
 
 <script is:inline data-astro-rerun>
-    window.addEventListener("scroll", () => {
-      const scrollPosition = window.scrollY;
-      const screenWidth = window.innerWidth;
-  
-      if (screenWidth > 1200) {
-        const moveFastElements = document.querySelectorAll('.move-fast');
-        const moveSlowElements = document.querySelectorAll('.move-slow');
-  
-        moveFastElements.forEach((element) => {
-          element.style.transform = `translateY(-${scrollPosition * 0.3}px)`;
-        });
-  
-        moveSlowElements.forEach((element) => {
-          element.style.transform = `translateY(-${scrollPosition * 0.1}px)`;
-        });
-      } else {
-        moveFastElements.forEach((element) => {
-          element.style.transform = `translateY(0px)`;
-        });
-        moveSlowElements.forEach((element) => {
-          element.style.transform = `translateY(0px)`;
-        });
-      }
-    });
-  </script>
+  window.addEventListener("scroll", () => {
+    const scrollPosition = window.scrollY;
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth > 1200) {
+      const moveFastElements = document.querySelectorAll(".move-fast");
+      const moveSlowElements = document.querySelectorAll(".move-slow");
+
+      moveFastElements.forEach((element) => {
+        element.style.transform = `translateY(-${scrollPosition * 0.3}px)`;
+      });
+
+      moveSlowElements.forEach((element) => {
+        element.style.transform = `translateY(-${scrollPosition * 0.1}px)`;
+      });
+    } else {
+      moveFastElements.forEach((element) => {
+        element.style.transform = `translateY(0px)`;
+      });
+      moveSlowElements.forEach((element) => {
+        element.style.transform = `translateY(0px)`;
+      });
+    }
+  });
+</script>
 
 <style>
   @keyframes animate-in-and-out {
-  entry -50%  {
-    opacity: 0; scale: 0.8;
+    entry -50% {
+      opacity: 0;
+      scale: 0.8;
+    }
+    entry 100% {
+      opacity: 1;
+      scale: 1;
+    }
+    exit -50% {
+      opacity: 1;
+      scale: 1;
+    }
+    exit 100% {
+      opacity: 0;
+      scale: 0.8;
+    }
   }
-  entry 100%  {
-    opacity: 1; scale: 1;
-  }
-  exit -50% {
-    opacity: 1; scale: 1;
-  }
-  exit 100% {
-    opacity: 0; scale: 0.8;
-  }
-}
 
-ul li {
-  animation: linear animate-in-and-out;
-  animation-timeline: view();
-}
+  ul li {
+    animation: linear animate-in-and-out;
+    animation-timeline: view();
+  }
 </style>
