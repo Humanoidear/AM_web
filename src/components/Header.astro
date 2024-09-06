@@ -43,7 +43,7 @@ const { isIndex, work } = Astro.props;
       </button>
       <div
         id="dropdown"
-        class="top-20 right-8 dropdown-content hidden mt-0 p-1 flex flex-col items-end gap-3 z-10 transition-all absolute"
+        class="top-20 right-8 dropdown-content hidden pointer-events-none mt-0 p-1 flex flex-col items-end gap-3 z-10 transition-all absolute"
       >
         <a
           href="https://x.com/alexmalvehy"
@@ -171,6 +171,7 @@ const { isIndex, work } = Astro.props;
 
           if (dropdown.classList.contains("hidden")) {
             dropdown.classList.remove("hidden");
+            dropdown.classList.remove("pointer-events-none");
             menuIcon.style.transform = "rotate(90deg)";
 
             links.forEach((link, index) => {
@@ -189,6 +190,7 @@ const { isIndex, work } = Astro.props;
 
             setTimeout(() => {
               dropdown.classList.add("hidden");
+              dropdown.classList.add("pointer-events-none");
               menuIcon.style.transform = "rotate(0deg)";
             }, links.length * 100);
           }
