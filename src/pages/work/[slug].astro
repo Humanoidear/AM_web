@@ -38,7 +38,7 @@ let options = {
 
 let parsedSEOContent = documentToPlainTextString(content);
 if (parsedSEOContent.length > 60) {
-  parsedSEOContent = parsedSEOContent.slice(0, 60) + "...";
+  parsedSEOContent = parsedSEOContent.slice(0, 160) + "...";
 }
 let bodyHTML = content ? documentToHtmlString(content, options) : "";
 ---
@@ -47,7 +47,7 @@ let bodyHTML = content ? documentToHtmlString(content, options) : "";
   <head>
     <BaseHead
       title={`${title} | work | ${SITE_TITLE}`}
-      description={`${type}\nServices: ${Array.isArray(services) && services.map((service) => service + " ")}\nYear: ${year}\n\n${parsedSEOContent}`}
+      description={`${type}\nServices: ${Array.isArray(services) && services.map((service) => " " + service)}\nYear: ${year}\n\n${parsedSEOContent}`}
       image={(heroImage as any)?.fields?.file?.url}
     />
   </head>
