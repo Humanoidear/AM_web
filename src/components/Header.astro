@@ -9,7 +9,7 @@ const { isIndex } = Astro.props;
     <h2 id="home-link" class={isIndex}>
       <a href="/"><img src="/img/am.svg" alt="Go home" width="70px" /></a>
     </h2>
-    <h1 id="wordmark-container" class={`text-6xl left-1/2 -translate-x-1/2 scale-75 flex flex-row items-start justify-start absolute ${isIndex ? '' : 'hidden'}`}>
+    <h1 id="wordmark-container" class={`text-6xl left-1/2 -translate-x-1/2 scale-75 flex flex-row items-start justify-start pointer-events-none absolute ${isIndex ? '' : 'hidden'}`}>
       <span></span><span class="w-[85px] flex remove overflow-hidden flex-nowrap relative">lex</span>
       <span id="movable"></span><span class="w-[190px] flex remove overflow-hidden flex-nowrap relative">alvehy</span>
     </h1>
@@ -84,7 +84,7 @@ const { isIndex } = Astro.props;
               wordmark.style.left = "33px";
               wordmark.style.transform = "translateX(0%) scale(1.05)";
               wordmark.style.transition = "0.5s ease";
-			  movable.style.transform = "translate(-13.9px, 1px)";
+			  movable.style.transform = "translate(-13.6px, 1px)";
 			  links.style.opacity = 1;
             } else {
               element.style.width = "";

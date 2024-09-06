@@ -78,6 +78,7 @@ body {
   overflow-wrap: break-word;
   font-size: 20px;
   line-height: 1.7;
+  scroll-behavior: smooth;
 }
 
 h1,

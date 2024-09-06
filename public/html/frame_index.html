@@ -117,7 +117,7 @@
 
         function animatePaths() {
             // Only generate new target paths every 600 frames
-            if (frameCount % 600 === 0) {
+            if (frameCount % 60 === 0) {
                 targetPath1 = generatePath(0, 10, 90, 2, -1);
                 targetPath2 = generatePath(gridSizeX - 9, gridSizeY + 1, 90, 1, -2);
             }

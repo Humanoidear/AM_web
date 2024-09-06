@@ -35,51 +35,49 @@ let posts = entries.items.map((item) => {
       src="/html/frame_index.html"
       class="top-0 left-0 w-full h-full z-0 fixed"
       transition:name="bg-iframe"></iframe>
-    <main class="flex flex-col items-center overflow-x-hidden scroll-snap-y">
-      <div
-        class="w-screen h-screen mb-52 md:mb-0 flex sm:flex-row flex-col items-center justify-center sm:gap-[20%] scroll-snap-center"
+    <div
+      class="fadeOutScale w-screen h-screen mb-52 md:mb-0 flex sm:flex-row flex-col items-center justify-center sm:gap-[20%] scroll-snap-center"
+    >
+      <h1
+        class="sm:w-[300px] lg:text-8xl tex-center sm:text-left pointer-events-none z-10 relative"
       >
-        <h1
-          class="sm:w-[300px] lg:text-8xl tex-center sm:text-left z-10 relative"
+        <span class="ml-3">more</span><br /><span class="ml-10">than</span><br
+        /><span id="catchphrase" class="text-[#70F1B0] catchphrase-container"
+          >a logo</span
         >
-          <span class="ml-3">more</span><br /><span class="ml-10">than</span><br
-          /><span id="catchphrase" class="text-[#70F1B0] catchphrase-container"
-            >a logo</span
-          >
-        </h1>
-        <ul
-          id="work-carousel"
-          class="w-[400px] h-[400px] grid grid-cols-2 grid-rows-2 gap-6 sm:pointer-events-auto pointer-events-none sm:opacity-100 opacity-10 z-0 sm:relative absolute"
-        >
-        </ul>
-        <a
-          href="#about"
-          class="w-full bottom-6 flex flex-col items-center absolute"
-        >
-          <img
-            src="https://unpkg.com/pixelarticons@1.8.1/svg/arrow-down.svg"
-            alt="Arrow Down - View More"
-            class="invert w-8 h-8 opacity-60 hover:opacity-100 transition-all"
-          />
-        </a>
-      </div>
-      <div
-        id="about"
-        class="flex flex-col items-center justify-center md:w-screen md:h-screen mb-52 md:mb-0 relative scroll-snap-center"
+      </h1>
+      <ul
+        id="work-carousel"
+        class="w-[400px] h-[400px] grid grid-cols-2 grid-rows-2 gap-6 sm:pointer-events-auto pointer-events-none sm:opacity-100 opacity-10 z-0 sm:relative absolute"
       >
-        <About />
-      </div>
-      <div
-        class="flex flex-col items-center justify-center md:w-screen md:h-screen mb-52 md:mb-0 relative scroll-snap-center"
+      </ul>
+      <a
+        href="#about"
+        class="opacity w-full bottom-6 flex flex-col items-center absolute"
       >
-        <Work />
-      </div>
-      <div
-        class="w-full flex flex-col items-center justify-center md:w-screen md:h-screen relative scroll-snap-center"
-      >
-        <Contact />
-      </div>
-    </main>
+        <img
+          src="https://unpkg.com/pixelarticons@1.8.1/svg/arrow-down.svg"
+          alt="Arrow Down - View More"
+          class="invert w-8 h-8 opacity-60 hover:opacity-100 transition-all"
+        />
+      </a>
+    </div>
+    <div
+      id="about"
+      class="fadeInScale flex flex-col items-center justify-center md:w-screen md:h-screen mb-52 md:mb-0 relative scroll-snap-center relative"
+    >
+      <About />
+    </div>
+    <div
+      class="fadeInScale flex flex-col items-center justify-center md:w-screen md:h-screen mb-52 md:mb-0 relative scroll-snap-center"
+    >
+      <Work />
+    </div>
+    <div
+      class="fadeInScale w-full flex flex-col items-center justify-center md:w-screen md:h-screen relative scroll-snap-center"
+    >
+      <Contact />
+    </div>
     <Footer />
     <script define:vars={{ posts }}>
       function updateCarousel() {
@@ -129,12 +127,12 @@ let posts = entries.items.map((item) => {
         const catchphrase = document.getElementById("catchphrase");
         const catchphrases = [
           "a logo",
-          "a brand",
-          "a story",
-          "a journey",
-          "an identity",
+          "a designer",
+          "graphics",
           "a vision",
-          "a message",
+          "visuals",
+          "a concept",
+          "motion",
         ];
         const randomIndex = Math.floor(Math.random() * catchphrases.length);
         const randomCatchphrase = catchphrases[randomIndex];
@@ -191,6 +189,24 @@ let posts = entries.items.map((item) => {
         scroll-snap-align: center;
       }
 
+      .opacity {
+        animation: fadeOut2 linear forwards;
+        animation-timeline: view();
+        animation-range: entry 25% cover 50%;
+      }
+
+      .fadeInScale {
+        animation: auto linear fadeInScale both;
+        animation-timeline: view();
+        animation-range: entry 25% cover 50%;
+      }
+
+      .fadeOutScale {
+        animation: auto linear fadeOutScale both;
+        animation-timeline: view();
+        animation-range: exit;
+      }
+
       @keyframes fadeIn {
         from {
           opacity: 0;
@@ -210,6 +226,39 @@ let posts = entries.items.map((item) => {
         to {
           opacity: 0;
           margin-top: -20px;
+        }
+      }
+
+      @keyframes fadeOut2 {
+        from {
+          opacity: 1;
+          transform: scale(1);
+        }
+        to {
+          opacity: 0;
+          transform: scale(0.7);
+        }
+      }
+
+      @keyframes fadeInScale {
+        0% {
+          opacity: 0;
+          transform: scale(0.7);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @keyframes fadeOutScale {
+        0% {
+          opacity: 1;
+          transform: scale(1) translate3d(0, 0, 0);
+        }
+        100% {
+          opacity: 0;
+          transform: scale(0.7) translate3d(0, 600px, 300px);
         }
       }
     </style>

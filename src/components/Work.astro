@@ -30,7 +30,7 @@ const posts = entries.items.map((item) => {
       posts.slice(0, 7).map((post, index) => (
         <li
           data-type={post.type}
-          class={`work-hover hover:shadow-xl shadow-white z-0 hover:z-10 relative ${index === 0 ? "col-span-2 row-span-2" : ""}`}
+          class={`slideup work-hover hover:shadow-xl shadow-white z-0 hover:z-10 relative ${index === 0 ? "col-span-2 row-span-2" : ""}`}
         >
           <a
             class="flex flex-row items-start justify-between gap-5 relative"
@@ -95,3 +95,49 @@ const posts = entries.items.map((item) => {
     </script>
   </ul>
 </section>
+
+<style>
+      .slideup {
+        animation: auto linear slideup both;
+        animation-timeline: view();
+      }
+
+      .slideup:nth-child(1) {
+        animation-range: cover 00% cover 50%;
+      }
+
+      .slideup:nth-child(2) {
+        animation-range: cover 20% cover 50%;
+      }
+
+      .slideup:nth-child(3) {
+        animation-range: cover 25% cover 50%;
+      }
+
+      .slideup:nth-child(4) {
+        animation-range: cover 30% cover 50%;
+      }
+
+      .slideup:nth-child(5) {
+        animation-range: cover 20% cover 50%;
+      }
+
+      .slideup:nth-child(6) {
+        animation-range: cover 25% cover 50%;
+      }
+
+      .slideup:nth-child(7) {
+        animation-range: cover 30% cover 50%;
+      }
+
+      @keyframes slideup {
+        0% {
+          opacity: 0;
+          transform: scale(0.8) translateY(50px);
+        }
+        15% {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+      }
+</style>
