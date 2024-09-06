@@ -1,19 +1,34 @@
 ---
-import HeaderLink from './HeaderLink.astro';
+import HeaderLink from "./HeaderLink.astro";
 
-const { isIndex } = Astro.props;
+const { isIndex, work } = Astro.props;
 ---
 
 <header class="p-8 w-full h-20 z-50 fixed">
   <nav class="flex flex-row items-center justify-between gap-5">
-    <h2 id="home-link" class={isIndex}>
-      <a href="/"><img src="/img/am.svg" alt="Go home" width="70px" /></a>
-    </h2>
-    <h1 id="wordmark-container" class={`text-6xl left-1/2 -translate-x-1/2 scale-75 flex flex-row items-start justify-start pointer-events-none absolute ${isIndex ? '' : 'hidden'}`}>
-      <span></span><span class="w-[85px] flex remove overflow-hidden flex-nowrap relative">lex</span>
-      <span id="movable"></span><span class="w-[190px] flex remove overflow-hidden flex-nowrap relative">alvehy</span>
+    <div class="flex flex-row items-center gap-6">
+      <h2 id="home-link" class={isIndex}>
+        <a href="/"><img src="/img/am.svg" alt="Go home" width="70px" /></a>
+      </h2>
+      <span class="animatein text-white text-2xl">{work}</span>
+    </div>
+    <h1
+      id="wordmark-container"
+      class={`text-6xl left-1/2 -translate-x-1/2 scale-75 flex flex-row items-start justify-start pointer-events-none absolute ${isIndex ? "" : "hidden"}`}
+    >
+      <span></span><span
+        class="w-[85px] flex remove overflow-hidden flex-nowrap relative"
+        >lex</span
+      >
+      <span id="movable"></span><span
+        class="w-[190px] flex remove overflow-hidden flex-nowrap relative"
+        >alvehy</span
+      >
     </h1>
-    <div id={isIndex} class={`flex-row items-center gap-9 internal-links sm:flex transition-all hidden ${isIndex ? 'opacity-0' : ''}`}>
+    <div
+      id={isIndex}
+      class={`flex-row items-center gap-9 internal-links sm:flex transition-all hidden ${isIndex ? "opacity-0" : ""}`}
+    >
       <div
         id="navbar"
         class="flex-row items-center gap-9 internal-links sm:flex hidden"
@@ -70,13 +85,14 @@ const { isIndex } = Astro.props;
         >
       </div>
 
-	  <script is:inline>
-		  document.addEventListener("scroll", () => {
+      <script is:inline>
+        document.addEventListener("scroll", () => {
           const remove = document.querySelectorAll(".remove");
           const wordmark = document.getElementById("wordmark-container");
-		  const movable = document.getElementById("movable");
-		  const links = document.getElementById("opacity-0")
-          const scrollTop = window.scrollY || document.documentElement.scrollTop;
+          const movable = document.getElementById("movable");
+          const links = document.getElementById("opacity-0");
+          const scrollTop =
+            window.scrollY || document.documentElement.scrollTop;
           remove.forEach((element) => {
             if (scrollTop > 0) {
               element.style.opacity = 0;
@@ -84,21 +100,21 @@ const { isIndex } = Astro.props;
               wordmark.style.left = "33px";
               wordmark.style.transform = "translateX(0%) scale(1.05)";
               wordmark.style.transition = "0.5s ease";
-			  movable.style.transform = "translate(-13.6px, 1px)";
-			  links.style.opacity = 1;
+              movable.style.transform = "translate(-13.6px, 1px)";
+              links.style.opacity = 1;
             } else {
               element.style.width = "";
               element.style.opacity = 1;
               wordmark.style.left = "50%";
               wordmark.style.transform = "translateX(-50%) scale(0.7)";
               wordmark.style.transition = "0.5s ease";
-			  movable.style.transform = "translate(0px, 0px)";
-			  links.style.opacity = 0;
+              movable.style.transform = "translate(0px, 0px)";
+              links.style.opacity = 0;
             }
             element.style.transition = "0.5s ease";
           });
         });
-	  </script>
+      </script>
 
       <script is:inline data-astro-rerun>
         const dropdown = document.getElementById("dropdown");
@@ -214,5 +230,20 @@ const { isIndex } = Astro.props;
   #dropdown.show a {
     opacity: 1;
     transform: translateY(0);
+  }
+  .animatein {
+    animation: auto linear animatein both;
+        animation-timeline: view();
+        animation-range: exit;
+  }
+  @keyframes animatein {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 </style>

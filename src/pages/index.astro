@@ -7,6 +7,7 @@ import Footer from "../components/Footer.astro";
 import About from "../components/About.astro";
 import Contact from "../components/Contact.astro";
 import Work from "../components/Work.astro";
+import Button from "../components/Button.astro";
 
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 
@@ -33,7 +34,7 @@ let posts = entries.items.map((item) => {
     <iframe
       id="frame"
       src="/html/frame_index.html"
-      class="top-0 left-0 w-full h-full z-0 fixed"
+      class="top-0 left-0 w-screen h-screen z-0 fixed"
       transition:name="bg-iframe"></iframe>
     <div
       class="fadeOutScale w-screen h-screen mb-52 md:mb-0 flex sm:flex-row flex-col items-center justify-center sm:gap-[20%] scroll-snap-center"
@@ -41,8 +42,11 @@ let posts = entries.items.map((item) => {
       <h1
         class="sm:w-[300px] lg:text-8xl tex-center sm:text-left pointer-events-none z-10 relative"
       >
-        <span class="ml-3">more</span><br /><span class="ml-10">than</span><br
-        /><span id="catchphrase" class="text-[#70F1B0] catchphrase-container"
+        <span class="fadeup delay-1 ml-3">more</span><br /><span
+          class="fadeup delay-2 ml-10">than</span
+        ><br /><span
+          id="catchphrase"
+          class="fadeup delay-3 text-[#70F1B0] catchphrase-container"
           >a logo</span
         >
       </h1>
@@ -67,6 +71,7 @@ let posts = entries.items.map((item) => {
       class="fadeInScale flex flex-col items-center justify-center md:w-screen md:h-screen mb-52 md:mb-0 relative scroll-snap-center relative"
     >
       <About />
+      <Button text="Read more" href="/about" />
     </div>
     <div
       class="fadeInScale flex flex-col items-center justify-center md:w-screen md:h-screen mb-52 md:mb-0 relative scroll-snap-center"
@@ -123,6 +128,8 @@ let posts = entries.items.map((item) => {
         });
       }
 
+      let currentIndex = 1;
+
       function updateTagline() {
         const catchphrase = document.getElementById("catchphrase");
         const catchphrases = [
@@ -134,10 +141,10 @@ let posts = entries.items.map((item) => {
           "a concept",
           "motion",
         ];
-        const randomIndex = Math.floor(Math.random() * catchphrases.length);
-        const randomCatchphrase = catchphrases[randomIndex];
-        // Break the catchphrase into individual words and animate them
-        const words = randomCatchphrase.split(" ");
+
+        const currentCatchphrase = catchphrases[currentIndex];
+
+        const words = currentCatchphrase.split(" ");
         const animatedWords = words.map((word) => {
           const letters = word.split("");
           const animatedLetters = letters
@@ -152,8 +159,10 @@ let posts = entries.items.map((item) => {
           setTimeout(() => {
             span.style.transition = "opacity 0.5s cubic-bezier(0,0,0,1)";
             span.style.opacity = 1;
-          }, index * 100); // Stagger effect with 100ms delay between each span
+          }, index * 100);
         });
+
+        currentIndex = (currentIndex + 1) % catchphrases.length;
       }
 
       updateCarousel();
@@ -205,6 +214,35 @@ let posts = entries.items.map((item) => {
         animation: auto linear fadeOutScale both;
         animation-timeline: view();
         animation-range: exit;
+      }
+
+      .fadeup {
+        opacity: 0;
+        animation: fadeup 1s cubic-bezier(0, 0, 0, 1) forwards;
+        position: relative;
+      }
+
+      .delay-1 {
+        animation-delay: 0.1s;
+      }
+
+      .delay-2 {
+        animation-delay: 0.2s;
+      }
+
+      .delay-3 {
+        animation-delay: 0.3s;
+      }
+
+      @keyframes fadeup {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       @keyframes fadeIn {

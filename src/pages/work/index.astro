@@ -108,23 +108,31 @@ const posts = entries.items.map((item) => {
 </html>
 
 <script is:inline data-astro-rerun>
-  document.addEventListener("astro:page-load", () => {
-    const moveFastElements = document.querySelectorAll(".move-fast");
-    const moveSlowElements = document.querySelectorAll(".move-slow");
-
     window.addEventListener("scroll", () => {
       const scrollPosition = window.scrollY;
-
-      moveFastElements.forEach((element) => {
-        element.style.transform = `translateY(-${scrollPosition * 0.3}px)`;
-      });
-
-      moveSlowElements.forEach((element) => {
-        element.style.transform = `translateY(-${scrollPosition * 0.1}px)`;
-      });
+      const screenWidth = window.innerWidth;
+  
+      if (screenWidth > 1200) {
+        const moveFastElements = document.querySelectorAll('.move-fast');
+        const moveSlowElements = document.querySelectorAll('.move-slow');
+  
+        moveFastElements.forEach((element) => {
+          element.style.transform = `translateY(-${scrollPosition * 0.3}px)`;
+        });
+  
+        moveSlowElements.forEach((element) => {
+          element.style.transform = `translateY(-${scrollPosition * 0.1}px)`;
+        });
+      } else {
+        moveFastElements.forEach((element) => {
+          element.style.transform = `translateY(0px)`;
+        });
+        moveSlowElements.forEach((element) => {
+          element.style.transform = `translateY(0px)`;
+        });
+      }
     });
-  });
-</script>
+  </script>
 
 <style>
   @keyframes animate-in-and-out {

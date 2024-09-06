@@ -45,14 +45,14 @@ let bodyHTML = content ? documentToHtmlString(content, options) : "";
   </head>
 
   <body>
-    <Header />
+    <Header work={` / ${ title } `} />
     <main class="flex flex-col items-center">
       <div class="w-full">
         <div class="flex items-end justify-end rounded-none">
           {
             heroImage && (
               <div
-                class="w-[95%] max-w-[1200px] h-[400px] relative"
+                class="expand w-[95%] max-w-[1200px] h-[400px] relative"
                 style={`background-size:cover; background-position:center; background-image: url('${(heroImage as any)?.fields?.file?.url}')`}
                 transition:name={`work-title-${title}-image`}
               />
@@ -106,3 +106,23 @@ let bodyHTML = content ? documentToHtmlString(content, options) : "";
     <Footer />
   </body>
 </html>
+
+<style>
+  .expand {
+    animation: auto linear expand both;
+        animation-timeline: view();
+        animation-range: exit;
+  }
+  @keyframes expand {
+    0% {
+      opacity: 1;
+      transform: translate(0, 0);
+      filter: grayscale(0) blur(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(0, 100px);
+      filter: grayscale(1) blur(5px);
+    }
+  }
+</style>
