@@ -1,0 +1,98 @@
+{
+  "en": [
+    {
+      "name": "Alex Malvehy",
+      "pfp": "https://via.placeholder.com/150?text=Alex+Malvehy",
+      "career": "Designer",
+      "quote": "Design is not just what it looks like and feels like. Design is how it works."
+    },
+    {
+      "name": "Jane Doe",
+      "pfp": "https://via.placeholder.com/150?text=Jane+Doe",
+      "career": "Graphic Designer",
+      "quote": "Creativity is intelligence having fun."
+    },
+    {
+      "name": "John Smith",
+      "pfp": "https://via.placeholder.com/150?text=John+Smith",
+      "career": "UI/UX Designer",
+      "quote": "Good design is good business."
+    },
+    {
+      "name": "Emily Johnson",
+      "pfp": "https://via.placeholder.com/150?text=Emily+Johnson",
+      "career": "Product Designer",
+      "quote": "Design adds value faster than it adds costs."
+    },
+    {
+      "name": "Michael Brown",
+      "pfp": "https://via.placeholder.com/150?text=Michael+Brown",
+      "career": "Web Designer",
+      "quote": "Design is thinking made visual."
+    }
+  ],
+  "es": [
+    {
+      "name": "Alex Malvehy",
+      "pfp": "https://via.placeholder.com/150?text=Alex+Malvehy",
+      "career": "Diseñador",
+      "quote": "El diseño no es solo cómo se ve y se siente. El diseño es cómo funciona."
+    },
+    {
+      "name": "Jane Doe",
+      "pfp": "https://via.placeholder.com/150?text=Jane+Doe",
+      "career": "Diseñadora Gráfica",
+      "quote": "La creatividad es inteligencia divirtiéndose."
+    },
+    {
+      "name": "John Smith",
+      "pfp": "https://via.placeholder.com/150?text=John+Smith",
+      "career": "Diseñador UI/UX",
+      "quote": "El buen diseño es buen negocio."
+    },
+    {
+      "name": "Emily Johnson",
+      "pfp": "https://via.placeholder.com/150?text=Emily+Johnson",
+      "career": "Diseñadora de Productos",
+      "quote": "El diseño agrega valor más rápido de lo que agrega costos."
+    },
+    {
+      "name": "Michael Brown",
+      "pfp": "https://via.placeholder.com/150?text=Michael+Brown",
+      "career": "Diseñador Web",
+      "quote": "El diseño es pensamiento hecho visual."
+    }
+  ],
+  "ca": [
+    {
+      "name": "Alex Malvehy",
+      "pfp": "https://via.placeholder.com/150?text=Alex+Malvehy",
+      "career": "Dissenyador",
+      "quote": "El disseny no és només com es veu i es sent. El disseny és com funciona."
+    },
+    {
+      "name": "Jane Doe",
+      "pfp": "https://via.placeholder.com/150?text=Jane+Doe",
+      "career": "Dissenyadora Gràfica",
+      "quote": "La creativitat és intel·ligència divertint-se."
+    },
+    {
+      "name": "John Smith",
+      "pfp": "https://via.placeholder.com/150?text=John+Smith",
+      "career": "Dissenyador UI/UX",
+      "quote": "El bon disseny és bon negoci."
+    },
+    {
+      "name": "Emily Johnson",
+      "pfp": "https://via.placeholder.com/150?text=Emily+Johnson",
+      "career": "Dissenyadora de Productes",
+      "quote": "El disseny afegeix valor més ràpid del que afegeix costos."
+    },
+    {
+      "name": "Michael Brown",
+      "pfp": "https://via.placeholder.com/150?text=Michael+Brown",
+      "career": "Dissenyador Web",
+      "quote": "El disseny és pensament fet visual."
+    }
+  ]
+}

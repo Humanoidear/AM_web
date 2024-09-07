@@ -1,14 +1,14 @@
 ---
-import { contentfulClient } from "../../lib/contentful";
-import type { work } from "../../lib/contentful";
+import { contentfulClient } from "../../../lib/contentful";
+import type { work } from "../../../lib/contentful";
 import { localizePath } from "astro-i18next";
-import BaseHead from "../../components/BaseHead.astro";
-import Header from "../../components/Header.astro";
-import Footer from "../../components/Footer.astro";
+import BaseHead from "../../../components/BaseHead.astro";
+import Header from "../../../components/Header.astro";
+import Footer from "../../../components/Footer.astro";
 import i18next, { t, changeLanguage } from "i18next";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../../../consts";
 
-changeLanguage("en");
+changeLanguage("es");
 
 const entries = await contentfulClient.getEntries<work>({
     content_type: "work",

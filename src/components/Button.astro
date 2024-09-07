@@ -1,8 +1,9 @@
 ---
+import { localizePath } from "astro-i18next";
 const { text, href } = Astro.props;
 ---
 
-<a href={href} class="pixel-corners px-3 py-1 hover:text-black bg-transparent hover:bg-white text-white text-lg font-[InstrumentSans] flex flex-row items-center transition-all">{text}<img
+<a href={localizePath(href)} class="pixel-corners px-3 py-1 hover:text-black bg-transparent hover:bg-white text-white text-lg font-[InstrumentSans] flex flex-row items-center transition-all">{text}<img
   src="https://unpkg.com/pixelarticons@1.8.1/svg/arrow-right.svg"
   alt="Follow Button Link"
 /></a>

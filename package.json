@@ -18,6 +18,7 @@
     "@contentful/rich-text-html-renderer": "^16.6.9",
     "@contentful/rich-text-plain-text-renderer": "^16.2.9",
     "astro": "^4.13.3",
+    "astro-i18next": "^1.0.0-beta.21",
     "contentful": "^10.15.0",
     "tailwindcss": "^3.4.9",
     "typescript": "^5.5.4"

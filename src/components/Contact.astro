@@ -1,6 +1,11 @@
 ---
-import reviews from "../data/reviews.json";
-const formattedReviews = reviews.map((review) => {
+import i18next, { t } from "i18next";
+import reviews from "../../public/json/reviews.json";
+
+let lang = i18next.language;
+let localizedReviews = reviews[lang];
+
+const formattedReviews = localizedReviews.map((review) => {
   const name = review.name;
   const [firstWord, ...rest] = name.split(" ");
   const formattedName = `<span>${firstWord}</span><br><span class='ml-6'>${rest.join(" ")}</span>`;
@@ -12,10 +17,9 @@ const formattedReviews = reviews.map((review) => {
   class="w-full md:mt-52 mt-20 md:max-w-[1100px] flex md:flex-row flex-col items-center md:gap-56 gap-10"
 >
   <div class="slideup w-full md:w-[calc(100%-13rem)] z-10 relative">
-    <h1 class="m-0 md:text-8xl text-6xl text-white">contact</h1>
+    <h1 class="m-0 md:text-8xl text-6xl text-white">{t("header.contact")}</h1>
     <p class="mb-3">
-      Do you have a project, idea, or just want to get some info? In either
-      case, don't hesitate to reach out to me, and we'll figure things out.
+      {t("contact.catch")}
     </p>
     <p class="flex flex-row items-center gap-1">
       <a

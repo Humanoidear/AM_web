@@ -1,6 +1,8 @@
 ---
 import { contentfulClient } from "../lib/contentful";
 import type { work } from "../lib/contentful";
+import i18next, { t } from "i18next";
+import { localizePath } from "astro-i18next";
 import Button from "../components/Button.astro";
 
 const entries = await contentfulClient.getEntries<work>({
@@ -23,8 +25,8 @@ const posts = entries.items.map((item) => {
 <h1
   class="w-full max-w-[1100px] m-0 text-6xl font-[MGNHumble] text-white text-left flex items-center justify-between translate-y-3"
 >
-  <span transition:name="work-head-title"> Work </span>
-  <Button text="View all work" href="/work" />
+  <span transition:name="work-head-title">{t("header.work")}</span>
+  <Button text={t("button.view_work")} href={localizePath("/work")} />
 </h1>
 <section class="max-w-[1100px] relative">
   <ul
@@ -38,12 +40,12 @@ const posts = entries.items.map((item) => {
         >
           <a
             class="flex flex-row items-start justify-between gap-5 relative"
-            href={`/work/${post.slug}/`}
+            href={localizePath(`/work/${post.slug}/`)}
           >
             <div class="w-full h-full overflow-hidden relative">
               <img
                 src={(post.preview as any)?.fields?.file?.url}
-                alt=""
+                alt={`Thumbnail image for ${post.title}`}
                 class="w-full h-full object-cover"
                 transition:name={`work-title-${post.title}-image`}
               />

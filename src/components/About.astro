@@ -1,12 +1,14 @@
+---
+import i18next, { t } from "i18next";
+---
+
 <div class="max-w-[700px] flex md:flex-row flex-col-reverse md:items-center gap-3">
   <div class="fadeup md:w-[calc(100%-13rem)] w-[95%] z-10 relative">
     <h1 class="md:translate-x-6 text-[MGNHumble] md:text-7xl text-6xl text-white md:text-right">
-      about
+      {t("header.about")}
     </h1>
     <p class="md:text-right">
-      I'm Alex Malvehy, a student and self-taught graphic and motion designer
-      from Barcelona. I specialize in branding, visual identity, and graphics
-      for television and streaming, continually learning and evolving.
+      {t("about.catch")}
     </p>
   </div>
   <div

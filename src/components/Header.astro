@@ -1,5 +1,8 @@
 ---
+import i18next, { t } from "i18next";
+import { localizePath } from "astro-i18next";
 import HeaderLink from "./HeaderLink.astro";
+import LanguageDropdown from "./LanguageDropdown.astro";
 
 const { isIndex, work } = Astro.props;
 ---
@@ -8,7 +11,7 @@ const { isIndex, work } = Astro.props;
   <nav class="flex flex-row items-center justify-between gap-5">
     <div class="flex flex-row items-center gap-6">
       <h2 id="home-link" class={isIndex}>
-        <a href="/"><img src="/img/am.svg" alt="Go home" width="70px" /></a>
+        <a href={localizePath("/")}><img src="/img/am.svg" alt="Go home" width="70px" /></a>
       </h2>
       <span class="animatein text-white text-2xl">{work}</span>
     </div>
@@ -27,13 +30,14 @@ const { isIndex, work } = Astro.props;
     </h1>
     <div
       id={isIndex}
-      class={`flex-row items-center gap-9 internal-links sm:flex transition-all hidden ${isIndex ? "opacity-0" : ""}`}
+      class={`flex-row items-center gap-6 internal-links sm:flex transition-all hidden ${isIndex ? "opacity-0" : ""}`}
     >
       <div class="flex-row items-center gap-9 internal-links sm:flex hidden">
-        <HeaderLink href="/about">about</HeaderLink>
-        <HeaderLink href="/work">work</HeaderLink>
-        <HeaderLink href="/contact">contact</HeaderLink>
+        <HeaderLink href={localizePath("/about")}>{t("header.about")}</HeaderLink>
+        <HeaderLink href={localizePath("/work")}>{t("header.work")}</HeaderLink>
+        <HeaderLink href={localizePath("/contact")}>{t("header.contact")}</HeaderLink>
       </div>
+      <LanguageDropdown />
       <button class="btn" id="menuIcon" onclick="toggleDropdown();">
         <img
           src="https://unpkg.com/pixelarticons@1.8.1/svg/chevron-down.svg"

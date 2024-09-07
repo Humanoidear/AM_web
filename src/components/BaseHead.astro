@@ -2,6 +2,7 @@
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
 import { ViewTransitions } from "astro:transitions";
+import { HeadHrefLangs } from "astro-i18next/components";
 import "../styles/global.css";
 
 interface Props {
@@ -20,6 +21,7 @@ const { title, description, image = "/img/am_seo_bg.png" } = Astro.props;
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type="image/svg+xml" href="/img/am.svg" />
 <meta name="generator" content={Astro.generator} />
+<HeadHrefLangs />
 
 <!-- Font preloads -->
 <link

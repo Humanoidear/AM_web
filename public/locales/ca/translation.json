@@ -1,0 +1,30 @@
+{
+    "site": {
+      "title": "alex malvehy",
+      "description": "Estudiant i dissenyador gràfic i moviment autodidacte de Barcelona especialitzat en branding, identitat visual i gràfics per a televisió i streaming, en constant aprenentatge i evolució."
+    },
+    "home": {
+      "more": "més",
+      "than": "que",
+      "a_logo": "un logo"
+    },
+    "about": {
+        "catch": "Sóc Alex Malvehy, estudiant i dissenyador gràfic i de moviment autodidacta de Barcelona. M'especialitzo en marca, identitat visual i gràfics per a televisió i streaming, aprenent i evolucionant contínuament."
+    },
+    "contact": {
+        "catch": "Tens un projecte, una idea o només vols obtenir informació? En qualsevol cas, no dubteu a posar-vos en contacte amb mi i ens entendrem."
+    },
+    "header": {
+        "about": "sobre",
+        "work": "treball",
+        "contact": "contactar"
+    },
+    "error": {
+        "404": "pàgina no trobada"
+    },
+    "button": {
+        "more": "llegir més",
+        "home": "tornar a l'inici",
+        "view_work": "veure tots els treballs"
+    }
+  }
