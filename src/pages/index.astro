@@ -92,7 +92,7 @@ let posts = entries.items.map((item) => {
       <Contact />
     </div>
     <Footer />
-    <script define:vars={{ posts, localizedCatchphrases }}>
+    <script define:vars={{ posts, lang, localizedCatchphrases }}>
       function updateCarousel() {
         let filteredPosts = posts.sort(() => Math.random() - 0.5).slice(0, 4);
 
@@ -121,7 +121,7 @@ let posts = entries.items.map((item) => {
               .map(
                 (post, index) => `
                   <li transition:name="work-title-${post.title}-image"  class="tile w-full h-full flex flex-col items-center justify-center gap-3 grayscale hover:grayscale-0 hover:scale-105 hover:border-4 border-0 border-white/20 overflow-hidden" style="transform: ${getRandomTransform()}; animation: fadeIn 0.5s cubic-bezier(0,0,0,1) ${index * 0.1}s forwards; opacity:0; aspect-ratio:1;">
-                    <a href="/work/${post.slug}/" class="w-full h-full">
+<a href="${lang === "en" ? "" : `/${lang}`}/work/${post.slug}" class="w-full h-full">
                     <img src="${post.preview.fields.file.url}" class="w-full h-full object-cover" alt="${post.title}">
                     </a>
                   </li>

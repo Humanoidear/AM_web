@@ -106,7 +106,7 @@ bodyHTML = localizedContent?.content || defaultContent?.content || bodyHTML;
               {type}
             </p>
             <ul>
-              <p class="opacity-60">Services</p>
+              <p class="opacity-60">${t("slug.services")}</p>
               {
                 Array.isArray(services) &&
                   services.map((service) => (
@@ -115,7 +115,7 @@ bodyHTML = localizedContent?.content || defaultContent?.content || bodyHTML;
               }
             </ul>
             <div transition:name={`work-title-${title}-year`}>
-              <p class="opacity-60">Year</p>
+              <p class="opacity-60">${t("slug.year")}</p>
               <p class="font-semibold text-white text-2xl">{year}</p>
             </div>
           </div>
