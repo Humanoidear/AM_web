@@ -73,7 +73,7 @@ let posts = entries.items.map((item) => {
       id="about"
       class="fadeInScale flex flex-col items-center justify-center md:w-screen md:h-screen mb-52 md:mb-0 scroll-snap-center relative"
     >
-      <About />
+      <About blob=true/>
       <div
         class="w-[95%] max-w-[700px] mt-3 flex flex-row items-end justify-end relative"
       >
@@ -88,7 +88,7 @@ let posts = entries.items.map((item) => {
     <div
       class="fadeInScale w-full flex flex-col items-center justify-center md:w-screen md:h-screen relative scroll-snap-center"
     >
-      <Contact />
+      <Contact blob=true/>
     </div>
     <Footer />
     <script data-astro-rerun define:vars={{ posts, lang, localizedCatchphrases }}>
