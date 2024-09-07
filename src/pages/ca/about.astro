@@ -4,7 +4,6 @@ import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
 import AboutComponent from "../../components/About.astro";
 import i18next, { t, changeLanguage } from "i18next";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
 
 changeLanguage("ca");
 ---
@@ -12,7 +11,7 @@ changeLanguage("ca");
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={`${t("header.about")} | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+    <BaseHead title={`${t("header.about")} | ${t("site.title")}`} description={t("site.description")} />
   </head>
   <body>
     <Header />

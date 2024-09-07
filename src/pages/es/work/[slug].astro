@@ -7,7 +7,6 @@ import BaseHead from "../../../components/BaseHead.astro";
 import Header from "../../../components/Header.astro";
 import Footer from "../../../components/Footer.astro";
 import i18next, { t, changeLanguage } from "i18next";
-import { SITE_TITLE } from "../../../consts";
 
 changeLanguage("es");
 
@@ -63,7 +62,7 @@ bodyHTML = localizedContent?.content || defaultContent?.content || bodyHTML;
 <html lang="en">
   <head>
     <BaseHead
-      title={`${title} | ${t("header.work")} | ${SITE_TITLE}`}
+      title={`${title} | ${t("header.work")} | ${t("site.title")}`}
       description={`${type}\nServices: ${Array.isArray(services) && services.map((service) => " " + service)}\nYear: ${year}\n\n${parsedSEOContent}`}
       image={(heroImage as any)?.fields?.file?.url}
     />
@@ -106,7 +105,7 @@ bodyHTML = localizedContent?.content || defaultContent?.content || bodyHTML;
               {type}
             </p>
             <ul>
-              <p class="opacity-60">${t("slug.services")}</p>
+              <p class="opacity-60">{t("slug.services")}</p>
               {
                 Array.isArray(services) &&
                   services.map((service) => (
@@ -115,7 +114,7 @@ bodyHTML = localizedContent?.content || defaultContent?.content || bodyHTML;
               }
             </ul>
             <div transition:name={`work-title-${title}-year`}>
-              <p class="opacity-60">${t("slug.year")}</p>
+              <p class="opacity-60">{t("slug.year")}</p>
               <p class="font-semibold text-white text-2xl">{year}</p>
             </div>
           </div>

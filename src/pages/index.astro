@@ -9,7 +9,6 @@ import About from "../components/About.astro";
 import Contact from "../components/Contact.astro";
 import Work from "../components/Work.astro";
 import Button from "../components/Button.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import catchphrases from "../../public/json/catchphrases.json";
 
 changeLanguage("en");
@@ -31,7 +30,7 @@ let posts = entries.items.map((item) => {
 <!doctype html>
 <html lang={i18next.language}>
   <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <BaseHead title={t("site.title")} description={t("site.description")} />
   </head>
   <body>
     <Header isIndex="opacity-0" />
