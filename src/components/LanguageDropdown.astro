@@ -35,7 +35,7 @@ const currentRoute = removeLangFromRoute(Astro.url.pathname);
     i18next.languages
       .filter((lang) => lang !== i18next.language)
       .map((lang) => (
-        <li class="mr-2 mb-3 transition-all" style="opacity:0; transform:translate(0, -20px);" key={lang}>
+        <li class="mr-2 mb-3 transition-all" style="opacity:0; transform:translate(0, -20px);">
           <a
             href={`${lang === "en" ? "" : "/" + lang}${currentRoute}`}
             class="text-white flex flex-row items-center justify-end gap-3"
