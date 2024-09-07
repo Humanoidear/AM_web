@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body, html {
+        body,
+        html {
             margin: 0;
             padding: 0;
             height: 100%;
@@ -15,11 +17,13 @@
             background-color: black;
             overflow: hidden;
         }
+
         .grid {
             display: grid;
             grid-template-columns: repeat(85, 20px);
             grid-template-rows: repeat(50, 20px);
         }
+
         .tile {
             width: 20px;
             height: 20px;
@@ -28,6 +32,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="grid" id="grid">
         <!-- Tiles will be generated here by JavaScript -->
@@ -90,6 +95,8 @@
         // Update the tiles' colors based on proximity to the paths
         function updateTiles() {
             const lineThickness = 1; // Adjusts the thickness of the line area
+            const purpleMaxColor = [83, 0, 240]; // RGB equivalent of #5300F0
+
             tiles.forEach((tile, index) => {
                 const tileX = index % gridSizeX;
                 const tileY = Math.floor(index / gridSizeX);
@@ -106,8 +113,12 @@
                 } else {
                     intensity = Math.max(0, 1 - (minDistance - lineThickness) / 15); // Gradual fade outside the line area
                 }
-                const blueIntensity = Math.floor(intensity * 255);
-                tile.style.backgroundColor = `rgb(0, 0, ${blueIntensity})`;
+
+                // Adjusting the tile color intensity using the purpleMaxColor
+                const redIntensity = Math.floor(intensity * purpleMaxColor[0]);
+                const greenIntensity = Math.floor(intensity * purpleMaxColor[1]);
+                const blueIntensity = Math.floor(intensity * purpleMaxColor[2]);
+                tile.style.backgroundColor = `rgb(${redIntensity}, ${greenIntensity}, ${blueIntensity})`;
             });
         }
 
@@ -137,4 +148,5 @@
         animatePaths();
     </script>
 </body>
+
 </html>

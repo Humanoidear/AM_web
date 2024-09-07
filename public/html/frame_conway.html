@@ -108,9 +108,11 @@
                 const distance = Math.sqrt((x - centerX) ** 2 + (y - centerY) ** 2);
                 const opacity = 0 + (distance / maxDistance) * 0.7;
 
-                tile.style.backgroundColor = gridArray[y][x] === 1 ? `rgba(0, 0, 255, ${opacity})` : 'black';
+                // Change the background color to #5300F0 with varying opacity
+                tile.style.backgroundColor = gridArray[y][x] === 1 ? `rgba(83, 0, 240, ${opacity})` : 'black';
             });
         }
+
 
         // Add mousemove event listener to the grid
         grid.addEventListener('mousemove', (e) => {

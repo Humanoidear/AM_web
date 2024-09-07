@@ -91,7 +91,12 @@ let posts = entries.items.map((item) => {
       <Contact />
     </div>
     <Footer />
-    <script define:vars={{ posts, lang, localizedCatchphrases }}>
+    <script data-astro-rerun define:vars={{ posts, lang, localizedCatchphrases }}>
+        document.addEventListener('astro:before-preparation', event => {
+          clearInterval(carouselInterval);
+          clearInterval(taglineInterval);
+        })
+        
       function updateCarousel() {
         let filteredPosts = posts.sort(() => Math.random() - 0.5).slice(0, 4);
 
@@ -164,8 +169,8 @@ let posts = entries.items.map((item) => {
       }
 
       updateCarousel();
-      setInterval(updateCarousel, 5000);
-      setInterval(updateTagline, 5000);
+      carouselInterval = setInterval(updateCarousel, 5000);
+      taglineInterval = setInterval(updateTagline, 5000);
 
       window.addEventListener("scroll", function () {
         var frame = document.getElementById("frame");

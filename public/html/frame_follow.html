@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body, html {
+        body,
+        html {
             margin: 0;
             padding: 0;
             height: 100%;
@@ -15,11 +17,13 @@
             background-color: black;
             overflow: hidden;
         }
+
         .grid {
             display: grid;
             grid-template-columns: repeat(85, 20px);
             grid-template-rows: repeat(50, 20px);
         }
+
         .tile {
             width: 20px;
             height: 20px;
@@ -28,6 +32,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="grid" id="grid">
         <!-- Tiles will be generated here by JavaScript -->
@@ -53,7 +58,8 @@
             return Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
         }
 
-        // Mouse move event to light up the tiles
+        const purpleMaxColor = [83, 0, 240];
+
         document.addEventListener('mousemove', (e) => {
             const rect = grid.getBoundingClientRect();
             const mouseX = e.clientX - rect.left;
@@ -65,10 +71,15 @@
 
                 // Adjust the intensity based on distance
                 const intensity = Math.max(0, 1 - distance / 250);
-                const blueIntensity = Math.floor(intensity * 255); // Darker when far, brighter when close
-                tile.style.backgroundColor = `rgb(0, 0, ${blueIntensity})`;
+
+                // Adjusting the tile color intensity using the purpleMaxColor
+                const redIntensity = Math.floor(intensity * purpleMaxColor[0]);
+                const greenIntensity = Math.floor(intensity * purpleMaxColor[1]);
+                const blueIntensity = Math.floor(intensity * purpleMaxColor[2]);
+                tile.style.backgroundColor = `rgb(${redIntensity}, ${greenIntensity}, ${blueIntensity})`;
             });
         });
     </script>
 </body>
+
 </html>
