@@ -142,6 +142,7 @@ const posts = entries.items.map((item) => {
 </script>
 
 <style>
+  @supports (animation-timeline: view()) {
   @keyframes animate-in-and-out {
     entry 0% {
       opacity: 0;
@@ -167,4 +168,5 @@ const posts = entries.items.map((item) => {
     animation: linear animate-in-and-out;
     animation-timeline: view();
   }
+}
 </style>
