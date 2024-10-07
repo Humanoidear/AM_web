@@ -9,15 +9,15 @@ const { pathname } = Astro.url;
 const subpath = pathname.match(/[^\/]+/g);
 const isActive = href === pathname || href === '/' + subpath?.[0];
 ---
-<a href={href} id={href?.toString()} class:list={[className, { active: isActive }]} {...props} onmousedown="handleMouseOver({id})">
+<a href={href} id={href?.toString()} class:list={[className, { active: isActive }]} {...props}>
     <slot />
 </a>
 
 <style>
     a {
         font-family: 'InstrumentSans', system-ui;
-        font-weight: 600;
-        font-size: 23px;
+        font-weight: 400;
+        font-size: 20px;
         color: #ffffff60;
         display: inline-block;
         text-decoration: none;
@@ -36,21 +36,3 @@ const isActive = href === pathname || href === '/' + subpath?.[0];
         font-family: 'MGNHumble', system-ui !important;
     }
 </style>
-
-<script is:inline>
-    function handleMouseOver(event) {
-        const target = document.getElementById(event.id);
-        const text = target.innerText;
-        const letters = text.split('');
-        target.innerHTML = letters.map(letter => `<span>${letter}</span>`).join('');
-
-        const spans = target.querySelectorAll('span');
-        spans.forEach((span, index) => {
-            span.style.opacity = '0';
-            setTimeout(() => {
-                span.style.transition = 'opacity 0.5s ease-in-out';
-                span.style.opacity = '1';
-            }, index * 100); // Stagger effect with 100ms delay between each span
-        });
-    }
-</script>

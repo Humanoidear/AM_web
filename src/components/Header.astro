@@ -32,7 +32,7 @@ const { isIndex, work } = Astro.props;
       id={isIndex}
       class={`flex-row items-center gap-6 internal-links sm:flex transition-all hidden ${isIndex ? "opacity-0" : ""}`}
     >
-      <div class="flex-row items-center gap-9 internal-links sm:flex hidden">
+      <div class="mr-6 flex-row items-center gap-9 internal-links sm:flex hidden">
         <HeaderLink href={localizePath("/about")}>{t("header.about")}</HeaderLink>
         <HeaderLink href={localizePath("/work")}>{t("header.work")}</HeaderLink>
         <HeaderLink href={localizePath("/contact")}>{t("header.contact")}</HeaderLink>

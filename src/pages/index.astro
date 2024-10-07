@@ -65,7 +65,7 @@ let posts = entries.items.map((item) => {
         <img
           src="https://unpkg.com/pixelarticons@1.8.1/svg/arrow-down.svg"
           alt="Arrow Down - View More"
-          class="invert w-8 h-8 opacity-60 hover:opacity-100 transition-all"
+          class="fadeOutInverted invert w-8 h-8 opacity-60 hover:opacity-100 transition-all"
         />
       </a>
     </div>
@@ -146,36 +146,30 @@ let posts = entries.items.map((item) => {
       function updateTagline() {
         const catchphrase = document.getElementById("catchphrase");
         const currentCatchphrase = localizedCatchphrases[currentIndex];
-
+      
         const words = currentCatchphrase.split(" ");
-        const animatedWords = words.map((word) => {
-          const letters = word.split("");
-          const animatedLetters = letters
-            .map((letter) => `<span class="letter">${letter}</span>`)
-            .join("");
-          return `<span class="word">${animatedLetters}</span>`;
-        });
+        const animatedWords = words.map(
+          (word) => `<span class="word" style="position:relative;">${word}</span>`
+        );
         catchphrase.innerHTML = animatedWords.join(" ");
-        const spans = catchphrase.querySelectorAll(".letter");
+      
+        const spans = catchphrase.querySelectorAll(".word");
         spans.forEach((span, index) => {
           span.style.opacity = 0;
+          span.style.top = "20px";
           setTimeout(() => {
-            span.style.transition = "opacity 0.5s cubic-bezier(0,0,0,1)";
+            span.style.transition = "top 0.5s cubic-bezier(0,0,0,1), opacity 0.5s cubic-bezier(0,0,0,1)";
+            span.style.top = "0px";
             span.style.opacity = 1;
-          }, index * 100);
+          }, 100 + index * 100);
         });
-
+      
         currentIndex = (currentIndex + 1) % localizedCatchphrases.length;
       }
 
       updateCarousel();
       carouselInterval = setInterval(updateCarousel, 5000);
       taglineInterval = setInterval(updateTagline, 5000);
-
-      window.addEventListener("scroll", function () {
-        var frame = document.getElementById("frame");
-        frame.style.opacity = 1 - window.scrollY / 1000;
-      });
     </script>
 
     <style>
@@ -211,6 +205,18 @@ let posts = entries.items.map((item) => {
         animation: auto linear fadeOutScale both;
         animation-timeline: view();
         animation-range: exit;
+      }
+
+      .fadeOutInverted {
+        animation: auto linear fadeOutInverted both;
+        animation-timeline: scroll();
+        animation-range: exit;
+      }
+
+      #frame {
+        animation: auto linear fadeOutScroll both;
+        animation-timeline: scroll();
+        animation-range: cover 00% cover 30%;
       }
 
       .fadeup {
@@ -267,22 +273,46 @@ let posts = entries.items.map((item) => {
       @keyframes fadeInScale {
         0% {
           opacity: 0;
-          transform: scale(0.7);
+          transform: translate(0, 200px);
         }
         100% {
           opacity: 1;
-          transform: scale(1);
+          transform: translate(0, 0);
         }
       }
 
       @keyframes fadeOutScale {
         0% {
           opacity: 1;
-          transform: scale(1) translate3d(0, 0, 0);
+          transform: translate(0, 0px);
         }
         100% {
           opacity: 0;
-          transform: scale(0.7) translate3d(0, 600px, 300px);
+          transform: translate(0, 500px);
+        }
+      }
+
+      @keyframes fadeOutInverted {
+        0% {
+          opacity: 1;
+          transform: translate(0, 0px);
+        }
+        100% {
+          opacity: 0;
+          transform: translate(0, -500px);
+        }
+      }
+
+      @keyframes fadeOutScroll {
+        0% {
+          opacity: 1;
+          transform: translate(0, 0px);
+          clip-path: inset(0 0 0 0);
+        }
+        100% {
+          opacity: 0;
+          transform: translate(0, -500px);
+          clip-path: inset(0 0 40% 0);
         }
       }
     </style>

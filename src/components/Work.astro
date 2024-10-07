@@ -103,6 +103,10 @@ const posts = entries.items.map((item) => {
 </section>
 
 <style>
+  :root {
+    transition: 0.2s;
+  }
+
   li:hover img {
     transform: scale(1.05);
   }
@@ -143,11 +147,11 @@ const posts = entries.items.map((item) => {
   @keyframes slideup {
     0% {
       opacity: 0;
-      transform: scale(0.8) translateY(50px);
+      transform: scale(0.8);
     }
     15% {
       opacity: 1;
-      transform: scale(1) translateY(0);
+      transform: scale(1);
     }
   }
 </style>
