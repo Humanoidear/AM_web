@@ -1,5 +1,6 @@
 ---
 import { t } from "i18next";
+import Button from "../components/Button.astro";
 
 const { blob } = Astro.props;
 ---
@@ -10,8 +11,11 @@ const { blob } = Astro.props;
     <h1 class="md:translate-x-6 text-[MGNHumble] md:text-7xl text-6xl text-white md:text-right">
       {t("header.about")}
     </h1>
-    <p class="md:text-right">
+       <p class="md:text-right flex flex-col items-end justify-end relative leading-7 font-medium">
       {t("about.catch")}
+      <span class={`${blob} ? "visible" : "hidden"} mt-3 inline-block relative`}>
+        <Button text={t("button.more")} href="/about" class="font-medium" nohide />
+      </span>
     </p>
   </div>
   <div

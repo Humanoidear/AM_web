@@ -15,6 +15,13 @@ export interface work {
     }
   }
 
+export interface header {
+    contentTypeId: "header",
+    fields: {
+      url: EntryFieldTypes.Text,
+    }
+  }
+
 export const contentfulClient = contentful.createClient({
   space: import.meta.env.CONTENTFUL_SPACE_ID,
   accessToken: import.meta.env.DEV

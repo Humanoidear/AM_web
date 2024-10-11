@@ -1,17 +1,21 @@
 ---
 import { localizePath } from "astro-i18next";
-const { icon, text, href } = Astro.props;
+const { icon, text, href, white, nohide } = Astro.props;
 ---
 
-<a href={localizePath(href)} class="pixel-corners px-3 py-1 hover:text-black bg-transparent hover:bg-white text-white text-lg font-[InstrumentSans] flex flex-row items-center transition-all">{icon && <img id="icon" src={icon} />}{text}<img
-  id="follow-button-link"
-  src="https://unpkg.com/pixelarticons@1.8.1/svg/arrow-right.svg"
-  alt="Follow Button Link"
-/></a>
+<a href={localizePath(href)} class={`pixel-corners px-3 py-1 hover:text-black bg-transparent hover:bg-white text-lg font-medium font-[InstrumentSans] flex-row items-center inline-flex transition-all ${white ? 'bg-white text-black' : 'text-white'}`}>
+  {icon && <img id="icon" class={`${white ? 'invert-0' : 'invert'}`} src={icon} />}
+  {text}
+  <img
+    id={`${nohide ? "follow-button-link-perma" : "follow-button-link"}`}
+    src="https://unpkg.com/pixelarticons@1.8.1/svg/arrow-right.svg"
+    alt="Follow Button Link"
+  />
+</a>
 
 <style>
   a:hover #follow-button-link {
-    margin-left: 6px;
+    margin-left: 18px;
     width: 20px;
     opacity: 1;
     filter: invert(0);
@@ -24,6 +28,24 @@ const { icon, text, href } = Astro.props;
     filter: invert(1);
   }
 
+  a:hover #follow-button-link-perma {
+    margin-left: 28px;
+    width: 20px;
+    opacity: 1;
+    filter: invert(0);
+  }
+
+  #follow-button-link-perma {
+    margin-left: 18px;
+    width: 20px;
+    opacity: 1;
+    filter: invert(1);
+  }
+
+  a:active #follow-button-link-perma {
+    transform: translate(3px, 0);
+  }
+
   a:active #follow-button-link {
     transform: translate(3px, 0);
   }
@@ -32,7 +54,6 @@ const { icon, text, href } = Astro.props;
     width: 20px;
     height: 20px;
     margin-right: 6px;
-    filter: invert(1);
     transition: 0.2s ease;
   }
 

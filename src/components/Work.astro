@@ -1,157 +1,90 @@
 ---
+import i18next, { t, changeLanguage } from "i18next";
 import { contentfulClient } from "../lib/contentful";
 import type { work } from "../lib/contentful";
-import i18next, { t } from "i18next";
-import { localizePath } from "astro-i18next";
 import Button from "../components/Button.astro";
 
+let lang = i18next.language;
 const entries = await contentfulClient.getEntries<work>({
-  content_type: "work",
+    content_type: "work",
 });
-
-const posts = entries.items.map((item) => {
-  const { title, date, slug, type, year, preview } = item.fields;
-  return {
-    title,
-    slug,
-    type,
-    year,
-    preview,
-    date: new Date(date).toLocaleDateString(),
-  };
+let posts = entries.items.map((item) => {
+    const { slug, preview } = item.fields;
+    return {
+        slug,
+        preview,
+    };
 });
 ---
 
-<h1
-  class="w-full max-w-[1100px] m-0 text-6xl font-[MGNHumble] text-white text-left flex items-center justify-between translate-y-3"
->
-  <span transition:name="work-head-title">{t("header.work")}</span>
-  <Button text={t("button.view_work")} href={localizePath("/work")} />
-</h1>
-<section class="max-w-[1100px] relative">
+<div class="flex md:flex-row flex-col-reverse md:items-center gap-10">
+  <img src="/img/blob-1.webp" class="w-1/3 translate-x-80 -rotate-90 absolute">
+  <div class="fadeup md:w-[calc(100%-13rem)] md:max-w-[500px] w-[95%] z-10 relative">
+    <h1 class="text-[MGNHumble] md:text-7xl text-6xl text-white">
+      {t("header.work")}
+    </h1>
+    <p class="leading-7">
+      {t("work.catch")}
+    </p>
+    <div class="mt-6 relative">
+      <Button text={t("work.button")} href="/work" />
+    </div>
+  </div>
   <ul
-    class="mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 grid-rows-2 gap-6"
-  >
-    {
-      posts.slice(0, 7).map((post, index) => (
-        <li
-          data-type={post.type}
-          class={`slideup work-hover hover:shadow-xl shadow-white border-0 hover:border-4 border-white/20 z-0 hover:z-10 relative ${index === 0 ? "col-span-2 row-span-2" : ""}`}
-        >
-          <a
-            class="flex flex-row items-start justify-between gap-5 relative"
-            href={localizePath(`/work/${post.slug}/`)}
-          >
-            <div class="w-full h-full overflow-hidden relative">
-              <img
-                src={(post.preview as any)?.fields?.file?.url}
-                alt={`Thumbnail image for ${post.title}`}
-                class="w-full h-full object-cover"
-                transition:name={`work-title-${post.title}-image`}
-              />
-            </div>
-          </a>
-        </li>
-      ))
+        id="work-carousel"
+        class="w-[400px] h-[400px] grid grid-cols-2 grid-rows-2 gap-6 sm:pointer-events-auto pointer-events-none sm:opacity-100 opacity-10 z-0 sm:relative absolute"
+      >
+      </ul>
+</div>
+
+<script data-astro-rerun define:vars={{ posts, lang }}>
+  document.addEventListener('astro:before-preparation', event => {
+    clearInterval(carouselInterval);
+  });
+
+  function updateCarousel() {
+    let filteredPosts = posts.sort(() => Math.random() - 0.5).slice(0, 4);
+
+    function getRandomTransform() {
+      const randomX = Math.floor(Math.random() * 100) - 50; // Random value between -50 and 50
+      const randomY = Math.floor(Math.random() * 100) - 50; // Random value between -50 and 50
+      return `translate(${randomX}px, ${randomY}px)`;
     }
 
-    <script is:inline data-astro-rerun>
-      document.querySelectorAll(".work-hover").forEach((item) => {
-        item.addEventListener("mouseenter", (e) => {
-          const follower = item.querySelector(".follower");
-          if (follower) {
-            follower.style.display = "flex";
-            follower.style.opacity = "1";
-            follower.style.pointerEvents = "none";
-            item.style.transition = "transform 0.2s ease";
-          }
-        });
+    const carousel = document.getElementById("work-carousel");
 
-        item.addEventListener("mousemove", (e) => {
-          const follower = item.querySelector(".follower");
-          if (follower) {
-            const rect = item.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            follower.style.left = `${x}px`;
-            follower.style.top = `${y}px`;
-
-            const translateX = (x / rect.width - 0.5) * 20;
-            const translateY = (y / rect.height - 0.5) * 20;
-            item.style.transform = `translate(${translateX}px, ${translateY}px) scale(1.05)`;
-            setTimeout(() => {
-              item.style.transition = "transform 0s";
-            }, 200);
-          }
-        });
-
-        item.addEventListener("mouseleave", (e) => {
-          const follower = item.querySelector(".follower");
-          if (follower) {
-            follower.style.display = "none";
-            follower.style.opacity = "0";
-            follower.style.pointerEvents = "none";
-            item.style.transition = "transform 0.3s ease";
-
-            // Reset translation
-            item.style.transform = "translate(0, 0)";
-          }
-        });
-      });
-    </script>
-  </ul>
-</section>
-
-<style>
-  :root {
-    transition: 0.2s;
-  }
-
-  li:hover img {
-    transform: scale(1.05);
-  }
-
-  .slideup {
-    animation: auto linear slideup both;
-    animation-timeline: view();
-  }
-
-  .slideup:nth-child(1) {
-    animation-range: cover 00% cover 50%;
-  }
-
-  .slideup:nth-child(2) {
-    animation-range: cover 20% cover 50%;
-  }
-
-  .slideup:nth-child(3) {
-    animation-range: cover 25% cover 50%;
-  }
-
-  .slideup:nth-child(4) {
-    animation-range: cover 30% cover 50%;
-  }
-
-  .slideup:nth-child(5) {
-    animation-range: cover 20% cover 50%;
-  }
-
-  .slideup:nth-child(6) {
-    animation-range: cover 25% cover 50%;
-  }
-
-  .slideup:nth-child(7) {
-    animation-range: cover 30% cover 50%;
-  }
-
-  @keyframes slideup {
-    0% {
-      opacity: 0;
-      transform: scale(0.8);
+    // Check if the carousel is being hovered
+    if (carousel.matches(":hover")) {
+      return; // Do not update if the carousel is being hovered
     }
-    15% {
-      opacity: 1;
-      transform: scale(1);
-    }
+
+    // Add fade-out class to all children
+    Array.from(carousel.children).forEach((child, index) => {
+      child.style.animation = `fadeOut 0.5s cubic-bezier(0,0,0,1) ${index * 0.1}s forwards`;
+    });
+
+    // Wait for the fade-out animation to complete before updating the content
+    setTimeout(
+      () => {
+        carousel.innerHTML = filteredPosts
+          .map(
+            (post, index) => `
+              <li transition:name="work-title-${post.title}-image"  class="tile w-full h-full flex flex-col items-center justify-center gap-3 hover:scale-105 hover:border-4 border-0 border-white/20 overflow-hidden" style="transform: ${getRandomTransform()}; animation: fadeIn 0.5s cubic-bezier(0,0,0,1) ${index * 0.1}s forwards; opacity:0; aspect-ratio:1;">
+                <a href="${lang === "en" ? "" : `/${lang}`}/work/${post.slug}" class="w-full h-full">
+                  <img src="${post.preview.fields.file.url}" class="w-full h-full object-cover" alt="${post.title}">
+                </a>
+              </li>
+            `
+          )
+          .join("");
+      },
+      carousel.children.length * 100 + 500
+    ); // Ensure the timeout matches the duration of the fade-out animation
+    document.querySelectorAll(".tile").forEach((tile) => {
+      tile.style.opacity = 1;
+    });
   }
-</style>
+
+  updateCarousel();
+  carouselInterval = setInterval(updateCarousel, 5000);
+</script>

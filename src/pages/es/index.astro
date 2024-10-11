@@ -1,6 +1,6 @@
 ---
 import { contentfulClient } from "../../lib/contentful";
-import type { work } from "../../lib/contentful";
+import type { work, header } from "../../lib/contentful";
 import i18next, { t, changeLanguage } from "i18next";
 import BaseHead from "../../components/BaseHead.astro";
 import Header from "../../components/Header.astro";
@@ -18,6 +18,12 @@ let localizedCatchphrases = catchphrases[lang];
 const entries = await contentfulClient.getEntries<work>({
     content_type: "work",
 });
+let headerEntry = await contentfulClient.getEntries<header>({
+    content_type: "header",
+});
+let header = headerEntry.items[0].fields.url;
+header = header.replace("watch?v=", "embed/");
+console.log(header);
 let posts = entries.items.map((item) => {
     const { slug, preview } = item.fields;
     return {
@@ -34,11 +40,7 @@ let posts = entries.items.map((item) => {
   </head>
   <body>
     <Header isIndex="opacity-0" />
-    <iframe
-      id="frame"
-      src="/html/frame_index.html"
-      class="top-0 left-0 w-screen h-screen z-0 fixed"
-      transition:name="bg-iframe"></iframe>
+      <img src="https://framerusercontent.com/images/CjzRK9qJBzg7lpVfLBIE8nOT1pU.png" id="frame" class="top-0 left-0 w-screen h-screen z-0 fixed">
     <div
       class="fadeOutScale w-screen h-screen mb-52 md:mb-0 flex sm:flex-row flex-col items-center justify-center sm:gap-[20%] scroll-snap-center"
     >
@@ -53,11 +55,13 @@ let posts = entries.items.map((item) => {
           >{t("home.a_logo")}</span
         >
       </h1>
-      <ul
-        id="work-carousel"
-        class="w-[400px] h-[400px] grid grid-cols-2 grid-rows-2 gap-6 sm:pointer-events-auto pointer-events-none sm:opacity-100 opacity-10 z-0 sm:relative absolute"
-      >
-      </ul>
+      <div>
+      <iframe title="Youtube Video" width="612" height="350" allow="presentation; fullscreen; accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" src={`${header}?iv_load_policy=3&amp;rel=0&amp;modestbranding=1&amp;playsinline=1&amp;autoplay=1&amp;mute=1&amp;loop=1&amp;color=white`} frameborder="0"></iframe>
+        <span class="-translate-x-6 -translate-y-5 flex flex-row items-end justify-end gap-3">
+          <Button text="cv" href="/" icon="https://framerusercontent.com/images/yBK8WGkZxlCuwBXsL4tGoX0TDr4.svg" white />
+          <Button text="Portfolio (pdf)" href="/" icon="https://framerusercontent.com/images/xKobCNxK5DGcLCya2LaxhCSpPsA.svg" white />
+        </span>
+    </div>
       <a
         href="#about"
         class="w-full bottom-6 flex flex-col items-center absolute"
@@ -65,7 +69,7 @@ let posts = entries.items.map((item) => {
         <img
           src="https://unpkg.com/pixelarticons@1.8.1/svg/arrow-down.svg"
           alt="Arrow Down - View More"
-          class="invert w-8 h-8 opacity-60 hover:opacity-100 transition-all"
+          class="fadeOutInverted invert w-8 h-8 opacity-60 hover:opacity-100 transition-all"
         />
       </a>
     </div>
@@ -77,7 +81,6 @@ let posts = entries.items.map((item) => {
       <div
         class="w-[95%] max-w-[700px] mt-3 flex flex-row items-end justify-end relative"
       >
-        <Button text={t("button.more")} href="/about" />
       </div>
     </div>
     <div
@@ -91,91 +94,39 @@ let posts = entries.items.map((item) => {
       <Contact blob=true/>
     </div>
     <Footer />
-    <script data-astro-rerun define:vars={{ posts, lang, localizedCatchphrases }}>
-        document.addEventListener('astro:before-preparation', event => {
-          clearInterval(carouselInterval);
-          clearInterval(taglineInterval);
-        })
-
-      function updateCarousel() {
-        let filteredPosts = posts.sort(() => Math.random() - 0.5).slice(0, 4);
-
-        function getRandomTransform() {
-          const randomX = Math.floor(Math.random() * 100) - 50; // Random value between -50 and 50
-          const randomY = Math.floor(Math.random() * 100) - 50; // Random value between -50 and 50
-          return `translate(${randomX}px, ${randomY}px)`;
-        }
-
-        const carousel = document.getElementById("work-carousel");
-
-        // Check if the carousel is being hovered
-        if (carousel.matches(":hover")) {
-          return; // Do not update if the carousel is being hovered
-        }
-
-        // Add fade-out class to all children
-        Array.from(carousel.children).forEach((child, index) => {
-          child.style.animation = `fadeOut 0.5s cubic-bezier(0,0,0,1) ${index * 0.1}s forwards`;
-        });
-
-        // Wait for the fade-out animation to complete before updating the content
-        setTimeout(
-          () => {
-            carousel.innerHTML = filteredPosts
-              .map(
-                (post, index) => `
-                  <li transition:name="work-title-${post.title}-image"  class="tile w-full h-full flex flex-col items-center justify-center gap-3 grayscale hover:grayscale-0 hover:scale-105 hover:border-4 border-0 border-white/20 overflow-hidden" style="transform: ${getRandomTransform()}; animation: fadeIn 0.5s cubic-bezier(0,0,0,1) ${index * 0.1}s forwards; opacity:0; aspect-ratio:1;">
-<a href="${lang === "en" ? "" : `/${lang}`}/work/${post.slug}" class="w-full h-full">
-                    <img src="${post.preview.fields.file.url}" class="w-full h-full object-cover" alt="${post.title}">
-                    </a>
-                  </li>
-                `
-              )
-              .join("");
-          },
-          carousel.children.length * 100 + 500
-        ); // Ensure the timeout matches the duration of the fade-out animation
-        document.querySelectorAll(".tile").forEach((tile) => {
-          tile.style.opacity = 1;
-        });
-      }
-
+        <script data-astro-rerun define:vars={{ posts, lang, localizedCatchphrases }}>
+      document.addEventListener('astro:before-preparation', event => {
+        clearInterval(taglineInterval);
+      });
+    
       let currentIndex = 1;
       console.log("Catchphrases " + localizedCatchphrases);
-
+    
       function updateTagline() {
         const catchphrase = document.getElementById("catchphrase");
         const currentCatchphrase = localizedCatchphrases[currentIndex];
-
+    
         const words = currentCatchphrase.split(" ");
-        const animatedWords = words.map((word) => {
-          const letters = word.split("");
-          const animatedLetters = letters
-            .map((letter) => `<span class="letter">${letter}</span>`)
-            .join("");
-          return `<span class="word">${animatedLetters}</span>`;
-        });
+        const animatedWords = words.map(
+          (word) => `<span class="word" style="position:relative;">${word}</span>`
+        );
         catchphrase.innerHTML = animatedWords.join(" ");
-        const spans = catchphrase.querySelectorAll(".letter");
+    
+        const spans = catchphrase.querySelectorAll(".word");
         spans.forEach((span, index) => {
           span.style.opacity = 0;
+          span.style.top = "20px";
           setTimeout(() => {
-            span.style.transition = "opacity 0.5s cubic-bezier(0,0,0,1)";
+            span.style.transition = "top 0.2s cubic-bezier(0,0,0,1), opacity 0.2s cubic-bezier(0,0,0,1)";
+            span.style.top = "0px";
             span.style.opacity = 1;
-          }, index * 100);
+          }, 100 + index * 100);
         });
-
+    
         currentIndex = (currentIndex + 1) % localizedCatchphrases.length;
       }
-
-      updateCarousel();
-      carouselInterval = setInterval(updateCarousel, 5000);
-      taglineInterval = setInterval(updateTagline, 5000);
-
-      window.addEventListener("scroll", function () {
-        var frame = document.getElementById("frame");
-        frame.style.opacity = 1 - window.scrollY / 1000;
-      });
+    
+      taglineInterval = setInterval(updateTagline, 3000);
     </script>
 
     <style>
@@ -213,9 +164,21 @@ let posts = entries.items.map((item) => {
         animation-range: exit;
       }
 
+      .fadeOutInverted {
+        animation: auto linear fadeOutInverted both;
+        animation-timeline: scroll();
+        animation-range: exit;
+      }
+
+      #frame {
+        animation: auto linear fadeOutScroll both;
+        animation-timeline: scroll();
+        animation-range: cover 00% cover 30%;
+      }
+
       .fadeup {
         opacity: 0;
-        animation: fadeup 1s cubic-bezier(0, 0, 0, 1) forwards;
+        animation: fadeup 0.2s cubic-bezier(0, 0, 0, 1) forwards;
         position: relative;
       }
 
@@ -267,22 +230,46 @@ let posts = entries.items.map((item) => {
       @keyframes fadeInScale {
         0% {
           opacity: 0;
-          transform: scale(0.7);
+          transform: translate(0, 200px);
         }
         100% {
           opacity: 1;
-          transform: scale(1);
+          transform: translate(0, 0);
         }
       }
 
       @keyframes fadeOutScale {
         0% {
           opacity: 1;
-          transform: scale(1) translate3d(0, 0, 0);
+          transform: translate(0, 0px);
         }
         100% {
           opacity: 0;
-          transform: scale(0.7) translate3d(0, 600px, 300px);
+          transform: translate(0, 500px);
+        }
+      }
+
+      @keyframes fadeOutInverted {
+        0% {
+          opacity: 1;
+          transform: translate(0, 0px);
+        }
+        100% {
+          opacity: 0;
+          transform: translate(0, -500px);
+        }
+      }
+
+      @keyframes fadeOutScroll {
+        0% {
+          opacity: 1;
+          transform: translate(0, 0px);
+          clip-path: inset(0 0 0 0);
+        }
+        100% {
+          opacity: 0;
+          transform: translate(0, -500px);
+          clip-path: inset(0 0 40% 0);
         }
       }
     </style>

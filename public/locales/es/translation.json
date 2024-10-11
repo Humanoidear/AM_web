@@ -11,6 +11,10 @@
     "about": {
         "catch": "Soy Alex Malvehy, estudiante y diseñador gráfico y de movimiento autodidacta de Barcelona. Me especializo en branding, identidad visual y gráficos para televisión y streaming, aprendiendo y evolucionando continuamente."
     },
+    "work": {
+        "catch": "Como diseñador freelance, he desarrollado un portafolio diverso enfocado en ofrecer diseño y gráficos de movimiento claros e impactantes en diversos sectores y clientes, así como proyectos personales y algunos pequeños experimentos.",
+        "button": "ver todos los trabajos"
+    },
     "contact": {
         "catch": "¿Tienes un proyecto, una idea o simplemente quieres obtener información? En cualquier caso, no dudes en ponerte en contacto conmigo y lo solucionaremos."
     },
