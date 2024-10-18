@@ -19,6 +19,7 @@
         "catch": "¿Tienes un proyecto, una idea o simplemente quieres obtener información? En cualquier caso, no dudes en ponerte en contacto conmigo y lo solucionaremos."
     },
     "slug": {
+        "client": "Cliente",
         "services": "Servicios",
         "year": "Año"
     },

@@ -19,6 +19,7 @@
         "catch": "Do you have a project, idea, or just want to get some info? In either case, don't hesitate to reach out to me, and we'll figure things out."
     },
     "slug": {
+        "client": "Client",
         "services": "Services",
         "year": "Year"
     },

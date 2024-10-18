@@ -261,15 +261,18 @@ p {
 
 ul,
 li {
+  filter: brightness(1);
   transition: 0.2s;
 }
 
 ul:hover li {
   opacity: 0.5;
+  filter:brightness(0.5);
   transition: 0.2s;
 }
 
 li:hover .work-hover img {
+  filter: brightness(1);
   transform: scale(1.05);
   transition: 0.2s;
 }
@@ -288,12 +291,22 @@ li:hover .hover-show {
   transition: 0.2s;
 }
 
+li .hover-show h2 span {
+  display: none;
+}
+
+li:hover .hover-show h2 span {
+  display: block;
+}
+
 ul:not(:has(li:hover)) li {
+  filter: brightness(1);
   opacity: 1;
   transition: 0.2s;
 }
 
 ul li:hover {
+  filter: brightness(1);
   opacity: 1;
   transition: 0.2s;
 }

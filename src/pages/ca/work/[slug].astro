@@ -76,7 +76,7 @@ bodyHTML = localizedContent?.content || defaultContent?.content || bodyHTML;
           {
             heroImage && (
               <div
-                class="expand w-[95%] max-w-[1200px] h-[400px] relative"
+                class="expand w-[95%] max-w-[calc(100%-300px)] h-[40vh] relative"
                 style={`background-size:cover; background-position:center; background-image: url('${(heroImage as any)?.fields?.file?.url}')`}
                 transition:name={`work-title-${title}-image`}
               />
@@ -102,6 +102,7 @@ bodyHTML = localizedContent?.content || defaultContent?.content || bodyHTML;
               class="font-semibold text-white text-2xl"
               transition:name={`work-title-${title}-type`}
             >
+            <p class="opacity-60">{t("slug.client")}</p>
               {type}
             </p>
             <ul>
@@ -120,7 +121,7 @@ bodyHTML = localizedContent?.content || defaultContent?.content || bodyHTML;
           </div>
         </div>
       </div>
-      <article class="mt-14 w-[98%] max-w-[1200px] text-white z-10 relative">
+      <article class="mt-48 w-[98%] max-w-[1200px] text-white z-10 relative">
         <div class="prose">
           <div class="title"></div>
           <div set:html={bodyHTML} />

@@ -2,7 +2,6 @@
 import BaseHead from "../../components/BaseHead.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
-import AboutComponent from "../../components/About.astro";
 import i18next, { t, changeLanguage } from "i18next";
 
 changeLanguage("ca");
@@ -15,13 +14,118 @@ changeLanguage("ca");
   </head>
   <body>
     <Header />
-    <main class="w-screen h-screen flex flex-col items-center justify-center relative">
+    <main class="w-screen h-[3000px] flex flex-col items-center justify-center relative overflow-hidden">
       <iframe
         src="/html/frame_conway.html"
         class="top-0 left-0 w-full h-full z-0 transition-all absolute"
         transition:name="bg-iframe"></iframe>
-        <AboutComponent />
-        <Footer />
+      <div class="timeline-container fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-[800px] flex items-center">
+        <div class="timeline-line absolute top-1/2 left-0 w-full h-1 bg-gray-300"></div>
+        <div class="timeline-content flex flex-row items-center">
+          <div class="milestone flex flex-row items-center justify-between w-screen max-w-[800px]">
+            <img src="https://via.placeholder.com/150" alt="Placeholder Image" class="w-40 h-40 object-contain">
+            <div class="flex flex-col items-start justify-center">
+              <h2 class="text-2xl font-bold">Milestone 1</h2>
+              <p class="text-gray-500">January 2020</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
+            </div>
+          </div>
+          <div class="milestone flex flex-row items-center justify-between w-screen max-w-[800px]">
+            <img src="https://via.placeholder.com/150" alt="Placeholder Image" class="w-40 h-40 object-contain">
+            <div class="flex flex-col items-start justify-center">
+              <h2 class="text-2xl font-bold">Milestone 2</h2>
+              <p class="text-gray-500">June 2020</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
+            </div>
+          </div>
+          <div class="milestone flex flex-row items-center justify-between w-screen max-w-[800px]">
+            <img src="https://via.placeholder.com/150" alt="Placeholder Image" class="w-40 h-40 object-contain">
+            <div class="flex flex-col items-start justify-center">
+              <h2 class="text-2xl font-bold">Milestone 3</h2>
+              <p class="text-gray-500">December 2020</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <Footer />
     </main>
+    <script>
+      document.addEventListener('scroll', () => {
+        const scrollPosition = window.scrollY;
+        const timelineContent = document.querySelector('.timeline-content');
+        const maxScroll = document.body.scrollHeight - window.innerHeight;
+        const scrollFraction = scrollPosition / maxScroll;
+        const maxTranslateX = timelineContent.scrollWidth - window.innerWidth;
+
+        timelineContent.style.transform = `translateX(-${scrollFraction * maxTranslateX}px)`;
+      });
+    </script>
   </body>
 </html>
+<style>
+.timeline-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  max-width: 800px;
+  overflow-x: hidden;
+}
+
+.timeline-container::before,
+.timeline-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50px;
+  z-index: 1;
+}
+
+.timeline-container::before {
+  left: 0;
+  background: linear-gradient(to right, black, transparent);
+}
+
+.timeline-container::after {
+  right: 0;
+  background: linear-gradient(to left, black, transparent);
+}
+
+.timeline-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: gray;
+}
+
+.timeline-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  transition: transform 0.5s cubic-bezier(0, 0, 0, 1);
+}
+
+.milestone {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  width: 100vw; /* Ensure each milestone takes up the full viewport width */
+  max-width: 800px;
+}
+
+.object-contain {
+  object-fit: contain;
+}
+</style>

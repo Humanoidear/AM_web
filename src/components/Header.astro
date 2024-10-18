@@ -4,11 +4,11 @@ import { localizePath } from "astro-i18next";
 import HeaderLink from "./HeaderLink.astro";
 import LanguageDropdown from "./LanguageDropdown.astro";
 
-const { isIndex, work } = Astro.props;
+const { isIndex } = Astro.props;
 ---
 
 <header
-  class="p-8 w-full h-20 z-50 fixed transition-transform transition-timing-function: cubic-bezier(0, 0, 0, 1);"
+  class="p-8 px-12 w-full h-20 z-50 fixed transition-transform transition-timing-function: cubic-bezier(0, 0, 0, 1);"
   id="header"
 >
   <nav class="flex flex-row items-center justify-between gap-5">
@@ -18,7 +18,6 @@ const { isIndex, work } = Astro.props;
           ><img src="/img/am.svg" alt="Go home" width="70px" /></a
         >
       </h2>
-      <span class="animatein text-white text-2xl">{work}</span>
     </div>
     <div
       class={`flex-row items-center gap-6 internal-links sm:flex transition-all hidden`}
@@ -30,7 +29,7 @@ const { isIndex, work } = Astro.props;
           >{t("header.about")}</HeaderLink
         >
         <HeaderLink href={localizePath("/work")}>{t("header.work")}</HeaderLink>
-        <HeaderLink href={localizePath("/contact")}
+        <HeaderLink href={localizePath("/#contact")}
           >{t("header.contact")}</HeaderLink
         >
       </div>

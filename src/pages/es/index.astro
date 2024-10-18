@@ -40,10 +40,11 @@ let posts = entries.items.map((item) => {
   </head>
   <body>
     <Header isIndex="opacity-0" />
-      <img src="https://framerusercontent.com/images/CjzRK9qJBzg7lpVfLBIE8nOT1pU.png" id="frame" class="top-0 left-0 w-screen h-screen z-0 fixed">
+    <img src="https://framerusercontent.com/images/CjzRK9qJBzg7lpVfLBIE8nOT1pU.png" id="frame" class="top-0 left-0 w-screen h-screen z-0 fixed object-cover">
     <div
       class="fadeOutScale w-screen h-screen mb-52 md:mb-0 flex sm:flex-row flex-col items-center justify-center sm:gap-[20%] scroll-snap-center"
     >
+    <img src="/img/am_horizontal.png" class="top-16 left-1/2 w-60 -translate-x-1/2 absolute">
       <h1
         class="sm:w-[300px] lg:text-8xl tex-center sm:text-left pointer-events-none z-10 relative"
       >
@@ -55,8 +56,8 @@ let posts = entries.items.map((item) => {
           >{t("home.a_logo")}</span
         >
       </h1>
-      <div>
-      <iframe title="Youtube Video" width="612" height="350" allow="presentation; fullscreen; accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" src={`${header}?iv_load_policy=3&amp;rel=0&amp;modestbranding=1&amp;playsinline=1&amp;autoplay=1&amp;mute=1&amp;loop=1&amp;color=white`} frameborder="0"></iframe>
+      <div class="lg:block hidden">
+      <iframe title="Youtube Video" class="xl:w-[610px] xl:h-[350px] w-[440px] h-[250px]" allow="presentation; fullscreen; accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" src={`${header}?iv_load_policy=3&amp;rel=0&amp;modestbranding=1&amp;playsinline=1&amp;autoplay=1&amp;mute=1&amp;loop=1&amp;color=white`} frameborder="0"></iframe>
         <span class="-translate-x-6 -translate-y-5 flex flex-row items-end justify-end gap-3">
           <Button text="cv" href="/" icon="https://framerusercontent.com/images/yBK8WGkZxlCuwBXsL4tGoX0TDr4.svg" white />
           <Button text="Portfolio (pdf)" href="/" icon="https://framerusercontent.com/images/xKobCNxK5DGcLCya2LaxhCSpPsA.svg" white />

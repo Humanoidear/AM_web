@@ -22,7 +22,9 @@ const posts = entries.items.map((item) => {
         preview,
     };
 });
-console.log(posts);
+posts.forEach((post) => {
+    post.title = post.title.split(" ");
+});
 ---
 
 <!doctype html>
@@ -44,7 +46,7 @@ console.log(posts);
         class="mb-6 max-w-[1400px] w-[95%] flex flex-row items-center justify-between gap-20 z-1 relative"
       >
         <h1
-          class="m-0 text-6xl font-[MGNHumble] text-white translate-y-3"
+          class="w-screen m-0 my-18 mb-28 text-8xl font-[MGNHumble] text-center text-white translate-y-3"
           transition:name="work-head-title"
         >
           {t("header.work")}
@@ -65,7 +67,7 @@ console.log(posts);
                   class="flex flex-row items-start justify-between gap-5 relative"
                   href={localizePath(`/work/${post.slug}/`)}
                 >
-                  <div class="work-hover w-full h-full border-0 hover:border-4 border-white/20 overflow-hidden transition-all z-10 relative">
+                  <div class="work-hover w-full h-full overflow-hidden transition-all z-10 relative">
                     {post.preview && (
                       <img
                         src={(post.preview as any)?.fields?.file?.url}
@@ -83,11 +85,14 @@ console.log(posts);
                   />
                   <div class="hover-show bottom-0 right-0 translate-y-[80%] w-full items-center justify-end flex flex-row pointer-events-none z-10 absolute">
                     <h2
-                      class="bottom-0 left-0 w-[200px] -translate-x-1/2 -translate-y-6 flex text-left m-0 fadeup font-[MGNHumble] text-white z-10 absolute"
-                      style="text-indent: -20px; padding-left: 20px;"
+                      class="bottom-0 left-0 w-[230px] -translate-x-1/2 -translate-y-6 flex flex-wrap text-left m-0 fadeup font-[MGNHumble] text-white z-10 absolute"
                       transition:name={`work-title-${post.title}`}
                     >
-                      {post.title}
+                      {post.title.map((word, index) => (
+                        <span style={`animation: fadeupword 0.3s cubic-bezier(0, 0, 0, 1) ${index * 0.3}s forwards; opacity: 0; margin-left: ${index * 10}px;`}>
+                          {word}
+                        </span>
+                      ))}
                     </h2>
                     <div class="translate-y-3 flex flex-col items-end">
                       <p
@@ -168,6 +173,17 @@ console.log(posts);
     scale: 0.8;
     animation: linear animate-in-and-out;
     animation-timeline: view();
+  }
+}
+
+@keyframes fadeupword {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 </style>

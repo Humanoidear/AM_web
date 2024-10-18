@@ -14,6 +14,10 @@ const { icon, text, href, white, nohide } = Astro.props;
 </a>
 
 <style>
+  .transition-all {
+    transition: all 0.3s cubic-bezier(0, 0, 0, 1);
+  }
+
   a:hover #follow-button-link {
     margin-left: 18px;
     width: 20px;
