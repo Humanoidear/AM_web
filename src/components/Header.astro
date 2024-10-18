@@ -7,35 +7,32 @@ import LanguageDropdown from "./LanguageDropdown.astro";
 const { isIndex, work } = Astro.props;
 ---
 
-<header class="p-8 w-full h-20 z-50 fixed">
+<header
+  class="p-8 w-full h-20 z-50 fixed transition-transform transition-timing-function: cubic-bezier(0, 0, 0, 1);"
+  id="header"
+>
   <nav class="flex flex-row items-center justify-between gap-5">
     <div class="flex flex-row items-center gap-6">
-      <h2 id="home-link" class={isIndex}>
-        <a href={localizePath("/")}><img src="/img/am.svg" alt="Go home" width="70px" /></a>
+      <h2>
+        <a href={localizePath("/")}
+          ><img src="/img/am.svg" alt="Go home" width="70px" /></a
+        >
       </h2>
       <span class="animatein text-white text-2xl">{work}</span>
     </div>
-    <h1
-      id="wordmark-container"
-      class={`text-6xl left-1/2 -translate-x-1/2 scale-75 flex flex-row items-start justify-start pointer-events-none absolute ${isIndex ? "" : "hidden"}`}
-    >
-      <span></span><span
-        class="w-[85px] flex remove overflow-hidden flex-nowrap relative"
-        >lex</span
-      >
-      <span id="movable"></span><span
-        class="w-[190px] flex remove overflow-hidden flex-nowrap relative"
-        >alvehy</span
-      >
-    </h1>
     <div
-      id={isIndex}
-      class={`flex-row items-center gap-6 internal-links sm:flex transition-all hidden ${isIndex ? "opacity-0" : ""}`}
+      class={`flex-row items-center gap-6 internal-links sm:flex transition-all hidden`}
     >
-      <div class="mr-6 flex-row items-center gap-9 internal-links sm:flex hidden">
-        <HeaderLink href={localizePath("/about")}>{t("header.about")}</HeaderLink>
+      <div
+        class="mr-6 flex-row items-center gap-9 internal-links sm:flex hidden"
+      >
+        <HeaderLink href={localizePath("/about")}
+          >{t("header.about")}</HeaderLink
+        >
         <HeaderLink href={localizePath("/work")}>{t("header.work")}</HeaderLink>
-        <HeaderLink href={localizePath("/contact")}>{t("header.contact")}</HeaderLink>
+        <HeaderLink href={localizePath("/contact")}
+          >{t("header.contact")}</HeaderLink
+        >
       </div>
       <LanguageDropdown />
       <button class="btn" id="menuIcon" onclick="toggleDropdown();">
@@ -136,37 +133,6 @@ const { isIndex, work } = Astro.props;
         >
       </div>
 
-      <script is:inline>
-        document.addEventListener("scroll", () => {
-          const remove = document.querySelectorAll(".remove");
-          const wordmark = document.getElementById("wordmark-container");
-          const movable = document.getElementById("movable");
-          const links = document.getElementById("opacity-0");
-          const scrollTop =
-            window.scrollY || document.documentElement.scrollTop;
-          remove.forEach((element) => {
-            if (scrollTop > 0) {
-              element.style.opacity = 0;
-              element.style.width = 0;
-              wordmark.style.left = "33px";
-              wordmark.style.transform = "translateX(0%) scale(1.05)";
-              wordmark.style.transition = "0.5s ease";
-              movable.style.transform = "translate(-13.6px, 1px)";
-              links.style.opacity = 1;
-            } else {
-              element.style.width = "";
-              element.style.opacity = 1;
-              wordmark.style.left = "50%";
-              wordmark.style.transform = "translateX(-50%) scale(0.7)";
-              wordmark.style.transition = "0.5s ease";
-              movable.style.transform = "translate(0px, 0px)";
-              links.style.opacity = 0;
-            }
-            element.style.transition = "0.5s ease";
-          });
-        });
-      </script>
-
       <script is:inline data-astro-rerun>
         function toggleDropdown() {
           const dropdown = document.getElementById("dropdown");
@@ -204,6 +170,22 @@ const { isIndex, work } = Astro.props;
   </nav>
 </header>
 
+<script define:vars={{ isIndex }}>
+  const header = document.getElementById("header");
+  if (isIndex) {
+    header.classList.add("-translate-y-20");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 100) {
+        header.classList.remove("-translate-y-20");
+      } else {
+        header.classList.add("-translate-y-20");
+      }
+    });
+  } else {
+    header.classList.remove("-translate-y-20");
+  }
+</script>
+
 <style>
   header::before {
     content: "";
@@ -212,9 +194,14 @@ const { isIndex, work } = Astro.props;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0) 100%);
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0.3) 50%,
+      rgba(0, 0, 0, 0) 100%
+    );
     pointer-events: none;
-    z-index: 0;
+    z-index: -1;
   }
   a:hover div {
     transform: translate(0px, 0);
