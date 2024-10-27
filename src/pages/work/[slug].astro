@@ -68,13 +68,15 @@ function parseFloatTags(html) {
     return floatHTML;
 }
 function parseCenterTags(html) {
-    const centerRegex = /<p>&lt;center&gt;<\/p>(.*?)<p>&lt;end-center&gt;<\/p>/gs;
-    let match;
-    let centerHTML = html;
-    while ((match = centerRegex.exec(html)) !== null) {
-        centerHTML = centerHTML.replace(match[0], `<div class="center">${match[1]}</div>`);
-    }
-    return centerHTML;
+  const centerRegex = /<p>&lt;center&gt;<\/p>(.*?)<p>&lt;end-center&gt;<\/p>/gs;
+  let match;
+  let centerHTML = html;
+
+  while ((match = centerRegex.exec(html)) !== null) {
+    centerHTML = centerHTML.replace(match[0], `<div class="center">${match[1]}</div>`);
+  }
+
+  return centerHTML;
 }
 const localizedContentArray = parseLocalizedContent(bodyHTML);
 const currentLanguage = i18next.language;
@@ -84,6 +86,7 @@ const defaultContent = localizedContentArray.find(item => item.lang === defaultL
 bodyHTML = localizedContent?.content || defaultContent?.content || bodyHTML;
 bodyHTML = parseFloatTags(bodyHTML); // Ensure parseFloatTags is called on the localized content
 bodyHTML = parseCenterTags(bodyHTML); // Ensure parseCenterTags is called on the localized content
+console.log(bodyHTML);
 ---
 
 <html lang="en">
@@ -181,9 +184,10 @@ bodyHTML = parseCenterTags(bodyHTML); // Ensure parseCenterTags is called on the
   }
 
   .float-container {
-    margin-top:38px;
-    padding-top:28px;
-    padding-bottom:28px;
+    gap: 18px;
+    margin-top: 38px;
+    padding-top: 28px;
+    padding-bottom: 28px;
   }
 
   .float p {
