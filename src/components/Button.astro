@@ -3,7 +3,7 @@ import { localizePath } from "astro-i18next";
 const { icon, text, href, white, nohide } = Astro.props;
 ---
 
-<a href={localizePath(href)} class={`pixel-corners px-3 py-1 hover:text-black bg-transparent hover:bg-white text-lg font-medium font-[InstrumentSans] flex-row items-center inline-flex transition-all ${white ? 'bg-white text-black' : 'text-white'}`}>
+<a href={localizePath(href)} class={`pixel-corners px-3 py-1 hover:text-black bg-transparent hover:bg-white text-lg font-medium font-[InstrumentSans] flex-row items-center inline-flex transition-bezier ${white ? 'bg-white text-black' : 'text-white'}`}>
   {icon && <img id="icon" class={`${white ? 'invert-0' : 'invert'}`} src={icon} />}
   {text}
   <img
@@ -14,7 +14,7 @@ const { icon, text, href, white, nohide } = Astro.props;
 </a>
 
 <style>
-  .transition-all {
+  .transition-bezier {
     transition: all 0.3s cubic-bezier(0, 0, 0, 1);
   }
 
@@ -54,17 +54,21 @@ const { icon, text, href, white, nohide } = Astro.props;
     transform: translate(3px, 0);
   }
 
+  img {
+    transition: 0.2s cubic-bezier(0, 0, 0, 1);
+  }
+
   #icon {
     width: 20px;
     height: 20px;
     margin-right: 6px;
-    transition: 0.2s ease;
+    transition: 0.2s cubic-bezier(0, 0, 0, 1);
   }
 
   a:hover #icon {
     width: 0px;
     filter: invert(0);
-    transition: 0.2s ease;
+    transition: 0.2s cubic-bezier(0, 0, 0, 1);
   }
 
 .pixel-corners,
