@@ -59,7 +59,7 @@ function parseFloatTags(html) {
     let floatHTML = html;
     while ((match = floatRegex.exec(html)) !== null) {
         const styleMatch = match[1].match(/style=&quot;(.*?)&quot;/);
-        const style = styleMatch ? `style="${styleMatch[1]} display:flex; justify-content:space-between;"` : "style=\"display:flex; justify-content:space-between;\"";
+        const style = styleMatch ? `style="${styleMatch[1]} display:flex; justify-content:space-between; padding-top:12px; padding-bottom:12px; background-color:var(--bg-color); box-shadow: 0 0 0 100vmax var(--bg-color); clip-path: inset(0 -100vmax);"` : "style=\"display:flex; justify-content:space-between;\"";
         const content = match[2]
             .replace(floatLeftRegex, "<div class=\"float\">$1</div>")
             .replace(floatRightRegex, "<div class=\"float\">$1</div>");
