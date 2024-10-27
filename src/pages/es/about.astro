@@ -50,17 +50,6 @@ changeLanguage("es");
       </div>
       <Footer />
     </main>
-    <script>
-      document.addEventListener('scroll', () => {
-        const scrollPosition = window.scrollY;
-        const timelineContent = document.querySelector('.timeline-content');
-        const maxScroll = document.body.scrollHeight - window.innerHeight;
-        const scrollFraction = scrollPosition / maxScroll;
-        const maxTranslateX = timelineContent.scrollWidth - window.innerWidth;
-
-        timelineContent.style.transform = `translateX(-${scrollFraction * maxTranslateX}px)`;
-      });
-    </script>
   </body>
 </html>
 <style>

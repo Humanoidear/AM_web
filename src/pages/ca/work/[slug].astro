@@ -51,12 +51,29 @@ function parseLocalizedContent(html) {
     }
     return localizedContent;
 }
+function parseFloatTags(html) {
+    const floatRegex = /<p>&lt;float(.*?)&gt;<\/p>(.*?)<p>&lt;end-float&gt;<\/p>/gs;
+    const floatLeftRegex = /<p>&lt;float-left&gt;<\/p>(.*?)<p>&lt;end-float-left&gt;<\/p>/gs;
+    const floatRightRegex = /<p>&lt;float-right&gt;<\/p>(.*?)<p>&lt;end-float-right&gt;<\/p>/gs;
+    let match;
+    let floatHTML = html;
+    while ((match = floatRegex.exec(html)) !== null) {
+        const styleMatch = match[1].match(/style=&quot;(.*?)&quot;/);
+        const style = styleMatch ? `style="${styleMatch[1]} display:flex; justify-content:space-between;"` : "style=\"display:flex; justify-content:space-between;\"";
+        const content = match[2]
+            .replace(floatLeftRegex, "<div class=\"float\">$1</div>")
+            .replace(floatRightRegex, "<div class=\"float\">$1</div>");
+        floatHTML = floatHTML.replace(match[0], `<div class="float-container" ${style}>${content}</div>`);
+    }
+    return floatHTML;
+}
 const localizedContentArray = parseLocalizedContent(bodyHTML);
 const currentLanguage = i18next.language;
 const defaultLanguage = "en";
 const localizedContent = localizedContentArray.find(item => item.lang === currentLanguage);
 const defaultContent = localizedContentArray.find(item => item.lang === defaultLanguage);
 bodyHTML = localizedContent?.content || defaultContent?.content || bodyHTML;
+bodyHTML = parseFloatTags(bodyHTML); // Ensure parseFloatTags is called on the localized content
 ---
 
 <html lang="en">
@@ -69,7 +86,7 @@ bodyHTML = localizedContent?.content || defaultContent?.content || bodyHTML;
   </head>
 
   <body>
-    <Header work={` / ${title} `} />
+    <Header/>
     <main class="flex flex-col items-center">
       <div class="w-full">
         <div class="flex items-end justify-end rounded-none">
@@ -98,25 +115,27 @@ bodyHTML = localizedContent?.content || defaultContent?.content || bodyHTML;
             >
               {title}
             </h3>
+            <div>
+              <p class="opacity-60">{t("slug.client")}</p>
             <p
-              class="font-semibold text-white text-2xl"
+              class="font-medium text-white text-2xl"
               transition:name={`work-title-${title}-type`}
             >
-            <p class="opacity-60">{t("slug.client")}</p>
               {type}
             </p>
+          </div>
             <ul>
               <p class="opacity-60">{t("slug.services")}</p>
               {
                 Array.isArray(services) &&
                   services.map((service) => (
-                    <li class="font-semibold text-white text-2xl">{service}</li>
+                    <li class="font-medium text-white text-2xl">{service}</li>
                   ))
               }
             </ul>
             <div transition:name={`work-title-${title}-year`}>
               <p class="opacity-60">{t("slug.year")}</p>
-              <p class="font-semibold text-white text-2xl">{year}</p>
+              <p class="font-medium text-white text-2xl">{year}</p>
             </div>
           </div>
         </div>
@@ -149,5 +168,15 @@ bodyHTML = localizedContent?.content || defaultContent?.content || bodyHTML;
       transform: translate(0, 100px);
       filter: grayscale(1) blur(5px);
     }
+  }
+
+  .float-left {
+    flex: 1;
+    margin-right: 10px;
+  }
+
+  .float-right {
+    flex: 1;
+    margin-left: 10px;
   }
 </style>
