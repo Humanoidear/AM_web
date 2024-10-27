@@ -1,0 +1,64 @@
+{
+"en": [
+    {
+      "date": "Sept. 2024 - 2026",
+      "icon": "<svg fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"> <path d=\"M3 2h18v20H3V2zm12 16v2h4V4H5v16h4v-2h6zM7 6h2v2H7V6zm6 0h-2v2h2V6zm2 0h2v2h-2V6zm-6 4H7v2h2v-2zm2 0h2v2h-2v-2zm6 0h-2v2h2v-2zM7 14h2v2H7v-2zm6 0h-2v2h2v-2zm4 0h-2v2h2v-2z\" fill=\"currentColor\"/> </svg>",
+      "title": "Vocational Training in Graphic Design",
+      "subtitle": "Institut Escola del Treball de Barcelona",
+      "content": "I studied graphic design at the Institut Escola del Treball de Barcelona. I learned the basics of design and how to use design software."
+    },
+    {
+      "date": "Jan. 2027 - Dec. 2027",
+      "icon": "<svg fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"> <path d=\"M12 2a10 10 0 100 20 10 10 0 000-20zm0 18a8 8 0 110-16 8 8 0 010 16z\" fill=\"currentColor\"/> </svg>",
+      "title": "Internship at Creative Agency",
+      "subtitle": "Creative Minds Agency",
+      "content": "Completed a year-long internship at Creative Minds Agency, where I worked on various design projects and gained practical experience in the industry."
+    },
+    {
+      "date": "Feb. 2028 - Aug. 2029",
+      "icon": "<svg fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"> <path d=\"M12 2a10 10 0 100 20 10 10 0 000-20zm0 18a8 8 0 110-16 8 8 0 010 16z\" fill=\"currentColor\"/> </svg>",
+      "title": "Freelance Graphic Designer",
+      "subtitle": "Self-Employed",
+      "content": "Worked as a freelance graphic designer, collaborating with clients from various industries to create logos, branding materials, and marketing collateral."
+    },
+    {
+      "date": "Sept. 2029 - Present",
+      "icon": "<svg fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"> <path d=\"M12 2a10 10 0 100 20 10 10 0 000-20zm0 18a8 8 0 110-16 8 8 0 010 16z\" fill=\"currentColor\"/> </svg>",
+      "title": "Senior Graphic Designer",
+      "subtitle": "Design Studio XYZ",
+      "content": "Currently working as a senior graphic designer at Design Studio XYZ, leading a team of designers and overseeing the creation of high-quality design projects."
+    },
+    {
+      "date": "Mar. 2030 - Jun. 2031",
+      "icon": "<svg fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"> <path d=\"M12 2a10 10 0 100 20 10 10 0 000-20zm0 18a8 8 0 110-16 8 8 0 010 16z\" fill=\"currentColor\"/> </svg>",
+      "title": "Guest Lecturer",
+      "subtitle": "University of Design",
+      "content": "Served as a guest lecturer at the University of Design, teaching courses on graphic design principles and sharing industry insights with students."
+    },
+    {
+      "date": "Jul. 2031 - Present",
+      "icon": "<svg fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"> <path d=\"M12 2a10 10 0 100 20 10 10 0 000-20zm0 18a8 8 0 110-16 8 8 0 010 16z\" fill=\"currentColor\"/> </svg>",
+      "title": "Creative Director",
+      "subtitle": "Innovative Design Solutions",
+      "content": "Currently working as a creative director at Innovative Design Solutions, leading creative projects and driving the company's design vision forward."
+    }
+  ],
+  "es": [
+    {
+      "date": "Sept. 2024 - 2026",
+      "icon": "<svg fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"> <path d=\"M3 2h18v20H3V2zm12 16v2h4V4H5v16h4v-2h6zM7 6h2v2H7V6zm6 0h-2v2h2V6zm2 0h2v2h-2V6zm-6 4H7v2h2v-2zm2 0h2v2h-2v-2zm6 0h-2v2h2v-2zM7 14h2v2H7v-2zm6 0h-2v2h2v-2zm4 0h-2v2h2v-2z\" fill=\"currentColor\"/> </svg>",
+      "title": "Formación Profesional en Diseño Gráfico",
+      "subtitle": "Institut Escola del Treball de Barcelona",
+      "content": "Estudié diseño gráfico en el Institut Escola del Treball de Barcelona. Aprendí los conceptos básicos del diseño y cómo utilizar software de diseño."
+    }
+  ],
+  "ca": [
+    {
+      "date": "Set. 2024 - 2026",
+      "icon": "<svg fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"> <path d=\"M3 2h18v20H3V2zm12 16v2h4V4H5v16h4v-2h6zM7 6h2v2H7V6zm6 0h-2v2h2V6zm2 0h2v2h-2V6zm-6 4H7v2h2v-2zm2 0h2v2h-2v-2zm6 0h-2v2h2v-2zM7 14h2v2H7v-2zm6 0h-2v2h2v-2zm4 0h-2v2h2v-2z\" fill=\"currentColor\"/> </svg>",
+      "title": "Formació Professional en Disseny Gràfic",
+      "subtitle": "Institut Escola del Treball de Barcelona",
+      "content": "Vaig estudiar disseny gràfic a l'Institut Escola del Treball de Barcelona. Vaig aprendre els conceptes bàsics del disseny i com utilitzar programari de disseny."
+    }
+  ]
+}

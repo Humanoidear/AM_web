@@ -1,8 +1,13 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
+import About from "../components/About.astro";
 import Footer from "../components/Footer.astro";
 import i18next, { t, changeLanguage } from "i18next";
+import timeline from "../../public/json/timeline.json";
+
+let lang = i18next.language;
+let localizedTimeline = timeline[lang];
 
 changeLanguage("en");
 ---
@@ -14,107 +19,55 @@ changeLanguage("en");
   </head>
   <body>
     <Header />
-    <main class="w-screen h-[3000px] flex flex-col items-center justify-center relative overflow-hidden">
+    <main class="w-screen flex flex-col items-center justify-center relative overflow-hidden">
       <iframe
         src="/html/frame_conway.html"
-        class="top-0 left-0 w-full h-full z-0 transition-all absolute"
+        class="top-0 left-0 w-full h-full z-0 transition-all fixed"
         transition:name="bg-iframe"></iframe>
-      <div class="timeline-container fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-[800px] flex items-center">
-        <div class="timeline-line absolute top-1/2 left-0 w-full h-1 bg-gray-300"></div>
-        <div class="timeline-content flex flex-row items-center">
-          <div class="milestone flex flex-row items-center justify-between w-screen max-w-[800px]">
-            <img src="https://via.placeholder.com/150" alt="Placeholder Image" class="w-40 h-40 object-contain">
-            <div class="flex flex-col items-start justify-center">
-              <h2 class="text-2xl font-bold">Milestone 1</h2>
-              <p class="text-gray-500">January 2020</p>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
+        <div class="max-w-[600px] mt-[20vh] mb-[150px]">
+          <div class="max-w-[700px] flex md:flex-row flex-col-reverse md:items-center gap-3">
+            <div
+              id="hover-space"
+              class="fadeup opacity-0 inline-block relative"
+              style="animation-delay: 200ms;"
+              onmousemove="handleMouseMove(event)"
+            >
+              <img id="am_face" src="/img/am_face.png" class="w-52 h-52 z-10 relative" />
+              <img id="am_bg" src="/img/am_bg.png" class="top-0 w-52 h-52 z-0 absolute" />
+            </div>
+            <div class="fadeup md:w-[calc(100%-13rem)] w-[95%] z-10 relative">
+              <h1 class="md:-translate-x-16 md:translate-y-28 text-[MGNHumble] md:text-8xl text-6xl text-white md:text-right">
+                bon dia!
+              </h1>
             </div>
           </div>
-          <div class="milestone flex flex-row items-center justify-between w-screen max-w-[800px]">
-            <img src="https://via.placeholder.com/150" alt="Placeholder Image" class="w-40 h-40 object-contain">
-            <div class="flex flex-col items-start justify-center">
-              <h2 class="text-2xl font-bold">Milestone 2</h2>
-              <p class="text-gray-500">June 2020</p>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
+          <p class="mt-20 flex flex-col items-end justify-end relative leading-7 font-medium">
+            {t("about.catch")}
+          </p>
+      </div>
+      <div class="max-w-[1010px] flex flex-col items-start justify-start z-10">
+        {
+          localizedTimeline.map((item) => (
+            <div class="h-[300px] flex flex-row items-start gap-3 relative">
+              <p class="w-[200px] text-right text-gray-500 relative text-ellipsis whitespace-nowrap">{ item.date }</p>
+              <div class="w-[5px] h-full bg-white mx-3 relative"></div>
+              <div class="w-[500px] flex flex-col items-start">
+                <div class="w-10 h-10 mb-2 invert relative" set:html={item.icon}></div>
+                <h3 class="text-xl font-bold">{ item.title }</h3>
+                <p class="text-gray-700">{ item.subtitle }</p>
+                <p class="text-white">{ item.content }</p>
+              </div>
+            </div>
+          ))
+        }
+          <div class="h-[150px] flex flex-row items-start gap-3 relative">
+            <p class="w-[200px] text-right text-gray-500 relative text-ellipsis whitespace-nowrap"></p>
+            <div class="w-[5px] h-full mx-3 relative border-l-[5px] border-dashed border-white"></div>
+            <div class="w-[500px] flex flex-col items-start">
             </div>
           </div>
-          <div class="milestone flex flex-row items-center justify-between w-screen max-w-[800px]">
-            <img src="https://via.placeholder.com/150" alt="Placeholder Image" class="w-40 h-40 object-contain">
-            <div class="flex flex-col items-start justify-center">
-              <h2 class="text-2xl font-bold">Milestone 3</h2>
-              <p class="text-gray-500">December 2020</p>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
-            </div>
-          </div>
-        </div>
       </div>
       <Footer />
     </main>
   </body>
 </html>
-<style>
-.timeline-container {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  max-width: 800px;
-  overflow-x: hidden;
-}
-
-.timeline-container::before,
-.timeline-container::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 50px;
-  z-index: 1;
-}
-
-.timeline-container::before {
-  left: 0;
-  background: linear-gradient(to right, black, transparent);
-}
-
-.timeline-container::after {
-  right: 0;
-  background: linear-gradient(to left, black, transparent);
-}
-
-.timeline-line {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background-color: gray;
-}
-
-.timeline-content {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  position: relative;
-  transition: transform 0.5s cubic-bezier(0, 0, 0, 1);
-}
-
-.milestone {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px;
-  width: 100vw; /* Ensure each milestone takes up the full viewport width */
-  max-width: 800px;
-}
-
-.object-contain {
-  object-fit: contain;
-}
-</style>
