@@ -68,15 +68,13 @@ function parseFloatTags(html) {
     return floatHTML;
 }
 function parseCenterTags(html) {
-  const centerRegex = /<p>&lt;center&gt;<\/p>(.*?)<p>&lt;end-center&gt;<\/p>/gs;
-  let match;
-  let centerHTML = html;
-
-  while ((match = centerRegex.exec(html)) !== null) {
-    centerHTML = centerHTML.replace(match[0], `<div class="center">${match[1]}</div>`);
-  }
-
-  return centerHTML;
+    const centerRegex = /<p>&lt;center&gt;<\/p>(.*?)<p>&lt;end-center&gt;<\/p>/gs;
+    let match;
+    let centerHTML = html;
+    while ((match = centerRegex.exec(html)) !== null) {
+        centerHTML = centerHTML.replace(match[0], `<div class="center">${match[1]}</div>`);
+    }
+    return centerHTML;
 }
 const localizedContentArray = parseLocalizedContent(bodyHTML);
 const currentLanguage = i18next.language;

@@ -1,43 +1,43 @@
 {
-"en": [
+  "en": [
     {
       "date": "Sept. 2024 - 2026",
-      "icon": "<svg fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"> <path d=\"M3 2h18v20H3V2zm12 16v2h4V4H5v16h4v-2h6zM7 6h2v2H7V6zm6 0h-2v2h2V6zm2 0h2v2h-2V6zm-6 4H7v2h2v-2zm2 0h2v2h-2v-2zm6 0h-2v2h2v-2zM7 14h2v2H7v-2zm6 0h-2v2h2v-2zm4 0h-2v2h2v-2z\" fill=\"currentColor\"/> </svg>",
+      "icon": "<svg fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"> <path d=\"M3 2h18v20H3V2zm12 16v2h4V4H5v16h4v-2h6zM7 6h2v2H7V6zm6 0h-2v2h2V6zm2 0h2v2h-2V6zm-6 4H7v2H7v-2zm2 0h2v2h-2V6zm6 0h-2v2h2V6zM7 14h2v2H7v-2zm6 0h-2v2h2V6zm4 0h-2v2h2V6z\" fill=\"currentColor\"/> </svg>",
       "title": "Vocational Training in Graphic Design",
       "subtitle": "Institut Escola del Treball de Barcelona",
       "content": "I studied graphic design at the Institut Escola del Treball de Barcelona. I learned the basics of design and how to use design software."
     },
     {
       "date": "Jan. 2027 - Dec. 2027",
-      "icon": "<svg fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"> <path d=\"M12 2a10 10 0 100 20 10 10 0 000-20zm0 18a8 8 0 110-16 8 8 0 010 16z\" fill=\"currentColor\"/> </svg>",
+      "icon": "<svg fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"> <path d=\"M8 3h8v4h6v14H2V7h6V3zm2 4h4V5h-4v2zM4 9v10h16V9H4z\" fill=\"currentColor\"/> </svg>",
       "title": "Internship at Creative Agency",
       "subtitle": "Creative Minds Agency",
       "content": "Completed a year-long internship at Creative Minds Agency, where I worked on various design projects and gained practical experience in the industry."
     },
     {
       "date": "Feb. 2028 - Aug. 2029",
-      "icon": "<svg fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"> <path d=\"M12 2a10 10 0 100 20 10 10 0 000-20zm0 18a8 8 0 110-16 8 8 0 010 16z\" fill=\"currentColor\"/> </svg>",
+      "icon": "<svg fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"> <path d=\"M24 2H4v16h20V2zM6 16V4h16v12H6zM2 4H0v18h20v-2H2V4zm12 2h2v2h-2V6zm-2 4V8h2v2h-2zm-2 2v-2h2v2h-2zm0 0v2H8v-2h2zm8-2h-2V8h2v2zm0 0h2v2h-2v-2zM8 6h2v2H8V6z\" fill=\"currentColor\"/> </svg>",
       "title": "Freelance Graphic Designer",
       "subtitle": "Self-Employed",
       "content": "Worked as a freelance graphic designer, collaborating with clients from various industries to create logos, branding materials, and marketing collateral."
     },
     {
       "date": "Sept. 2029 - Present",
-      "icon": "<svg fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"> <path d=\"M12 2a10 10 0 100 20 10 10 0 000-20zm0 18a8 8 0 110-16 8 8 0 010 16z\" fill=\"currentColor\"/> </svg>",
+      "icon": "<svg fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"> <path d=\"M2 2h14v4h6v16H2V2zm18 6h-4v2h2v2h-2v2h2v2h-2v2h2v2h2V8zm-6-4H4v16h2v-2h6v2h2V4zM6 6h2v2H6V6zm6 0h-2v2h2V6zm-6 4h2v2H6v-2zm6 0h-2v2h2V6zm-6 4h2v2H6v-2zm6 0h-2v2h2V6z\" fill=\"currentColor\"/> </svg>",
       "title": "Senior Graphic Designer",
       "subtitle": "Design Studio XYZ",
       "content": "Currently working as a senior graphic designer at Design Studio XYZ, leading a team of designers and overseeing the creation of high-quality design projects."
     },
     {
       "date": "Mar. 2030 - Jun. 2031",
-      "icon": "<svg fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"> <path d=\"M12 2a10 10 0 100 20 10 10 0 000-20zm0 18a8 8 0 110-16 8 8 0 010 16z\" fill=\"currentColor\"/> </svg>",
+      "icon": "<svg fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"> <path d=\"M10 2h4v5h2v2h-2v11h4v-9h2v9h2v2H2v-2h2V8h2v12h6V4h-2V2zM8 6V4h2v2H8zm0 0H6v2h2V6zm10 5h-2V9h2v2zm-8-1H8v2h2v-2zm-2 4h2v2H8v-2z\" fill=\"currentColor\"/> </svg>",
       "title": "Guest Lecturer",
       "subtitle": "University of Design",
       "content": "Served as a guest lecturer at the University of Design, teaching courses on graphic design principles and sharing industry insights with students."
     },
     {
       "date": "Jul. 2031 - Present",
-      "icon": "<svg fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"> <path d=\"M12 2a10 10 0 100 20 10 10 0 000-20zm0 18a8 8 0 110-16 8 8 0 010 16z\" fill=\"currentColor\"/> </svg>",
+      "icon": "<svg fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"> <path d=\"M6 2h10v2H6V2zM4 6V4h2v2H4zm0 12H2V6h2v12zm2 2H4v-2h2v2zm12 0H6v2h12v-2zm2-2v2h-2v-2h2zm0 0h2V8h-2v10zM12 6H8v2H6v8h2v2h8v-2h2v-4h-2v4H8V8h4V6zm2 8v-4h2V8h2V6h4V4h-2V2h-2v4h-2v2h-2v2h-4v4h4z\" fill=\"currentColor\"/> </svg>",
       "title": "Creative Director",
       "subtitle": "Innovative Design Solutions",
       "content": "Currently working as a creative director at Innovative Design Solutions, leading creative projects and driving the company's design vision forward."
@@ -46,19 +46,89 @@
   "es": [
     {
       "date": "Sept. 2024 - 2026",
-      "icon": "<svg fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"> <path d=\"M3 2h18v20H3V2zm12 16v2h4V4H5v16h4v-2h6zM7 6h2v2H7V6zm6 0h-2v2h2V6zm2 0h2v2h-2V6zm-6 4H7v2h2v-2zm2 0h2v2h-2v-2zm6 0h-2v2h2v-2zM7 14h2v2H7v-2zm6 0h-2v2h2v-2zm4 0h-2v2h2v-2z\" fill=\"currentColor\"/> </svg>",
+      "icon": "<svg fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"> <path d=\"M3 2h18v20H3V2zm12 16v2h4V4H5v16h4v-2h6zM7 6h2v2H7V6zm6 0h-2v2h2V6zm2 0h2v2h-2V6zm-6 4H7v2H7v-2zm2 0h2v2h-2V6zm6 0h-2v2h2V6zM7 14h2v2H7v-2zm6 0h-2v2h2V6zm4 0h-2v2h2V6z\" fill=\"currentColor\"/> </svg>",
       "title": "Formación Profesional en Diseño Gráfico",
       "subtitle": "Institut Escola del Treball de Barcelona",
       "content": "Estudié diseño gráfico en el Institut Escola del Treball de Barcelona. Aprendí los conceptos básicos del diseño y cómo utilizar software de diseño."
+    },
+    {
+      "date": "Ene. 2027 - Dic. 2027",
+      "icon": "<svg fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"> <path d=\"M8 3h8v4h6v14H2V7h6V3zm2 4h4V5h-4v2zM4 9v10h16V9H4z\" fill=\"currentColor\"/> </svg>",
+      "title": "Prácticas en Agencia Creativa",
+      "subtitle": "Creative Minds Agency",
+      "content": "Completé un año de prácticas en Creative Minds Agency, donde trabajé en varios proyectos de diseño y adquirí experiencia práctica en la industria."
+    },
+    {
+      "date": "Feb. 2028 - Ago. 2029",
+      "icon": "<svg fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"> <path d=\"M24 2H4v16h20V2zM6 16V4h16v12H6zM2 4H0v18h20v-2H2V4zm12 2h2v2h-2V6zm-2 4V8h2v2h-2zm-2 2v-2h2v2h-2zm0 0v2H8v-2h2zm8-2h-2V8h2v2zm0 0h2v2h-2v-2zM8 6h2v2H8V6z\" fill=\"currentColor\"/> </svg>",
+      "title": "Diseñador Gráfico Freelance",
+      "subtitle": "Autónomo",
+      "content": "Trabajé como diseñador gráfico freelance, colaborando con clientes de diversas industrias para crear logotipos, materiales de marca y material de marketing."
+    },
+    {
+      "date": "Sept. 2029 - Presente",
+      "icon": "<svg fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"> <path d=\"M2 2h14v4h6v16H2V2zm18 6h-4v2h2v2h-2v2h2v2h-2v2h2v2h2V8zm-6-4H4v16h2v-2h6v2h2V4zM6 6h2v2H6V6zm6 0h-2v2h2V6zm-6 4h2v2H6v-2zm6 0h-2v2h2V6zm-6 4h2v2H6v-2zm6 0h-2v2h2V6z\" fill=\"currentColor\"/> </svg>",
+      "title": "Diseñador Gráfico Senior",
+      "subtitle": "Design Studio XYZ",
+      "content": "Actualmente trabajo como diseñador gráfico senior en Design Studio XYZ, liderando un equipo de diseñadores y supervisando la creación de proyectos de diseño de alta calidad."
+    },
+    {
+      "date": "Mar. 2030 - Jun. 2031",
+      "icon": "<svg fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"> <path d=\"M10 2h4v5h2v2h-2v11h4v-9h2v9h2v2H2v-2h2V8h2v12h6V4h-2V2zM8 6V4h2v2H8zm0 0H6v2h2V6zm10 5h-2V9h2v2zm-8-1H8v2h2v-2zm-2 4h2v2H8v-2z\" fill=\"currentColor\"/> </svg>",
+      "title": "Profesor Invitado",
+      "subtitle": "Universidad de Diseño",
+      "content": "Serví como profesor invitado en la Universidad de Diseño, impartiendo cursos sobre principios de diseño gráfico y compartiendo conocimientos de la industria con los estudiantes."
+    },
+    {
+      "date": "Jul. 2031 - Presente",
+      "icon": "<svg fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"> <path d=\"M6 2h10v2H6V2zM4 6V4h2v2H4zm0 12H2V6h2v12zm2 2H4v-2h2v2zm12 0H6v2h12v-2zm2-2v2h-2v-2h2zm0 0h2V8h-2v10zM12 6H8v2H6v8h2v2h8v-2h2v-4h-2v4H8V8h4V6zm2 8v-4h2V8h2V6h4V4h-2V2h-2v4h-2v2h-2v2h-4v4h4z\" fill=\"currentColor\"/> </svg>",
+      "title": "Director Creativo",
+      "subtitle": "Innovative Design Solutions",
+      "content": "Actualmente trabajo como director creativo en Innovative Design Solutions, liderando proyectos creativos e impulsando la visión de diseño de la empresa."
     }
   ],
   "ca": [
     {
       "date": "Set. 2024 - 2026",
-      "icon": "<svg fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"> <path d=\"M3 2h18v20H3V2zm12 16v2h4V4H5v16h4v-2h6zM7 6h2v2H7V6zm6 0h-2v2h2V6zm2 0h2v2h-2V6zm-6 4H7v2h2v-2zm2 0h2v2h-2v-2zm6 0h-2v2h2v-2zM7 14h2v2H7v-2zm6 0h-2v2h2v-2zm4 0h-2v2h2v-2z\" fill=\"currentColor\"/> </svg>",
+      "icon": "<svg fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"> <path d=\"M3 2h18v20H3V2zm12 16v2h4V4H5v16h4v-2h6zM7 6h2v2H7V6zm6 0h-2v2h2V6zm2 0h2v2h-2V6zm-6 4H7v2H7v-2zm2 0h2v2h-2V6zm6 0h-2v2h2V6zM7 14h2v2H7v-2zm6 0h-2v2h2V6zm4 0h-2v2h2V6z\" fill=\"currentColor\"/> </svg>",
       "title": "Formació Professional en Disseny Gràfic",
       "subtitle": "Institut Escola del Treball de Barcelona",
       "content": "Vaig estudiar disseny gràfic a l'Institut Escola del Treball de Barcelona. Vaig aprendre els conceptes bàsics del disseny i com utilitzar programari de disseny."
+    },
+    {
+      "date": "Gen. 2027 - Des. 2027",
+      "icon": "<svg fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"> <path d=\"M8 3h8v4h6v14H2V7h6V3zm2 4h4V5h-4v2zM4 9v10h16V9H4z\" fill=\"currentColor\"/> </svg>",
+      "title": "Pràctiques en Agència Creativa",
+      "subtitle": "Creative Minds Agency",
+      "content": "Vaig completar un any de pràctiques a Creative Minds Agency, on vaig treballar en diversos projectes de disseny i vaig adquirir experiència pràctica en la indústria."
+    },
+    {
+      "date": "Feb. 2028 - Ago. 2029",
+      "icon": "<svg fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"> <path d=\"M24 2H4v16h20V2zM6 16V4h16v12H6zM2 4H0v18h20v-2H2V4zm12 2h2v2h-2V6zm-2 4V8h2v2h-2zm-2 2v-2h2v2h-2zm0 0v2H8v-2h2zm8-2h-2V8h2v2zm0 0h2v2h-2v-2zM8 6h2v2H8V6z\" fill=\"currentColor\"/> </svg>",
+      "title": "Dissenyador Gràfic Freelance",
+      "subtitle": "Autònom",
+      "content": "Vaig treballar com a dissenyador gràfic freelance, col·laborant amb clients de diverses indústries per crear logotips, materials de marca i material de màrqueting."
+    },
+    {
+      "date": "Set. 2029 - Present",
+      "icon": "<svg fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"> <path d=\"M2 2h14v4h6v16H2V2zm18 6h-4v2h2v2h-2v2h2v2h-2v2h2v2h2V8zm-6-4H4v16h2v-2h6v2h2V4zM6 6h2v2H6V6zm6 0h-2v2h2V6zm-6 4h2v2H6v-2zm6 0h-2v2h2V6zm-6 4h2v2H6v-2zm6 0h-2v2h2V6z\" fill=\"currentColor\"/> </svg>",
+      "title": "Dissenyador Gràfic Sènior",
+      "subtitle": "Design Studio XYZ",
+      "content": "Actualment treballo com a dissenyador gràfic sènior a Design Studio XYZ, liderant un equip de dissenyadors i supervisant la creació de projectes de disseny d'alta qualitat."
+    },
+    {
+      "date": "Març 2030 - Juny 2031",
+      "icon": "<svg fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"> <path d=\"M10 2h4v5h2v2h-2v11h4v-9h2v9h2v2H2v-2h2V8h2v12h6V4h-2V2zM8 6V4h2v2H8zm0 0H6v2h2V6zm10 5h-2V9h2v2zm-8-1H8v2h2v-2zm-2 4h2v2H8v-2z\" fill=\"currentColor\"/> </svg>",
+      "title": "Professor Convidat",
+      "subtitle": "Universitat de Disseny",
+      "content": "Vaig servir com a professor convidat a la Universitat de Disseny, impartint cursos sobre principis de disseny gràfic i compartint coneixements de la indústria amb els estudiants."
+    },
+    {
+      "date": "Jul. 2031 - Present",
+      "icon": "<svg fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"> <path d=\"M6 2h10v2H6V2zM4 6V4h2v2H4zm0 12H2V6h2v12zm2 2H4v-2h2v2zm12 0H6v2h12v-2zm2-2v2h-2v-2h2zm0 0h2V8h-2v10zM12 6H8v2H6v8h2v2h8v-2h2v-4h-2v4H8V8h4V6zm2 8v-4h2V8h2V6h4V4h-2V2h-2v4h-2v2h-2v2h-4v4h4z\" fill=\"currentColor\"/> </svg>",
+      "title": "Director Creatiu",
+      "subtitle": "Innovative Design Solutions",
+      "content": "Actualment treballo com a director creatiu a Innovative Design Solutions, liderant projectes creatius i impulsant la visió de disseny de l'empresa."
     }
   ]
 }

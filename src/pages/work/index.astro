@@ -83,7 +83,7 @@ const posts = entries.items.map((item) => {
                   />
                   <div class="hover-show bottom-0 right-0 translate-y-[80%] w-full items-center justify-end flex flex-row pointer-events-none z-10 absolute">
                     <h2
-                      class="bottom-0 left-0 w-[230px] -translate-x-1/2 -translate-y-6 flex flex-wrap text-left m-0 fadeup font-[MGNHumble] text-white z-10 absolute"
+                      class="sm:flex hidden bottom-0 left-0 w-[230px] -translate-x-1/2 -translate-y-6 flex-wrap text-left m-0 fadeup font-[MGNHumble] text-white z-10 absolute"
                       transition:name={`work-title-${post.title}`}
                     >
                       {post.splitTitle.map((word, index) => (
@@ -94,13 +94,13 @@ const posts = entries.items.map((item) => {
                     </h2>
                     <div class="translate-y-3 flex flex-col items-end">
                       <p
-                        class={`m-0 text-white text-2xl font-semibold`}
+                        class={`m-0 text-white text-right text-2xl font-semibold`}
                         transition:name={`work-title-${post.title}-type`}
                       >
                         {post.type}
                       </p>
                       <p
-                        class={`m-0 text-white text-lg opacity-60`}
+                        class={`m-0 text-white text-right text-lg opacity-60`}
                         transition:name={`work-title-${post.title}-year`}
                       >
                         {post.year}

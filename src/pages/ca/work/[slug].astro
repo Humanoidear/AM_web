@@ -59,13 +59,22 @@ function parseFloatTags(html) {
     let floatHTML = html;
     while ((match = floatRegex.exec(html)) !== null) {
         const styleMatch = match[1].match(/style=&quot;(.*?)&quot;/);
-        const style = styleMatch ? `style="${styleMatch[1]} display:flex; justify-content:space-between;"` : "style=\"display:flex; justify-content:space-between;\"";
+        const style = styleMatch ? `style="${styleMatch[1]} display:flex; justify-content:space-between; background-color:var(--bg-color); box-shadow: 0 0 0 100vmax var(--bg-color); clip-path: inset(0 -100vmax);"` : "style=\"display:flex; justify-content:space-between;\"";
         const content = match[2]
             .replace(floatLeftRegex, "<div class=\"float\">$1</div>")
             .replace(floatRightRegex, "<div class=\"float\">$1</div>");
         floatHTML = floatHTML.replace(match[0], `<div class="float-container" ${style}>${content}</div>`);
     }
     return floatHTML;
+}
+function parseCenterTags(html) {
+    const centerRegex = /<p>&lt;center&gt;<\/p>(.*?)<p>&lt;end-center&gt;<\/p>/gs;
+    let match;
+    let centerHTML = html;
+    while ((match = centerRegex.exec(html)) !== null) {
+        centerHTML = centerHTML.replace(match[0], `<div class="center">${match[1]}</div>`);
+    }
+    return centerHTML;
 }
 const localizedContentArray = parseLocalizedContent(bodyHTML);
 const currentLanguage = i18next.language;
@@ -74,6 +83,8 @@ const localizedContent = localizedContentArray.find(item => item.lang === curren
 const defaultContent = localizedContentArray.find(item => item.lang === defaultLanguage);
 bodyHTML = localizedContent?.content || defaultContent?.content || bodyHTML;
 bodyHTML = parseFloatTags(bodyHTML); // Ensure parseFloatTags is called on the localized content
+bodyHTML = parseCenterTags(bodyHTML); // Ensure parseCenterTags is called on the localized content
+console.log(bodyHTML);
 ---
 
 <html lang="en">
@@ -87,13 +98,13 @@ bodyHTML = parseFloatTags(bodyHTML); // Ensure parseFloatTags is called on the l
 
   <body>
     <Header/>
-    <main class="flex flex-col items-center">
+    <main class="m-0 p-0 flex flex-col items-center">
       <div class="w-full">
         <div class="flex items-end justify-end rounded-none">
           {
             heroImage && (
               <div
-                class="expand w-[95%] max-w-[calc(100%-300px)] h-[40vh] relative"
+                class="expand w-full sm:w-[95%] sm:max-w-[calc(100%-300px)] h-[40vh] relative"
                 style={`background-size:cover; background-position:center; background-image: url('${(heroImage as any)?.fields?.file?.url}')`}
                 transition:name={`work-title-${title}-image`}
               />
@@ -105,7 +116,7 @@ bodyHTML = parseFloatTags(bodyHTML); // Ensure parseFloatTags is called on the l
             class="top-6 w-[95%] max-w-[1300px] flex sm:flex-row flex-col items-start justify-between gap-5 relative"
           >
             <img
-              class="w-[700px] -translate-x-[150px] -translate-y-[350px] rotate-90 opacity-60 z-0 absolute"
+              class="hidden sm:block w-[700px] -translate-x-[150px] -translate-y-[350px] rotate-90 opacity-60 z-0 absolute"
               src="/img/blob-1.webp"
               transition:name={`work-title-${title}-blob`}
             />
@@ -142,7 +153,6 @@ bodyHTML = parseFloatTags(bodyHTML); // Ensure parseFloatTags is called on the l
       </div>
       <article class="mt-48 w-[98%] max-w-[1200px] text-white z-10 relative">
         <div class="prose">
-          <div class="title"></div>
           <div set:html={bodyHTML} />
         </div>
       </article>
@@ -151,7 +161,7 @@ bodyHTML = parseFloatTags(bodyHTML); // Ensure parseFloatTags is called on the l
   </body>
 </html>
 
-<style>
+<style is:global>
   .expand {
     animation: auto linear expand both;
     animation-timeline: view();
@@ -170,13 +180,21 @@ bodyHTML = parseFloatTags(bodyHTML); // Ensure parseFloatTags is called on the l
     }
   }
 
-  .float-left {
-    flex: 1;
-    margin-right: 10px;
+  .float-container {
+    gap: 18px;
+    margin-top: 38px;
+    padding-top: 28px;
+    padding-bottom: 28px;
   }
 
-  .float-right {
-    flex: 1;
-    margin-left: 10px;
+  .float p {
+    margin: 0 !important;
+  }
+
+  @media (max-width: 768px) {
+    .float-container {
+      display: flex;
+      flex-direction: column !important;
+    }
   }
 </style>
