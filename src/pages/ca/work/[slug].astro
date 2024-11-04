@@ -53,7 +53,7 @@ let options = {
                 return `<embed src="${url}" type="application/pdf" width="100%" height="600px" />`;
             }
             else {
-                return `<a href="${url}" target="_blank" class="pixel-corners w-50 h-60 m-3 border border-white/20 bg-white/5 hover:bg-white/10 hover:text-white text-white flex flex-col items-center justify-between relative"><svg class="w-10 h-10 mt-20 relative" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> <path d="M21 22H3V2h12v2h2v2h2v2h2v14zM17 6h-2v2h2V6zM5 4v16h14V10h-6V4H5zm8 12H7v2h6v-2zm-6-4h10v2H7v-2zm4-4H7v2h4V8z" fill="currentColor"/> </svg><p class="p-3 w-full bg-white/5 flex flex-row justify-between relative" style="margin-bottom:0;"> ${node.data.target.fields.title} <svg class="w-6" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> <path d="M4 11v2h12v2h2v-2h2v-2h-2V9h-2v2H4zm10-4h2v2h-2V7zm0 0h-2V5h2v2zm0 10h2v-2h-2v2zm0 0h-2v2h2v-2z" fill="currentColor"/> </svg></p></a>`;
+                return `<a href="${url}" target="_blank" class="pixel-corners mb-3 border border-white/20 bg-white/5 hover:bg-white/10 hover:text-white text-white flex flex-col items-center justify-between relative"><p class="p-3 w-full flex flex-row items-center justify-between relative" style="margin-bottom:0;"><span class="flex flex-row items-center gap-3"><svg class="w-6 relative" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> <path d="M21 22H3V2h12v2h2v2h2v2h2v14zM17 6h-2v2h2V6zM5 4v16h14V10h-6V4H5zm8 12H7v2h6v-2zm-6-4h10v2H7v-2zm4-4H7v2h4V8z" fill="currentColor"/> </svg> ${node.data.target.fields.title}</span> <svg class="w-6" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> <path d="M4 11v2h12v2h2v-2h2v-2h-2V9h-2v2H4zm10-4h2v2h-2V7zm0 0h-2V5h2v2zm0 10h2v-2h-2v2zm0 0h-2v2h2v-2z" fill="currentColor"/> </svg></p></a>`;
             }
         },
     },
@@ -76,6 +76,7 @@ function parseLocalizedContent(html) {
     return localizedContent;
 }
 function parseFloatTags(html) {
+    const embedRegex = /<p>&lt;embed(.*?)&gt;<\/p>(.*?)<p>&lt;end-embed&gt;<\/p>/gs;
     const floatRegex = /<p>&lt;float(.*?)&gt;<\/p>(.*?)<p>&lt;end-float&gt;<\/p>/gs;
     const floatLeftRegex = /<p>&lt;float-left&gt;<\/p>(.*?)<p>&lt;end-float-left&gt;<\/p>/gs;
     const floatRightRegex = /<p>&lt;float-right&gt;<\/p>(.*?)<p>&lt;end-float-right&gt;<\/p>/gs;
@@ -87,7 +88,7 @@ function parseFloatTags(html) {
             `style="${styleMatch[1]} display:flex; justify-content:space-between; background-color:var(--bg-color); box-shadow: 0 0 0 100vmax var(--bg-color); clip-path: inset(0 -100vmax);"` :
             "style=\"display:flex; justify-content:space-between;\"";
         // Check if content contains float-left or float-right
-        const content = match[2];
+        let content = match[2];
         const hasFloats = floatLeftRegex.test(content) || floatRightRegex.test(content);
         if (hasFloats) {
             const processedContent = content
@@ -99,6 +100,13 @@ function parseFloatTags(html) {
             // Handle direct content without floats
             floatHTML = floatHTML.replace(match[0], `<div class="float-container" ${style}>${content}</div>`);
         }
+    }
+    while ((match = embedRegex.exec(html)) !== null) {
+        const styleMatch = match[1].match(/style=&quot;(.*?)&quot;/);
+        const style = styleMatch ? `style="${styleMatch[1]} aspect-ratio: 16/10;"` : "style=\"aspect-ratio: 16/10;\"";
+        let content = match[2];
+        content = content.replace(/<\/?p>/g, ""); // Remove surrounding <p> tags
+        floatHTML = floatHTML.replace(match[0], `<iframe class="w-full" ${style} src="${content}"></iframe>`);
     }
     return floatHTML;
 }

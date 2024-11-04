@@ -30,7 +30,7 @@ const currentRoute = removeLangFromRoute(Astro.url.pathname);
   class="w-8 h-8 inline-block relative"
   ><img src={`/img/emoji/${i18next.language}.png`} class="w-8" /></button
 >
-<ul id="langDropdown" class="right-20 top-20 z-50 absolute hidden">
+<ul id="langDropdown" class="right-24 top-20 z-50 absolute hidden">
   {
     i18next.languages
       .filter((lang) => lang !== i18next.language)
