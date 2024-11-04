@@ -12,6 +12,7 @@ export interface work {
       preview: EntryFieldTypes.AssetLink,
       heroImage: EntryFieldTypes.AssetLink,
       content: EntryFieldTypes.RichText
+      blobColor: EntryFieldTypes.Text,
     }
   }
 
