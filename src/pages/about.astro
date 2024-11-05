@@ -45,13 +45,13 @@ let localizedTimeline = timeline[lang];
             {t("about.catch")}
           </p>
       </div>
-      <div class="-translate-x-10 sm:translate-x-0 max-w-[600px] sm:max-w-[1100px] flex flex-col items-start justify-start z-10">
+      <div class="-translate-x-18 sm:-translate-x-10 md:translate-x-0 max-w-[600px] sm:max-w-[1100px] flex flex-col items-start justify-start z-10">
         {
           localizedTimeline.map((item) => (
-            <div class="h-[300px] flex flex-row items-start gap-3 relative">
+            <div class="h-[380px] sm:h-[300px] flex flex-row items-start gap-3 relative">
               <p class="translate-x-12 translate-y-10 sm:translate-x-0 sm:translate-y-0 rotate-90 sm:rotate-0 w-[100px] sm:w-[200px] text-right text-white/60 relative text-ellipsis whitespace-nowrap">{ item.date }</p>
               <div class="w-[5px] h-full bg-white mx-3 relative"></div>
-              <div class="w-[350px] sm:w-[500px] flex flex-col items-start">
+              <div class="w-[280px] sm:w-[350px] md:w-[400px] flex flex-col items-start">
                 <div class="w-10 h-10 mb-2 invert relative" set:html={item.icon}></div>
                 <h3 class="mb-0 text-xl font-bold">{ item.title }</h3>
                 <p class="mb-3 text-white/60">{ item.subtitle }</p>

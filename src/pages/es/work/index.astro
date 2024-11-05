@@ -42,7 +42,6 @@ const extraPosts = extra.items.map((item) => {
         content,
     };
 });
-console.log(extraPosts[0].content[0].fields.title);
 ---
 
 <!doctype html>
@@ -58,9 +57,9 @@ console.log(extraPosts[0].content[0].fields.title);
     <img
       src="/img/blob-2.avif"
       id="blob-2"
-      class="-translate-y-[100px] absolute"
+      class="hidden sm:block -translate-y-[100px] absolute"
     />
-    <main class="pt-40 flex flex-col items-center justify-center relative">
+    <main class="pt-40 flex flex-col items-center justify-center overflow-hidden relative">
       <div
         class="mb-6 max-w-[1400px] w-[95%] flex flex-row items-center justify-between gap-20 z-1 relative"
       >
@@ -79,11 +78,11 @@ console.log(extraPosts[0].content[0].fields.title);
             posts.map((post, index) => (
               <li
                 data-type={post.type}
-                class={`mb-6 hover:shadow-xl shadow-white z-0 hover:z-10 relative ${index % 2 !== 0 ? "lg:top-32 move-fast" : "move-slow"}`}
+                class={`sm:mb-6 hover:shadow-xl shadow-white z-0 hover:z-10 relative ${index % 2 !== 0 ? "lg:top-32 move-fast" : "move-slow"}`}
                 style="aspect-ratio: 1 / 1;"
               >
                 <a
-                  class="flex flex-row items-start justify-between gap-5 relative"
+                  class="flex flex-row items-start justify-between sm:gap-5 relative"
                   href={localizePath(`/work/${post.slug}/`)}
                 >
                   <div
@@ -132,7 +131,7 @@ console.log(extraPosts[0].content[0].fields.title);
                         </span>
                       ))}
                     </h2>
-                    <div class="-translate-x-4 translate-y-3 flex flex-col items-end">
+                    <div class="sm:-translate-x-4 translate-y-3 flex flex-col items-end">
                       <p
                         class={`m-0 text-white text-right text-2xl font-semibold`}
                         transition:name={`work-title-${post.title}-type`}
@@ -154,7 +153,7 @@ console.log(extraPosts[0].content[0].fields.title);
         </ul>
       </section>
       <ul
-        class="w-full max-w-[1400px] flex flex-wrap flex-col items-start justify-start gap-8 relative"
+        class="mt-16 sm:mt-0 w-full max-w-[1400px] flex flex-wrap flex-col items-start justify-start gap-8 overflow-hidden relative"
       >
         <h2 class="border-b-2 border-white">Extra</h2>
         {
@@ -177,12 +176,12 @@ console.log(extraPosts[0].content[0].fields.title);
                     class="w-32 h-32 z-10"
                   />
                 )}
-                <div class="ml-6 w-full flex flex-row items-center justify-between gap-8 z-10">
+                <div class="ml-3 sm:ml-6 flex flex-row items-center justify-between gap-8 z-10">
                   <div class="flex flex-col items-start">
-                    <h1 class="w-auto mb-0 text-4xl text-white sm:overflow-hidden sm:text-ellipsis sm:whitespace-nowrap">
+                    <h1 class="w-auto mb-0 text-2xl sm:text-4xl text-white sm:overflow-hidden sm:text-ellipsis sm:whitespace-nowrap">
                     {post.title}
                   </h1>
-                  <p class="w-full max-w-[600px] line-clamp-2">{post.description}</p>
+                  <p class="max-w-[600px] line-clamp-2">{post.description}</p>
                   </div>
                   <div class="hidden mr-6 sm:flex flex-row gap-16">
                     {post.type && (
