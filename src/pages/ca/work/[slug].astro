@@ -30,7 +30,6 @@ export async function getStaticPaths() {
     return pages;
 }
 const { content, title, year, type, services, heroImage, blobColor } = Astro.props;
-console.log(content);
 let options = {
     renderNode: {
         "embedded-asset-block": (node: any) => {
@@ -139,14 +138,14 @@ bodyHTML = parseCenterTags(bodyHTML); // Ensure parseCenterTags is called on the
   </head>
 
   <body>
-    <Header/>
+    <Header isWork/>
     <main class="m-0 p-0 flex flex-col items-center">
-      <div class="w-full">
+      <div class="w-full max-w-[1800px]">
         <div class="flex items-end justify-end rounded-none z-10 relative">
           {
             heroImage && (
               <div
-                class="expand w-full sm:w-[95%] sm:max-w-[calc(100%-300px)] h-[40vh] relative"
+                class="expand w-full sm:w-[95%] sm:max-w-[calc(100%-300px)] h-[380px] relative"
                 style={`background-size:cover; background-position:center; background-image: url('${(heroImage as any)?.fields?.file?.url}')`}
                 transition:name={`work-title-${title}-image`}
               />
@@ -205,6 +204,15 @@ bodyHTML = parseCenterTags(bodyHTML); // Ensure parseCenterTags is called on the
     <Footer />
   </body>
 </html>
+
+<script is:inline>
+  document.addEventListener('astro:page-load', () => {
+    const videos = document.querySelectorAll("video");
+    videos.forEach((video) => {
+      video.load();
+    });
+  });
+</script>
 
 <style is:global>
   .expand {

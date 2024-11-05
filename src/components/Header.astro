@@ -4,7 +4,7 @@ import { localizePath } from "astro-i18next";
 import HeaderLink from "./HeaderLink.astro";
 import LanguageDropdown from "./LanguageDropdown.astro";
 
-const { isIndex } = Astro.props;
+const { isIndex, isWork } = Astro.props;
 ---
 
 <header
@@ -169,7 +169,7 @@ const { isIndex } = Astro.props;
   </nav>
 </header>
 
-<script define:vars={{ isIndex }}>
+<script define:vars={{ isIndex, isWork }}>
   const header = document.getElementById("header");
   if (isIndex) {
     header.classList.add("-translate-y-20");
@@ -183,10 +183,23 @@ const { isIndex } = Astro.props;
   } else {
     header.classList.remove("-translate-y-20");
   }
+
+  if (isWork) {
+    header.style.background = "transparent";
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 100) {
+        header.classList.add("with-before");
+      } else {
+        header.classList.remove("with-before");
+      }
+    });
+  } else {
+    header.classList.add("with-before");
+  }
 </script>
 
 <style>
-  header::before {
+  header.with-before::before {
     content: "";
     position: absolute;
     top: 0;
@@ -196,12 +209,21 @@ const { isIndex } = Astro.props;
     background: linear-gradient(
       180deg,
       rgba(0, 0, 0, 1) 0%,
-      rgba(0, 0, 0, 0.3) 50%,
+      rgba(0, 0, 0, 0.6) 50%,
       rgba(0, 0, 0, 0) 100%
     );
+    filter: blur(4px);
+    transform: scale(150%);
     pointer-events: none;
     z-index: -1;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
   }
+
+  header:not(.with-before)::before {
+    opacity: 0;
+  }
+
   a:hover div {
     transform: translate(0px, 0);
     opacity: 1;

@@ -160,19 +160,19 @@ sup::before {
 }
 
 .slide-in-left {
-  animation: slideInLeft 0.5s forwards;
+  animation: slideInLeft 0.5s cubic-bezier(0, 0, 0, 1) forwards;
 }
 
 .slide-in-right {
-  animation: slideInRight 0.5s forwards;
+  animation: slideInRight 0.5s cubic-bezier(0, 0, 0, 1) forwards;
 }
 
 .slide-out-left {
-  animation: slideOutLeft 0.5s forwards;
+  animation: slideOutLeft 0.5s cubic-bezier(0, 0, 0, 1) forwards;
 }
 
 .slide-out-right {
-  animation: slideOutRight 0.5s forwards;
+  animation: slideOutRight 0.5s cubic-bezier(0, 0, 0, 1) forwards;
 }
 
 @keyframes slideInLeft {
