@@ -172,7 +172,7 @@ console.log(extraPosts[0].content[0].fields.title);
                 </div>
                 {post.preview && (
                   <img
-                    src={post.preview.fields.file.url}
+                  src={(post.preview as any)?.fields?.file?.url}
                     alt=""
                     class="w-32 h-32 z-10"
                   />
@@ -198,7 +198,7 @@ console.log(extraPosts[0].content[0].fields.title);
                         <p class="m-0 text-white opacity-60">
                           {t("slug.year")}
                         </p>
-                        <p class="m-0 text-white">{post.year.slice(0, 4)}</p>
+                        <p class="m-0 text-white">{typeof post.year === 'string' ? post.year.slice(0, 4) : post.year}</p>
                       </span>
                     )}
                     {post.services && (
@@ -207,7 +207,7 @@ console.log(extraPosts[0].content[0].fields.title);
                           {t("slug.services")}
                         </p>
                         <p class="m-0 text-white flex flex-col">
-                          {post.services.map((service) => (
+                          {Array.isArray(post.services) && post.services.map((service) => (
                             <span>{service}</span>
                           ))}
                         </p>
@@ -220,7 +220,7 @@ console.log(extraPosts[0].content[0].fields.title);
                 id={`content-${index}`}
                 class="animatein mt-6 hidden w-full whitespace-nowrap overflow-x-auto snap-x snap-mandatory"
               >
-                {post.content.map((item) => (
+                {Array.isArray(post.content) && post.content.map((item) => (
                   <div class="inline-block w-full lg:w-1/2 p-2 snap-start">
                     <img
                       src={item.fields.file.url}
