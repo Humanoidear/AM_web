@@ -131,46 +131,117 @@ const { isIndex, isWork } = Astro.props;
           /></a
         >
       </div>
-
-      <script is:inline data-astro-rerun>
-        function toggleDropdown() {
-          const dropdown = document.getElementById("dropdown");
-          const links = dropdown.querySelectorAll("a");
-          const menuIcon = document.getElementById("menuIcon");
-
-          if (dropdown.classList.contains("hidden")) {
-            dropdown.classList.remove("hidden");
-            dropdown.classList.remove("pointer-events-none");
-            menuIcon.style.transform = "rotate(90deg)";
-
-            links.forEach((link, index) => {
-              setTimeout(() => {
-                link.style.opacity = "1";
-                link.style.transform = "translateY(0)";
-              }, index * 100);
-            });
-          } else {
-            links.forEach((link, index) => {
-              setTimeout(() => {
-                link.style.opacity = "0";
-                link.style.transform = "translateY(-20px)";
-              }, index * 100);
-            });
-
-            setTimeout(() => {
-              dropdown.classList.add("hidden");
-              dropdown.classList.add("pointer-events-none");
-              menuIcon.style.transform = "rotate(0deg)";
-            }, links.length * 100);
-          }
-        }
-      </script>
+    </div>
+    <div class="sm:hidden flex items-center">
+      <button class="btn" id="hamburgerMenu" onclick="toggleMobileMenu();">
+        <img
+          src="https://unpkg.com/pixelarticons@1.8.1/svg/menu.svg"
+          alt="Menu"
+          class="invert w-8 h-8 opacity-60 hover:opacity-100 transition-all"
+        />
+      </button>
     </div>
   </nav>
+  <div
+    id="mobileMenu"
+    class="w-screen h-screen inset-0 bg-black bg-opacity-90 z-50 hidden flex flex-col items-center justify-between fixed"
+  >
+    <div
+      class="top-0 left-0 w-[calc(100vw-67px)] m-8 mt-9 flex flex-col items-end justify-between gap-6 relative"
+    >
+      <button class="btn" onclick="toggleMobileMenu();">
+        <img
+          src="https://unpkg.com/pixelarticons@1.8.1/svg/close.svg"
+          alt="Close"
+          class="invert w-8 h-8 opacity-60 hover:opacity-100 transition-all"
+        />
+      </button>
+      <HeaderLink href={localizePath("/about")}>{t("header.about")}</HeaderLink>
+      <HeaderLink href={localizePath("/work")}>{t("header.work")}</HeaderLink>
+      <HeaderLink href={localizePath("/#contact")}
+        >{t("header.contact")}</HeaderLink
+      >
+      <LanguageDropdown isMobile />
+    </div>
+    <div
+      class="w-[calc(100vw-67px)] m-8 flex flex-row items-center justify-between gap-6 relative"
+    >
+      <a
+        href="https://x.com/alexmalvehy"
+        class="opacity-60 hover:opacity-100 transition-all"
+      >
+        <img src="/img/SVG_socials/twitter.svg" class="h-6 invert" />
+      </a>
+      <a
+        href="https://www.behance.net/alexmalvehy"
+        class="opacity-60 hover:opacity-100 transition-all"
+      >
+        <img src="/img/SVG_socials/behance.svg" class="h-6 invert" />
+      </a>
+      <a
+        href="https://www.youtube.com/c/Al3xitu"
+        class="opacity-60 hover:opacity-100 transition-all"
+      >
+        <img src="/img/SVG_socials/youtube.svg" class="h-6 invert" />
+      </a>
+      <a
+        href="https://www.instagram.com/alexmalvehy/"
+        class="opacity-60 hover:opacity-100 transition-all"
+      >
+        <img src="/img/SVG_socials/instagram.svg" class="h-6 invert" />
+      </a>
+      <a
+        href="https://www.linkedin.com/company/alexmalvehy/"
+        class="opacity-60 hover:opacity-100 transition-all"
+      >
+        <img src="/img/SVG_socials/linkedin.svg" class="h-6 invert" />
+      </a>
+    </div>
+  </div>
 </header>
+
+<script is:inline>
+  function toggleMobileMenu() {
+    mobileMenu.classList.toggle("hidden");
+  }
+
+  function toggleDropdown() {
+    const dropdown = document.getElementById("dropdown");
+    const links = dropdown.querySelectorAll("a");
+    const menuIcon = document.getElementById("menuIcon");
+
+    if (dropdown.classList.contains("hidden")) {
+      dropdown.classList.remove("hidden");
+      dropdown.classList.remove("pointer-events-none");
+      menuIcon.style.transform = "rotate(90deg)";
+
+      links.forEach((link, index) => {
+        setTimeout(() => {
+          link.style.opacity = "1";
+          link.style.transform = "translateY(0)";
+        }, index * 100);
+      });
+    } else {
+      links.forEach((link, index) => {
+        setTimeout(() => {
+          link.style.opacity = "0";
+          link.style.transform = "translateY(-20px)";
+        }, index * 100);
+      });
+
+      setTimeout(() => {
+        dropdown.classList.add("hidden");
+        dropdown.classList.add("pointer-events-none");
+        menuIcon.style.transform = "rotate(0deg)";
+      }, links.length * 100);
+    }
+  }
+</script>
 
 <script define:vars={{ isIndex, isWork }}>
   const header = document.getElementById("header");
+  const mobileMenu = document.getElementById("mobileMenu");
+
   if (isIndex) {
     header.classList.add("-translate-y-20");
     window.addEventListener("scroll", () => {

@@ -1,5 +1,6 @@
 ---
 import i18next from "i18next";
+const { isMobile } = Astro.props;
 
 function getLangName(lang) {
   switch (lang) {
@@ -25,25 +26,31 @@ function removeLangFromRoute(route) {
 const currentRoute = removeLangFromRoute(Astro.url.pathname);
 ---
 
-<button
-  onclick="toggleLangDropdown()"
-  class="btn-lang w-8 h-8 inline-block relative"
-  ><img src={`/img/emoji/${i18next.language}.png`} class="color w-8" />
-  <img src={`/img/emoji/${i18next.language}_white.png`} class="white top-1 absolute" style="filter:brightness(1000000000);"></button
->
-<ul id="langDropdown" class="right-24 top-20 z-50 absolute hidden">
+{!isMobile && (
+  <button
+    onclick="toggleLangDropdown()"
+    class="btn-lang w-8 h-8 inline-block relative"
+  >
+    <img src={`/img/emoji/${i18next.language}.png`} class="color w-8" />
+    <img src={`/img/emoji/${i18next.language}_white.png`} class="white top-1 absolute" style="filter:brightness(1000000000);" />
+  </button>
+)}
+
+<ul id="langDropdown" class={`z-50 ${isMobile ? 'left-2 flex flex-row gap-6 relative' : 'right-24 top-20 hidden absolute'}`}>
   {
     i18next.languages
-      .filter((lang) => lang !== i18next.language)
+      .filter((lang) => isMobile || lang !== i18next.language)
       .map((lang) => (
-        <li class="mr-2 mb-3 transition-all" style="opacity:0; transform:translate(0, -20px);">
+        <li class="mr-2 mb-3 transition-all" style="opacity:1; transform:translateY(0);">
           <a
             href={`${lang === "en" ? "" : "/" + lang}${currentRoute}`}
             class="btn-lang text-white flex flex-row items-center justify-end gap-3"
           >
-            <p>{getLangName(lang)}</p>
-            <img src={`/img/emoji/${lang}.png`} class="color w-7" />
-            <img src={`/img/emoji/${lang}_white.png`} class="white w-7 absolute" style="filter:brightness(1000000000);">
+            { !isMobile && <p>{getLangName(lang)}</p> }
+            <img src={`/img/emoji/${lang}.png`} class={`${lang !== i18next.language ? 'color' : ''} w-7`} />
+            {lang !== i18next.language && (
+              <img src={`/img/emoji/${lang}_white.png`} class="white w-7 absolute" style="filter:brightness(1000000000);" />
+            )}
           </a>
         </li>
       ))
@@ -51,35 +58,35 @@ const currentRoute = removeLangFromRoute(Astro.url.pathname);
 </ul>
 
 <script is:inline data-astro-rerun>
-    function toggleLangDropdown() {
-      const dropdown = document.getElementById("langDropdown");
-      const links = dropdown.querySelectorAll("li");
+  function toggleLangDropdown() {
+    const dropdown = document.getElementById("langDropdown");
+    const links = dropdown.querySelectorAll("li");
 
-      if (dropdown.classList.contains("hidden")) {
-        dropdown.classList.remove("hidden");
-        dropdown.classList.remove("pointer-events-none");
+    if (dropdown.classList.contains("hidden")) {
+      dropdown.classList.remove("hidden");
+      dropdown.classList.remove("pointer-events-none");
 
-        links.forEach((link, index) => {
-          setTimeout(() => {
-            link.style.opacity = "1";
-            link.style.transform = "translateY(0)";
-          }, index * 100);
-        });
-      } else {
-        links.forEach((link, index) => {
-          setTimeout(() => {
-            link.style.opacity = "0";
-            link.style.transform = "translateY(-20px)";
-          }, index * 100);
-        });
-
+      links.forEach((link, index) => {
         setTimeout(() => {
-          dropdown.classList.add("hidden");
-          dropdown.classList.add("pointer-events-none");
-        }, links.length * 100);
-      }
+          link.style.opacity = "1";
+          link.style.transform = "translateY(0)";
+        }, index * 100);
+      });
+    } else {
+      links.forEach((link, index) => {
+        setTimeout(() => {
+          link.style.opacity = "0";
+          link.style.transform = "translateY(-20px)";
+        }, index * 100);
+      });
+
+      setTimeout(() => {
+        dropdown.classList.add("hidden");
+        dropdown.classList.add("pointer-events-none");
+      }, links.length * 100);
     }
-  </script>
+  }
+</script>
 
 <style>
   a:hover p {

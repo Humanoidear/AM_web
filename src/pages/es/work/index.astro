@@ -138,24 +138,33 @@ const posts = entries.items.map((item) => {
     const scrollPosition = window.scrollY;
     const screenWidth = window.innerWidth;
 
+    const moveFastElements = document.querySelectorAll(".move-fast");
+    const moveSlowElements = document.querySelectorAll(".move-slow");
+
     if (screenWidth > 1200) {
-      const moveFastElements = document.querySelectorAll(".move-fast");
-      const moveSlowElements = document.querySelectorAll(".move-slow");
+      if (moveFastElements.length > 0) {
+        moveFastElements.forEach((element) => {
+          element.style.transform = `translateY(-${scrollPosition * 0.3}px)`;
+        });
+      }
 
-      moveFastElements.forEach((element) => {
-        element.style.transform = `translateY(-${scrollPosition * 0.3}px)`;
-      });
-
-      moveSlowElements.forEach((element) => {
-        element.style.transform = `translateY(-${scrollPosition * 0.1}px)`;
-      });
+      if (moveSlowElements.length > 0) {
+        moveSlowElements.forEach((element) => {
+          element.style.transform = `translateY(-${scrollPosition * 0.1}px)`;
+        });
+      }
     } else {
-      moveFastElements.forEach((element) => {
-        element.style.transform = `translateY(0px)`;
-      });
-      moveSlowElements.forEach((element) => {
-        element.style.transform = `translateY(0px)`;
-      });
+      if (moveFastElements.length > 0) {
+        moveFastElements.forEach((element) => {
+          element.style.transform = `translateY(0px)`;
+        });
+      }
+
+      if (moveSlowElements.length > 0) {
+        moveSlowElements.forEach((element) => {
+          element.style.transform = `translateY(0px)`;
+        });
+      }
     }
   });
 </script>
