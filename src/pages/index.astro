@@ -23,7 +23,6 @@ let headerEntry = await contentfulClient.getEntries<header>({
 });
 let header = headerEntry.items[0].fields.url;
 header = header.replace("watch?v=", "embed/");
-console.log(header);
 let posts = entries.items.map((item) => {
     const { slug, preview } = item.fields;
     return {
@@ -40,13 +39,13 @@ let posts = entries.items.map((item) => {
   </head>
   <body>
     <Header isIndex="opacity-0" />
-    <img src="https://framerusercontent.com/images/CjzRK9qJBzg7lpVfLBIE8nOT1pU.png" id="frame" class="top-0 left-0 w-screen h-screen z-0 fixed object-cover">
+    <img src="https://framerusercontent.com/images/CjzRK9qJBzg7lpVfLBIE8nOT1pU.png" id="frame" class="top-0 left-0 w-screen h-screen z-0 fixed object-cover" style="object-position:20%;">
     <div
       class="fadeOutScale w-screen h-screen mb-52 md:mb-0 flex sm:flex-row flex-col items-center justify-center sm:gap-[20%] scroll-snap-center"
     >
     <img src="/img/am_horizontal.png" class="top-16 left-1/2 w-60 -translate-x-1/2 absolute">
       <h1
-        class="sm:w-[300px] lg:text-8xl tex-center sm:text-left pointer-events-none z-10 relative"
+        class="sm:w-[300px] lg:text-8xl text-7xl tex-center sm:text-left pointer-events-none z-10 relative"
       >
         <span class="fadeup delay-1 ml-3">{t("home.more")}</span><br /><span
           class="fadeup delay-2 ml-10">{t("home.than")}</span
