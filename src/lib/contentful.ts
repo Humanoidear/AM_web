@@ -17,6 +17,22 @@ export interface work {
     }
   }
 
+  export interface extra {
+    contentTypeId: "extra",
+    fields: {
+      title: EntryFieldTypes.Text,
+      slug: EntryFieldTypes.Text,
+      date: EntryFieldTypes.Date,
+      year: EntryFieldTypes.Text,
+      type: EntryFieldTypes.Text,
+      color: EntryFieldTypes.Text,
+      services: EntryFieldTypes.Object,
+      preview: EntryFieldTypes.AssetLink,
+      description: EntryFieldTypes.Text,
+      content: EntryFieldTypes.RichText
+    }
+  }
+
 export interface header {
     contentTypeId: "header",
     fields: {
