@@ -10,6 +10,7 @@ export interface work {
       type: EntryFieldTypes.Text,
       services: EntryFieldTypes.Object,
       preview: EntryFieldTypes.AssetLink,
+      gif: EntryFieldTypes.AssetLink,
       heroImage: EntryFieldTypes.AssetLink,
       content: EntryFieldTypes.RichText
       blobColor: EntryFieldTypes.Text,

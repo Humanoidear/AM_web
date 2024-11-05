@@ -297,7 +297,7 @@ ul:hover li {
 li:hover .work-hover img {
   filter: brightness(1);
   transform: scale(1.05);
-  transition: 0.2s;
+  transition: 0.3s cubic-bezier(0, 0, 0, 1);
 }
 
 img {
