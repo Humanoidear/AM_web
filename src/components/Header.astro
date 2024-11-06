@@ -142,67 +142,99 @@ const { isIndex, isWork } = Astro.props;
       </button>
     </div>
   </nav>
+</header>
+
+<div
+  id="mobileMenu"
+  class="opacity w-screen h-screen inset-0 bg-black bg-opacity-90 z-50 hidden flex flex-col items-center justify-between fixed"
+>
   <div
-    id="mobileMenu"
-    class="w-screen h-screen inset-0 bg-black bg-opacity-90 z-50 hidden flex flex-col items-center justify-between fixed"
+    class="animate-slide top-0 left-0 w-[calc(100vw-67px)] m-8 mt-9 flex flex-col items-end justify-between gap-6 relative"
   >
-    <div
-      class="top-0 left-0 w-[calc(100vw-67px)] m-8 mt-9 flex flex-col items-end justify-between gap-6 relative"
+    <button id="closebtn" class="btn" style="transition: 0.3s cubic-bezier(0, 0, 0, 1);" onclick="toggleMobileMenu();">
+      <img
+        src="https://unpkg.com/pixelarticons@1.8.1/svg/close.svg"
+        alt="Close"
+        class="invert w-8 h-8 opacity-60 hover:opacity-100 transition-all"
+      />
+    </button>
+    <span
+      style="opacity:0; animation: fadeslide 0.3s 0ms cubic-bezier(0, 0, 0, 1) forwards;"
     >
-      <button class="btn" onclick="toggleMobileMenu();">
-        <img
-          src="https://unpkg.com/pixelarticons@1.8.1/svg/close.svg"
-          alt="Close"
-          class="invert w-8 h-8 opacity-60 hover:opacity-100 transition-all"
-        />
-      </button>
       <HeaderLink href={localizePath("/about")}>{t("header.about")}</HeaderLink>
+    </span>
+    <span
+      style="opacity:0; animation: fadeslide 0.3s 200ms cubic-bezier(0, 0, 0, 1) forwards;"
+    >
       <HeaderLink href={localizePath("/work")}>{t("header.work")}</HeaderLink>
+    </span>
+    <span
+      style="opacity:0; animation: fadeslide 0.3s 400ms cubic-bezier(0, 0, 0, 1) forwards;"
+    >
       <HeaderLink href={localizePath("/#contact")}
         >{t("header.contact")}</HeaderLink
       >
-      <LanguageDropdown isMobile />
-    </div>
-    <div
-      class="w-[calc(100vw-67px)] m-8 flex flex-row items-center justify-between gap-6 relative"
+    </span>
+    <span
+      style="opacity:0; animation: fadeslide 0.3s 600ms cubic-bezier(0, 0, 0, 1) forwards;"
     >
-      <a
-        href="https://x.com/alexmalvehy"
-        class="opacity-60 hover:opacity-100 transition-all"
-      >
-        <img src="/img/SVG_socials/twitter.svg" class="h-6 invert" />
-      </a>
-      <a
-        href="https://www.behance.net/alexmalvehy"
-        class="opacity-60 hover:opacity-100 transition-all"
-      >
-        <img src="/img/SVG_socials/behance.svg" class="h-6 invert" />
-      </a>
-      <a
-        href="https://www.youtube.com/c/Al3xitu"
-        class="opacity-60 hover:opacity-100 transition-all"
-      >
-        <img src="/img/SVG_socials/youtube.svg" class="h-6 invert" />
-      </a>
-      <a
-        href="https://www.instagram.com/alexmalvehy/"
-        class="opacity-60 hover:opacity-100 transition-all"
-      >
-        <img src="/img/SVG_socials/instagram.svg" class="h-6 invert" />
-      </a>
-      <a
-        href="https://www.linkedin.com/company/alexmalvehy/"
-        class="opacity-60 hover:opacity-100 transition-all"
-      >
-        <img src="/img/SVG_socials/linkedin.svg" class="h-6 invert" />
-      </a>
-    </div>
+      <LanguageDropdown isMobile />
+    </span>
   </div>
-</header>
+  <div
+    class="w-[calc(100vw-67px)] m-8 flex flex-row items-center justify-between gap-6 relative"
+  >
+    <a
+      href="https://x.com/alexmalvehy"
+      class="opacity-0 transition-all fade-in2"
+      style="animation-delay: 0s"
+    >
+      <img src="/img/SVG_socials/twitter.svg" class="h-6 invert" />
+    </a>
+    <a
+      href="https://www.behance.net/alexmalvehy"
+      class="opacity-0 transition-all fade-in2"
+      style="animation-delay: 0.1s"
+    >
+      <img src="/img/SVG_socials/behance.svg" class="h-6 invert" />
+    </a>
+    <a
+      href="https://www.youtube.com/c/Al3xitu"
+      class="opacity-0 transition-all fade-in2"
+      style="animation-delay: 0.2s"
+    >
+      <img src="/img/SVG_socials/youtube.svg" class="h-6 invert" />
+    </a>
+    <a
+      href="https://www.instagram.com/alexmalvehy/"
+      class="opacity-0 transition-all fade-in2"
+      style="animation-delay: 0.3s"
+    >
+      <img src="/img/SVG_socials/instagram.svg" class="h-6 invert" />
+    </a>
+    <a
+      href="https://www.linkedin.com/company/alexmalvehy/"
+      class="opacity-0 transition-all fade-in2"
+      style="animation-delay: 0.4s"
+    >
+      <img src="/img/SVG_socials/linkedin.svg" class="h-6 invert" />
+    </a>
+  </div>
+</div>
 
 <script is:inline>
   function toggleMobileMenu() {
-    mobileMenu.classList.toggle("hidden");
+    if (mobileMenu.classList.contains("hidden")) {
+      document.getElementById("closebtn").style.transform = "rotate(0deg)";
+      mobileMenu.classList.remove("fadeout")
+      mobileMenu.classList.toggle("hidden");
+    } else {
+      document.getElementById("closebtn").style.transform = "rotate(90deg)";
+      mobileMenu.classList.add("fadeout")
+      setTimeout(() => {
+        mobileMenu.classList.toggle("hidden");
+      }, 200)
+    }
   }
 
   function toggleDropdown() {
@@ -321,6 +353,70 @@ const { isIndex, isWork } = Astro.props;
   #dropdown.show a {
     opacity: 1;
     transform: translateY(0);
+  }
+  .animate-slide button {
+    animation: rotatefade 0.3s cubic-bezier(0, 0, 0, 1);
+    animation-delay: 0s;
+  }
+  @keyframes rotatefade {
+    0% {
+      opacity: 0;
+      transform: rotate(90deg);
+    }
+    100% {
+      opacity: 1;
+      transform: rotate(0deg);
+    }
+  }
+  @keyframes fadeslide {
+    0% {
+      opacity: 0;
+      transform: translate(20px, 0);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(0px, 0);
+    }
+  }
+  .opacity {
+    animation: fadein 0.3s cubic-bezier(0, 0, 0, 1);
+  }
+  @keyframes fadein {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  .fade-in2 {
+    animation: fadeIn2 0.5s cubic-bezier(0, 0, 0, 1) forwards;
+    transition: 0.2s;
+  }
+  .fade-in2:hover {
+    opacity: 1 !important;
+    transition: 0.2s;
+  }
+  @keyframes fadeIn2 {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 0.6;
+      transform: translateY(0);
+    }
+  }
+  .fadeout {
+    animation: fadeout 0.2 forwards;
+  }
+  @keyframes fadeout {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
   }
   .animatein {
     animation: auto linear animatein both;
