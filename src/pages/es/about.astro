@@ -21,6 +21,7 @@ let localizedTimeline = timeline[lang];
     <main class="w-screen flex flex-col items-center justify-center relative overflow-hidden">
       <iframe
         id="frame"
+        title="Conway's Game of Life Background"
         src="/html/frame_conway.html"
         class="opaquescroll top-0 left-0 w-full h-full z-0 transition-all fixed"
         transition:name="bg-iframe"></iframe>
@@ -32,8 +33,8 @@ let localizedTimeline = timeline[lang];
               style="animation-delay: 200ms;"
               onmousemove="handleMouseMove(event)"
             >
-              <img id="am_face" src="/img/am_face.png" class="w-52 h-52 z-10 relative" />
-              <img id="am_bg" src="/img/am_bg.png" class="top-0 w-52 h-52 z-0 absolute" />
+              <img id="am_face" alt="alex malvehy face" src="/img/am_face.png" class="w-52 h-52 z-10 relative" />
+              <img id="am_bg" alt="alex malvehy background" src="/img/am_bg.png" class="top-0 w-52 h-52 z-0 absolute" />
             </div>
             <div class="fadeup md:w-[calc(100%-13rem)] w-[95%] z-10 relative">
               <h1 class="md:-translate-x-16 md:translate-y-28 text-[MGNHumble] md:text-8xl text-6xl text-white md:text-right">
@@ -53,7 +54,7 @@ let localizedTimeline = timeline[lang];
               <div class="w-[5px] h-full bg-white mx-3 relative"></div>
               <div class="w-[280px] sm:w-[350px] md:w-[400px] flex flex-col items-start">
                 <div class="w-10 h-10 mb-2 invert relative" set:html={item.icon}></div>
-                <h3 class="mb-0 text-xl font-bold">{ item.title }</h3>
+                <h2 class="mb-0 text-xl font-bold">{ item.title }</h2>
                 <p class="mb-3 text-white/60">{ item.subtitle }</p>
                 <p class="text-white">{ item.content }</p>
               </div>

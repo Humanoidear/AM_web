@@ -4,7 +4,7 @@ const { icon, text, href, externalhref, white, nohide } = Astro.props;
 ---
 
 <a href={href ? localizePath(href) : externalhref} class={`pixel-corners px-3 py-1 hover:text-black bg-transparent hover:bg-white text-lg font-medium font-[InstrumentSans] flex-row items-center inline-flex transition-bezier ${white ? 'bg-white text-black' : 'text-white'}`}>
-  {icon && <img id="icon" class={`${white ? 'invert-0' : 'invert'}`} src={icon} />}
+  {icon && <img id="icon" alt="Button Icon" class={`${white ? 'invert-0' : 'invert'}`} src={icon} />}
   {text}
   <img
     id={`${nohide ? "follow-button-link-perma" : "follow-button-link"}`}

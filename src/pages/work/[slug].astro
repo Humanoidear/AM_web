@@ -107,7 +107,7 @@ function parseFloatTags(html) {
             : "style=\"aspect-ratio: 16/10;\"";
         let content = match[2];
         content = content.replace(/<\/?p>/g, ""); // Remove surrounding <p> tags
-        floatHTML = floatHTML.replace(match[0], `<iframe class="w-full" ${style} src="${content}"></iframe>`);
+        floatHTML = floatHTML.replace(match[0], `<iframe class="w-full" title="Embed Content" ${style} src="${content}"></iframe>`);
     }
     return floatHTML;
 }
@@ -162,6 +162,7 @@ bodyHTML = parseCenterTags(bodyHTML); // Ensure parseCenterTags is called on the
               <img
                 class="hidden sm:block w-[900px] opacity-60 z-0"
                 style={`filter: drop-shadow(0px 1000px 0 ${blobColor}); transform: translateY(-1350px) translateX(-300px);`}
+                alt=""
                 src="/img/blobl.webp"
                 transition:name={`work-title-${title}-blob`}
               />

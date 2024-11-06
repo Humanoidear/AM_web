@@ -31,8 +31,8 @@ const currentRoute = removeLangFromRoute(Astro.url.pathname);
     onclick="toggleLangDropdown()"
     class="btn-lang w-8 h-8 inline-block relative"
   >
-    <img src={`/img/emoji/${i18next.language}.png`} class="color w-8" />
-    <img src={`/img/emoji/${i18next.language}_white.png`} class="white top-1 absolute" style="filter:brightness(1000000000);" />
+    <img src={`/img/emoji/${i18next.language}.png`} alt={`${i18next.language} Flag deselected`} class="color w-8" />
+    <img src={`/img/emoji/${i18next.language}_white.png`} alt={`${i18next.language} Flag selected`} class="white top-1 absolute" style="filter:brightness(1000000000);" />
   </button>
 )}
 
@@ -47,9 +47,9 @@ const currentRoute = removeLangFromRoute(Astro.url.pathname);
             class="btn-lang text-white flex flex-row items-center justify-end gap-3"
           >
             { !isMobile && <p>{getLangName(lang)}</p> }
-            <img src={`/img/emoji/${lang}.png`} class={`${lang !== i18next.language ? 'color' : ''} w-7`} />
+            <img src={`/img/emoji/${lang}.png`} alt={`${lang} Flag deselected`} class={`${lang !== i18next.language ? 'color' : ''} w-7`} />
             {lang !== i18next.language && (
-              <img src={`/img/emoji/${lang}_white.png`} class="white w-7 absolute" style="filter:brightness(1000000000);" />
+              <img src={`/img/emoji/${lang}_white.png`} alt={`${lang} Flag selected`} class="white w-7 absolute" style="filter:brightness(1000000000);" />
             )}
           </a>
         </li>
