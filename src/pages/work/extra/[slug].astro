@@ -92,7 +92,7 @@ if (parsedSEOContent.length > 60) {
       <div id="scrollingText" class="w-full max-w-[1800px] pointer-events-none">
         <div class="flex items-center justify-center z-0">
           <div
-            class="ml-20 mr-32 top-6 w-[600px] max-w-screen flex flex-col items-start justify-between gap-5 relative"
+            class="mx-6 sm:ml-20 sm:mr-32 top-6 w-screen sm:w-[600px] max-w-screen flex flex-col items-start justify-between gap-5 relative"
           >
             <div
               class="mb-6 top-2 left-2 pixel-corners text-white px-3 rounded z-10 absolute"
@@ -146,7 +146,7 @@ if (parsedSEOContent.length > 60) {
         {
           Array.isArray(content) &&
             content.map((item) => (
-              <div class="w-[700px] max-w-screen p-2 relative">
+              <div class="w-screen sm:w-[700px] max-w-screen p-2 relative">
                 <img
                   src={item.fields.file.url}
                   alt=""
@@ -445,6 +445,11 @@ if (parsedSEOContent.length > 60) {
     .float-container {
       display: flex;
       flex-direction: column !important;
+    }
+
+    .no-scrollbar {
+      overflow-x: scroll !important;
+      overflow-y: hidden !important;
     }
   }
 
