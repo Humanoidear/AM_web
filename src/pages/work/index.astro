@@ -103,7 +103,7 @@ const combinedPosts = [...posts, ...extraPosts];
                       class={`w-full h-full object-cover ${post.gif ? "img" : ""}`}
                       transition:name={`work-title-${post.title}-image`}
                     />
-                    {"gif" in post && (
+                    {post.gif && (
                       <img
                         src={(post.gif as any)?.fields?.file?.url}
                         alt=""
