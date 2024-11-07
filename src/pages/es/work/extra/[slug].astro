@@ -79,7 +79,7 @@ if (parsedSEOContent.length > 60) {
       onmouseleave="unfollower()"
       class="h-screen m-0 p-0 flex flex-row items-center overflow-scroll snap-x snap-mandatory no-scrollbar"
     >
-    <div class="w-screen overflow-x-hidden overflow-y-visible pointer-events-none absolute">
+    <div class="w-screen pointer-events-none absolute">
       <img
         id="scrollingImage"
         class="w-[1000px] max-w-[1000px] opacity-60 z-0 transition-none"
@@ -96,6 +96,7 @@ if (parsedSEOContent.length > 60) {
           >
             <div
               class="mb-6 top-2 left-2 pixel-corners text-white px-3 rounded z-10 absolute"
+              transition:name={`work-${title}-extra`}
             >
               Extra
             </div>
@@ -143,14 +144,15 @@ if (parsedSEOContent.length > 60) {
         </div>
       </div>
       <div class="mr-20 flex flex-row gap-20 pointer-events-none">
-        {
+                {
           Array.isArray(content) &&
-            content.map((item) => (
+            content.map((item, index) => (
               <div class="w-screen sm:w-[700px] max-w-screen p-2 relative">
                 <img
                   src={item.fields.file.url}
                   alt=""
                   class="w-full object-cover"
+                  transition:name={index === 0 ? `work-title-${title}-image` : undefined}
                 />
                 <p class="font-bold" style="margin-bottom:8px !important;">
                   {item.fields.title}

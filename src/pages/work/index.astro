@@ -114,11 +114,6 @@ const combinedPosts = [...posts, ...extraPosts];
                   </>
                 )}
               </div>
-              {"color" in post && (
-                <div class="top-2 left-2 pixel-corners text-white px-3 rounded z-10 absolute masked-div" style={`color: ${post.color}; --mask-color: ${post.color};`}>
-                  Extra
-                </div>
-              )}
               <div style="opacity:0.7; overflow:hidden;">
                 <img
                   src="/img/blob-1.webp"
@@ -148,12 +143,21 @@ const combinedPosts = [...posts, ...extraPosts];
                   >
                     {post.type}
                   </p>
-                  <p
-                    class={`m-0 text-white text-right text-lg opacity-60`}
-                    transition:name={`work-title-${post.title}-year`}
-                  >
-                    {post.year}
-                  </p>
+                  { "color" in post ? (
+                    <div
+                      class="mt-1 pixel-corners text-white px-3 rounded z-10 masked-div relative"
+                      transition:name={`work-${post.title}-extra`}
+                    >
+                      Extra
+                    </div>
+                  ) : (
+                    <p
+                      class={`m-0 text-white text-right text-lg opacity-60`}
+                      transition:name={`work-title-${post.title}-year`}
+                    >
+                      {post.year}
+                    </p>
+                  )}
                 </div>
               </div>
             </a>
