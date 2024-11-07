@@ -2,7 +2,7 @@
 import { contentfulClient } from "../../../../lib/contentful";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer";
-import type { work } from "../../../../lib/contentful";
+import type { extra } from "../../../../lib/contentful";
 import BaseHead from "../../../../components/BaseHead.astro";
 import Header from "../../../../components/Header.astro";
 import Footer from "../../../../components/Footer.astro";
@@ -11,7 +11,7 @@ import i18next, { t, changeLanguage } from "i18next";
 changeLanguage("es");
 
 export async function getStaticPaths() {
-    const { items } = await contentfulClient.getEntries({
+    const { items } = await contentfulClient.getEntries<extra>({
         content_type: "extra",
     });
     const pages = items.map((item) => ({
@@ -161,7 +161,7 @@ if (parsedSEOContent.length > 60) {
         }
       </div>
     </main>
-    <div class="bottom-20 right-10 flex flex-row items-center opacity-30 hover:opacity-100 absolute transition-all">
+    <div class="hidden bottom-20 right-10 sm:flex flex-row items-center opacity-30 hover:opacity-100 absolute transition-all">
       <button class="hover:border-2 border-black p-2 hover:bg-white/20 active:scale-95 w-12 invert transition-all" onclick="scrollImp(-400);"><svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> <path d="M20 11v2H8v2H6v-2H4v-2h2V9h2v2h12zM10 7H8v2h2V7zm0 0h2V5h-2v2zm0 10H8v-2h2v2zm0 0h2v2h-2v-2z" fill="currentColor"/> </svg></button>
       <button class="hover:border-2 border-black p-2 hover:bg-white/20 active:scale-95 w-12 invert transition-all" onclick="scrollImp(400);"><svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> <path d="M4 11v2h12v2h2v-2h2v-2h-2V9h-2v2H4zm10-4h2v2h-2V7zm0 0h-2V5h2v2zm0 10h2v-2h-2v2zm0 0h-2v2h2v-2z" fill="currentColor"/> </svg></button>
     </div>
