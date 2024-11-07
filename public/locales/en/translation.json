@@ -1,39 +1,39 @@
 {
-    "site": {
-      "title": "alex malvehy",
-      "description": "A student and self-taught graphic and motion designer from Barcelona who specializes in branding, visual identity, and graphics for television and streaming, continually learning and evolving."
-    },
-    "home": {
-      "more": "more",
-      "than": "than",
-      "a_logo": "a logo"
-    },
-    "about": {
-        "catch": "I'm Alex Malvehy, a student and self-taught graphic and motion designer based in Barcelona. I specialize in branding, visual identity, and graphics for television and streaming, continually learning and evolving."
-    },
-    "work": {
-        "catch": "As a freelance designer, I've developed a diverse portfolio focused on delivering clear, impactful design and motion graphics across various sectors and clients, as well as personal projects and some little experiments.",
-        "button": "view all work"
-    },
-    "contact": {
-        "catch": "Do you have a project, idea, or just want to get some info? In either case, don't hesitate to reach out to me, and we'll figure things out."
-    },
-    "slug": {
-        "client": "Client",
-        "services": "Services",
-        "year": "Year"
-    },
-    "header": {
-        "about": "about",
-        "work": "work",
-        "contact": "contact"
-    },
-    "error": {
-        "404": "page not found"
-    },
-    "button": {
-        "more": "read more",
-        "home": "back to home",
-        "view_work": "view all work"
-    }
+  "site": {
+    "title": "alex malvehy",
+    "description": "A student and self-taught graphic and motion designer from Barcelona who specializes in branding, visual identity, and graphics for television and streaming, continually learning and evolving."
+  },
+  "home": {
+    "more": "more",
+    "than": "than",
+    "a_logo": "a logo"
+  },
+  "about": {
+    "catch": "I'm Alex Malvehy, a student and self-taught graphic and motion designer based in Barcelona. I specialize in branding, visual identity, and graphics for television and streaming, continually learning and evolving."
+  },
+  "work": {
+    "catch": "As a freelance designer, I've developed a diverse portfolio focused on delivering clear, impactful design and motion graphics across various sectors and clients, as well as personal projects and some little experiments.",
+    "button": "view all work"
+  },
+  "contact": {
+    "catch": "Do you have a project, idea, or just want to get some info? In either case, don't hesitate to reach out to me, and we'll figure things out."
+  },
+  "slug": {
+    "client": "Client",
+    "services": "Services",
+    "year": "Year"
+  },
+  "header": {
+    "about": "about",
+    "work": "work",
+    "contact": "contact"
+  },
+  "error": {
+    "404": "page not found"
+  },
+  "button": {
+    "more": "read more",
+    "home": "back to home",
+    "view_work": "view all work"
   }
+}

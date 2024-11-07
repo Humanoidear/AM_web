@@ -1,44 +1,44 @@
 import contentful, { type Entry, type EntryFieldTypes } from "contentful";
 
 export interface work {
-    contentTypeId: "work",
-    fields: {
-      title: EntryFieldTypes.Text,
-      slug: EntryFieldTypes.Text,
-      date: EntryFieldTypes.Date,
-      year: EntryFieldTypes.Text,
-      type: EntryFieldTypes.Text,
-      services: EntryFieldTypes.Object,
-      preview: EntryFieldTypes.AssetLink,
-      gif: EntryFieldTypes.AssetLink,
-      heroImage: EntryFieldTypes.AssetLink,
-      content: EntryFieldTypes.RichText
-      blobColor: EntryFieldTypes.Text,
-    }
-  }
+  contentTypeId: "work";
+  fields: {
+    title: EntryFieldTypes.Text;
+    slug: EntryFieldTypes.Text;
+    date: EntryFieldTypes.Date;
+    year: EntryFieldTypes.Text;
+    type: EntryFieldTypes.Text;
+    services: EntryFieldTypes.Object;
+    preview: EntryFieldTypes.AssetLink;
+    gif: EntryFieldTypes.AssetLink;
+    heroImage: EntryFieldTypes.AssetLink;
+    content: EntryFieldTypes.RichText;
+    blobColor: EntryFieldTypes.Text;
+  };
+}
 
-  export interface extra {
-    contentTypeId: "extra",
-    fields: {
-      title: EntryFieldTypes.Text,
-      slug: EntryFieldTypes.Text,
-      date: EntryFieldTypes.Date,
-      year: EntryFieldTypes.Text,
-      type: EntryFieldTypes.Text,
-      color: EntryFieldTypes.Text,
-      services: EntryFieldTypes.Object,
-      preview: EntryFieldTypes.AssetLink,
-      description: EntryFieldTypes.Text,
-      content: EntryFieldTypes.RichText
-    }
-  }
+export interface extra {
+  contentTypeId: "extra";
+  fields: {
+    title: EntryFieldTypes.Text;
+    slug: EntryFieldTypes.Text;
+    date: EntryFieldTypes.Date;
+    year: EntryFieldTypes.Text;
+    type: EntryFieldTypes.Text;
+    color: EntryFieldTypes.Text;
+    services: EntryFieldTypes.Object;
+    preview: EntryFieldTypes.AssetLink;
+    description: EntryFieldTypes.Text;
+    content: EntryFieldTypes.RichText;
+  };
+}
 
 export interface header {
-    contentTypeId: "header",
-    fields: {
-      url: EntryFieldTypes.Text,
-    }
-  }
+  contentTypeId: "header";
+  fields: {
+    url: EntryFieldTypes.Text;
+  };
+}
 
 export const contentfulClient = contentful.createClient({
   space: import.meta.env.CONTENTFUL_SPACE_ID,

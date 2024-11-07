@@ -5,16 +5,33 @@ import Button from "../components/Button.astro";
 const { blob } = Astro.props;
 ---
 
-<div class="w-[90%] sm:w-auto max-w-[750px] flex md:flex-row flex-col-reverse md:items-center gap-3">
-  <img src="/img/blob-1.webp" alt="" class={`${blob ? "visible" : "hidden"} sm:w-1/3 -translate-x-32 rotate-180 absolute`}>
+<div
+  class="w-[90%] sm:w-auto max-w-[750px] flex md:flex-row flex-col-reverse md:items-center gap-3"
+>
+  <img
+    src="/img/blob-1.webp"
+    alt=""
+    class={`${blob ? "visible" : "hidden"} sm:w-1/3 -translate-x-32 rotate-180 absolute`}
+  />
   <div class="fadeup md:w-[calc(100%-13rem)] w-[95%] z-10 relative">
-    <h1 class="md:translate-x-6 text-[MGNHumble] md:text-7xl text-6xl text-white md:text-right">
+    <h1
+      class="md:translate-x-6 text-[MGNHumble] md:text-7xl text-6xl text-white md:text-right"
+    >
       {t("header.about")}
     </h1>
-       <p class="md:text-right flex flex-col items-begin justify-end relative leading-7 font-medium">
+    <p
+      class="md:text-right flex flex-col items-begin justify-end relative leading-7 font-medium"
+    >
       {t("about.catch")}
-      <span class={`${blob} ? "visible" : "hidden"} mt-3 inline-block relative`}>
-        <Button text={t("button.more")} href="/about" class="font-medium" nohide />
+      <span
+        class={`${blob} ? "visible" : "hidden"} mt-3 inline-block relative`}
+      >
+        <Button
+          text={t("button.more")}
+          href="/about"
+          class="font-medium"
+          nohide
+        />
       </span>
     </p>
   </div>
@@ -23,6 +40,10 @@ const { blob } = Astro.props;
     class="fadeup opacity-0 inline-block relative"
     style="animation-delay: 200ms;"
   >
-    <img alt="alex malvehy face" src="/img/am_face.webp" class="translate-y-3 sm:translate-x-0 w-56 h-56 z-10 relative" />
+    <img
+      alt="alex malvehy face"
+      src="/img/am_face.webp"
+      class="translate-y-3 sm:translate-x-0 w-56 h-56 z-10 relative"
+    />
   </div>
 </div>

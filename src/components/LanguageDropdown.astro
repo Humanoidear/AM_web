@@ -26,30 +26,56 @@ function removeLangFromRoute(route) {
 const currentRoute = removeLangFromRoute(Astro.url.pathname);
 ---
 
-{!isMobile && (
-  <button
-    onclick="toggleLangDropdown()"
-    class="btn-lang w-8 h-8 inline-block relative"
-  >
-    <img src={`/img/emoji/${i18next.language}.png`} alt={`${i18next.language} Flag deselected`} class="color w-8" />
-    <img src={`/img/emoji/${i18next.language}_white.png`} alt={`${i18next.language} Flag selected`} class="white top-1 absolute" style="filter:brightness(1000000000);" />
-  </button>
-)}
+{
+  !isMobile && (
+    <button
+      onclick="toggleLangDropdown()"
+      class="btn-lang w-8 h-8 inline-block relative"
+    >
+      <img
+        src={`/img/emoji/${i18next.language}.png`}
+        alt={`${i18next.language} Flag deselected`}
+        class="color w-8"
+      />
+      <img
+        src={`/img/emoji/${i18next.language}_white.png`}
+        alt={`${i18next.language} Flag selected`}
+        class="white top-1 absolute"
+        style="filter:brightness(1000000000);"
+      />
+    </button>
+  )
+}
 
-<ul id="langDropdown" class={`z-50 ${isMobile ? 'left-2 flex flex-row gap-6 relative' : 'right-24 top-20 hidden absolute'}`}>
+<ul
+  id="langDropdown"
+  class={`z-50 ${isMobile ? "left-2 flex flex-row gap-6 relative" : "right-24 top-20 hidden absolute"}`}
+>
   {
     i18next.languages
       .filter((lang) => isMobile || lang !== i18next.language)
       .map((lang) => (
-        <li class="mr-2 mb-3 transition-all" style="opacity:1; transform:translateY(0);">
+        <li
+          class="mr-2 mb-3 transition-all"
+          style="opacity:1; transform:translateY(0);"
+        >
           <a
             href={`${lang === "en" ? "" : "/" + lang}${currentRoute}`}
             class="btn-lang text-white flex flex-row items-center justify-end gap-3"
           >
-            { !isMobile && <p>{getLangName(lang)}</p> }
-            <img src={`/img/emoji/${lang}.png`} alt={`${lang} Flag deselected`} class={`${lang !== i18next.language ? 'color' : ''} w-7`} />
+            {!isMobile && <p>{getLangName(lang)}</p>}
+            <img
+              src={`/img/emoji/${lang}.png`}
+              alt={`${lang} Flag deselected`}
+              class={`${lang !== i18next.language ? "color" : ""} w-7`}
+            />
             {lang !== i18next.language && (
-              <img src={`/img/emoji/${lang}_white.png`} alt={`${lang} Flag selected`} class="white w-7 absolute" style="filter:brightness(1000000000);" />
+              <img
+                src={`/img/emoji/${lang}_white.png`}
+                alt={`${lang} Flag selected`}
+                class="white w-7 absolute"
+                style="filter:brightness(1000000000);"
+              />
             )}
           </a>
         </li>
@@ -125,7 +151,8 @@ const currentRoute = removeLangFromRoute(Astro.url.pathname);
     transition: 0.2s;
   }
 
-  .btn-lang:active .white, .btn-lang:active .color {
+  .btn-lang:active .white,
+  .btn-lang:active .color {
     transform: scale(0.95);
     transition: 0.2s;
   }

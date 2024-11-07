@@ -131,7 +131,12 @@ const { isIndex, isWork } = Astro.props;
   <div
     class="animate-slide top-0 left-0 w-[calc(100vw-67px)] m-8 mt-9 flex flex-col items-end justify-between gap-6 relative"
   >
-    <button id="closebtn" class="btn" style="transition: 0.3s cubic-bezier(0, 0, 0, 1);" onclick="toggleMobileMenu();">
+    <button
+      id="closebtn"
+      class="btn"
+      style="transition: 0.3s cubic-bezier(0, 0, 0, 1);"
+      onclick="toggleMobileMenu();"
+    >
       <img
         src="https://unpkg.com/pixelarticons@1.8.1/svg/close.svg"
         alt="Close"
@@ -169,35 +174,55 @@ const { isIndex, isWork } = Astro.props;
       class="opacity-0 transition-all fade-in2"
       style="animation-delay: 0s"
     >
-      <img src="/img/SVG_socials/twitter.svg" alt="Twitter logo" class="h-6 invert" />
+      <img
+        src="/img/SVG_socials/twitter.svg"
+        alt="Twitter logo"
+        class="h-6 invert"
+      />
     </a>
     <a
       href="https://www.behance.net/alexmalvehy"
       class="opacity-0 transition-all fade-in2"
       style="animation-delay: 0.1s"
     >
-      <img src="/img/SVG_socials/behance.svg" alt="Behance logo" class="h-6 invert" />
+      <img
+        src="/img/SVG_socials/behance.svg"
+        alt="Behance logo"
+        class="h-6 invert"
+      />
     </a>
     <a
       href="https://www.youtube.com/c/Al3xitu"
       class="opacity-0 transition-all fade-in2"
       style="animation-delay: 0.2s"
     >
-      <img src="/img/SVG_socials/youtube.svg" alt="YouTube logo" class="h-6 invert" />
+      <img
+        src="/img/SVG_socials/youtube.svg"
+        alt="YouTube logo"
+        class="h-6 invert"
+      />
     </a>
     <a
       href="https://www.instagram.com/alexmalvehy/"
       class="opacity-0 transition-all fade-in2"
       style="animation-delay: 0.3s"
     >
-      <img src="/img/SVG_socials/instagram.svg" alt="Instagram logo" class="h-6 invert" />
+      <img
+        src="/img/SVG_socials/instagram.svg"
+        alt="Instagram logo"
+        class="h-6 invert"
+      />
     </a>
     <a
       href="https://www.linkedin.com/company/alexmalvehy/"
       class="opacity-0 transition-all fade-in2"
       style="animation-delay: 0.4s"
     >
-      <img src="/img/SVG_socials/linkedin.svg" alt="LinkedIn logo" class="h-6 invert" />
+      <img
+        src="/img/SVG_socials/linkedin.svg"
+        alt="LinkedIn logo"
+        class="h-6 invert"
+      />
     </a>
   </div>
 </div>
@@ -206,14 +231,14 @@ const { isIndex, isWork } = Astro.props;
   function toggleMobileMenu() {
     if (mobileMenu.classList.contains("hidden")) {
       document.getElementById("closebtn").style.transform = "rotate(0deg)";
-      mobileMenu.classList.remove("fadeout")
+      mobileMenu.classList.remove("fadeout");
       mobileMenu.classList.toggle("hidden");
     } else {
       document.getElementById("closebtn").style.transform = "rotate(90deg)";
-      mobileMenu.classList.add("fadeout")
+      mobileMenu.classList.add("fadeout");
       setTimeout(() => {
         mobileMenu.classList.toggle("hidden");
-      }, 200)
+      }, 200);
     }
   }
 

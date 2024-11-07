@@ -39,11 +39,21 @@ let posts = entries.items.map((item) => {
   </head>
   <body>
     <Header isIndex="opacity-0" />
-    <img src="https://framerusercontent.com/images/CjzRK9qJBzg7lpVfLBIE8nOT1pU.png" alt="alex malvehy logo" id="frame" class="top-0 left-0 w-screen h-screen z-0 fixed object-cover" style="object-position:20%;">
+    <img
+      src="https://framerusercontent.com/images/CjzRK9qJBzg7lpVfLBIE8nOT1pU.png"
+      alt="alex malvehy logo"
+      id="frame"
+      class="top-0 left-0 w-screen h-screen z-0 fixed object-cover"
+      style="object-position:20%;"
+    />
     <div
       class="fadeOutScale w-screen h-screen mb-52 md:mb-0 flex sm:flex-row flex-col items-center justify-center sm:gap-[20%] scroll-snap-center"
     >
-    <img src="/img/am_horizontal.png" alt="alex malvehy logo" class="top-16 left-1/2 w-60 -translate-x-1/2 absolute">
+      <img
+        src="/img/am_horizontal.png"
+        alt="alex malvehy logo"
+        class="top-16 left-1/2 w-60 -translate-x-1/2 absolute"
+      />
       <h1
         class="sm:w-[300px] lg:text-8xl text-7xl tex-center sm:text-left pointer-events-none z-10 relative"
       >
@@ -56,12 +66,29 @@ let posts = entries.items.map((item) => {
         >
       </h1>
       <div class="lg:block hidden">
-      <iframe title="Youtube Video" class="xl:w-[610px] xl:h-[350px] w-[440px] h-[250px] pointer-events-none z-1 relative" allow="presentation; fullscreen; accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" src={`${header}?iv_load_policy=3&amp;rel=0&amp;modestbranding=1&amp;playsinline=1&amp;autoplay=1&amp;mute=1&amp;loop=1&amp;color=white`} frameborder="0"></iframe>
-        <span class="-translate-x-6 -translate-y-5 flex flex-row items-end justify-end gap-3">
-          <Button text="cv" externalhref="/pdf/cv.pdf" icon="https://framerusercontent.com/images/yBK8WGkZxlCuwBXsL4tGoX0TDr4.svg" white />
-          <Button text="Portfolio (pdf)" externalhref="/pdf/portfolio.pdf" icon="https://framerusercontent.com/images/xKobCNxK5DGcLCya2LaxhCSpPsA.svg" white />
+        <iframe
+          title="Youtube Video"
+          class="xl:w-[610px] xl:h-[350px] w-[440px] h-[250px] pointer-events-none z-1 relative"
+          allow="presentation; fullscreen; accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          src={`${header}?iv_load_policy=3&amp;rel=0&amp;modestbranding=1&amp;playsinline=1&amp;autoplay=1&amp;mute=1&amp;loop=1&amp;color=white`}
+          frameborder="0"></iframe>
+        <span
+          class="-translate-x-6 -translate-y-5 flex flex-row items-end justify-end gap-3"
+        >
+          <Button
+            text="cv"
+            externalhref="/pdf/cv.pdf"
+            icon="https://framerusercontent.com/images/yBK8WGkZxlCuwBXsL4tGoX0TDr4.svg"
+            white
+          />
+          <Button
+            text="Portfolio (pdf)"
+            externalhref="/pdf/portfolio.pdf"
+            icon="https://framerusercontent.com/images/xKobCNxK5DGcLCya2LaxhCSpPsA.svg"
+            white
+          />
         </span>
-    </div>
+      </div>
       <a
         href="#about"
         class="w-full bottom-6 flex flex-col items-center absolute"
@@ -77,7 +104,7 @@ let posts = entries.items.map((item) => {
       id="about"
       class="fadeInScale flex flex-col items-center justify-center md:w-screen md:h-screen mb-52 md:mb-0 scroll-snap-center relative"
     >
-      <About blob=true/>
+      <About blob="true/" />
       <div
         class="w-[95%] max-w-[700px] mt-3 flex flex-row items-end justify-end relative"
       >
@@ -91,42 +118,50 @@ let posts = entries.items.map((item) => {
     <div
       class="fadeInScale w-full flex flex-col items-center justify-center md:w-screen md:h-screen relative scroll-snap-center"
     >
-      <Contact blob=true/>
+      <Contact blob="true/" />
     </div>
     <Footer />
     <div id="contact"></div>
-        <script data-astro-rerun define:vars={{ posts, lang, localizedCatchphrases }}>
-      document.addEventListener('astro:before-preparation', event => {
+    <script
+      data-astro-rerun
+      define:vars={{ posts, lang, localizedCatchphrases }}
+    >
+      document.addEventListener("astro:before-preparation", (event) => {
         clearInterval(taglineInterval);
       });
-    
+
       let currentIndex = 1;
       console.log("Catchphrases " + localizedCatchphrases);
-    
+
       function updateTagline() {
         const catchphrase = document.getElementById("catchphrase");
         const currentCatchphrase = localizedCatchphrases[currentIndex];
-    
+
         const words = currentCatchphrase.split(" ");
         const animatedWords = words.map(
-          (word) => `<span class="word" style="position:relative;">${word}</span>`
+          (word) =>
+            `<span class="word" style="position:relative;">${word}</span>`
         );
         catchphrase.innerHTML = animatedWords.join(" ");
-    
+
         const spans = catchphrase.querySelectorAll(".word");
         spans.forEach((span, index) => {
           span.style.opacity = 0;
           span.style.top = "20px";
-          setTimeout(() => {
-            span.style.transition = "top 0.2s cubic-bezier(0,0,0,1), opacity 0.2s cubic-bezier(0,0,0,1)";
-            span.style.top = "0px";
-            span.style.opacity = 1;
-          }, 100 + index * 100);
+          setTimeout(
+            () => {
+              span.style.transition =
+                "top 0.2s cubic-bezier(0,0,0,1), opacity 0.2s cubic-bezier(0,0,0,1)";
+              span.style.top = "0px";
+              span.style.opacity = 1;
+            },
+            100 + index * 100
+          );
         });
-    
+
         currentIndex = (currentIndex + 1) % localizedCatchphrases.length;
       }
-    
+
       taglineInterval = setInterval(updateTagline, 3000);
 
       // Make id="frame" opaque when scrolling
@@ -134,7 +169,7 @@ let posts = entries.items.map((item) => {
         const frame = document.getElementById("frame");
         const scroll = window.scrollY;
         const maxScroll = 1000;
-        const opacity = 1 - (scroll / maxScroll);
+        const opacity = 1 - scroll / maxScroll;
         frame.style.opacity = opacity < 0 ? 0 : opacity;
       });
     </script>
