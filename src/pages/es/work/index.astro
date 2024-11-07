@@ -65,7 +65,7 @@ const combinedPosts = [...posts, ...extraPosts];
       class="w-[1300px] max-w-[1300px] sm:max-w-full left-1/2 sm:left-0 -translate-x-1/2 sm:translate-x-0 sm:w-auto translate-y-[0px] sm:-translate-y-[100px] absolute"
     />
   </div>
-    <main class="pt-40 flex flex-col items-center justify-center relative">
+    <main class="pt-40 flex flex-col items-center justify-center overflow-hidden relative">
       <div
         class="mb-6 max-w-[1400px] w-[95%] flex flex-row items-center justify-between gap-20 z-1 relative"
       >
@@ -100,7 +100,7 @@ const combinedPosts = [...posts, ...extraPosts];
                     <img
                       src={(post.preview as any)?.fields?.file?.url}
                       alt=""
-                      class={`w-full h-full object-cover ${'gif' in post ? "img" : ""}`}
+                      class={`w-full h-full object-cover ${post.gif ? "img" : ""}`}
                       transition:name={`work-title-${post.title}-image`}
                     />
                     {"gif" in post && (
