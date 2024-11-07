@@ -175,6 +175,7 @@ if (parsedSEOContent.length > 60) {
 <script is:inline>
   function follower() {
     if (window.innerWidth < 768) return;
+    document.body.style.userSelect = "none";
     document.body.style.cursor = "none";
     document.getElementById("follower").style.animation = "expandFollower 0.2s cubic-bezier(0, 0, 0, 1) forwards";
     document.getElementById("follower").style.display = "block";
@@ -187,6 +188,7 @@ if (parsedSEOContent.length > 60) {
     };
   }
   function unfollower() {
+    document.body.style.userSelect = "auto";
     document.getElementById("follower").style.animation = "shrinkFollower 0.2s cubic-bezier(0, 0, 0, 1) forwards";
     setTimeout(() => {
       document.body.style.cursor = "auto";
