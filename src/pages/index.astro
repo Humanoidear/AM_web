@@ -89,12 +89,12 @@ let posts = entries.items.map((item) => {
       <Work />
     </div>
     <div
-      id="contact"
       class="fadeInScale w-full flex flex-col items-center justify-center md:w-screen md:h-screen relative scroll-snap-center"
     >
       <Contact blob=true/>
     </div>
     <Footer />
+    <div id="contact"></div>
         <script data-astro-rerun define:vars={{ posts, lang, localizedCatchphrases }}>
       document.addEventListener('astro:before-preparation', event => {
         clearInterval(taglineInterval);

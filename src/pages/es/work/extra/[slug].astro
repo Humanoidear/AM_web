@@ -1,35 +1,35 @@
 ---
-import { contentfulClient } from "../../lib/contentful";
+import { contentfulClient } from "../../../../lib/contentful";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer";
-import type { work } from "../../lib/contentful";
-import BaseHead from "../../components/BaseHead.astro";
-import Header from "../../components/Header.astro";
-import Footer from "../../components/Footer.astro";
+import type { work } from "../../../../lib/contentful";
+import BaseHead from "../../../../components/BaseHead.astro";
+import Header from "../../../../components/Header.astro";
+import Footer from "../../../../components/Footer.astro";
 import i18next, { t, changeLanguage } from "i18next";
 
-changeLanguage("en");
+changeLanguage("es");
 
 export async function getStaticPaths() {
-    const { items } = await contentfulClient.getEntries<work>({
-        content_type: "work",
+    const { items } = await contentfulClient.getEntries({
+        content_type: "extra",
     });
     const pages = items.map((item) => ({
         params: { slug: item.fields.slug },
         props: {
             title: item.fields.title,
+            description: item.fields.description,
             content: item.fields.content,
             year: item.fields.year,
             type: item.fields.type,
             services: item.fields.services,
             preview: item.fields.preview,
-            heroImage: item.fields.heroImage,
-            blobColor: item.fields.blobColor,
+            blobColor: item.fields.color,
         },
     }));
     return pages;
 }
-const { content, title, year, type, services, heroImage, blobColor } = Astro.props;
+const { content, title, description, year, type, services, blobColor, preview, } = Astro.props;
 let options = {
     renderNode: {
         "embedded-asset-block": (node: any) => {
@@ -57,152 +57,111 @@ let options = {
         },
     },
 };
-let parsedSEOContent = documentToPlainTextString(content);
+let parsedSEOContent = documentToPlainTextString(content as any);
 if (parsedSEOContent.length > 60) {
     parsedSEOContent = parsedSEOContent.slice(0, 160) + "...";
 }
-let bodyHTML = content ? documentToHtmlString(content, options) : "";
-function parseLocalizedContent(html) {
-    const regex = /<p>&lt;begin-localization=&quot;(.*?)&quot;&gt;<\/p>(.*?)<p>&lt;end-localization=&quot;\1&quot;&gt;<\/p>/gs;
-    let match;
-    const localizedContent = [];
-    while ((match = regex.exec(html)) !== null) {
-        localizedContent.push({
-            lang: match[1],
-            content: match[2].trim(),
-        });
-    }
-    return localizedContent;
-}
-function parseFloatTags(html) {
-    const embedRegex = /<p>&lt;embed(.*?)&gt;<\/p>(.*?)<p>&lt;end-embed&gt;<\/p>/gs;
-    const floatRegex = /<p>&lt;float(.*?)&gt;<\/p>(.*?)<p>&lt;end-float&gt;<\/p>/gs;
-    const floatLeftRegex = /<p>&lt;float-left&gt;<\/p>(.*?)<p>&lt;end-float-left&gt;<\/p>/gs;
-    const floatRightRegex = /<p>&lt;float-right&gt;<\/p>(.*?)<p>&lt;end-float-right&gt;<\/p>/gs;
-    let match;
-    let floatHTML = html;
-    while ((match = floatRegex.exec(html)) !== null) {
-        const styleMatch = match[1].match(/style=&quot;(.*?)&quot;/);
-        const style = styleMatch
-            ? `style="${styleMatch[1]} display:flex; justify-content:space-between; background-color:var(--bg-color); box-shadow: 0 0 0 100vmax var(--bg-color); clip-path: inset(0 -100vmax);"`
-            : "style=\"display:flex; justify-content:space-between;\"";
-        // Check if content contains float-left or float-right
-        let content = match[2];
-        const hasFloats = floatLeftRegex.test(content) || floatRightRegex.test(content);
-        if (hasFloats) {
-            const processedContent = content
-                .replace(floatLeftRegex, "<div class=\"float\">$1</div>")
-                .replace(floatRightRegex, "<div class=\"float\">$1</div>");
-            floatHTML = floatHTML.replace(match[0], `<div class="float-container" ${style}>${processedContent}</div>`);
-        }
-        else {
-            // Handle direct content without floats
-            floatHTML = floatHTML.replace(match[0], `<div class="float-container" ${style}>${content}</div>`);
-        }
-    }
-    while ((match = embedRegex.exec(html)) !== null) {
-        const styleMatch = match[1].match(/style=&quot;(.*?)&quot;/);
-        const style = styleMatch
-            ? `style="${styleMatch[1]} aspect-ratio: 16/10;"`
-            : "style=\"aspect-ratio: 16/10;\"";
-        let content = match[2];
-        content = content.replace(/<\/?p>/g, ""); // Remove surrounding <p> tags
-        floatHTML = floatHTML.replace(match[0], `<iframe class="w-full" title="Embed Content" ${style} src="${content}"></iframe>`);
-    }
-    return floatHTML;
-}
-function parseCenterTags(html) {
-    const centerRegex = /<p>&lt;center&gt;<\/p>(.*?)<p>&lt;end-center&gt;<\/p>/gs;
-    let match;
-    let centerHTML = html;
-    while ((match = centerRegex.exec(html)) !== null) {
-        centerHTML = centerHTML.replace(match[0], `<div class="center">${match[1]}</div>`);
-    }
-    return centerHTML;
-}
-const localizedContentArray = parseLocalizedContent(bodyHTML);
-const currentLanguage = i18next.language;
-const defaultLanguage = "en";
-const localizedContent = localizedContentArray.find((item) => item.lang === currentLanguage);
-const defaultContent = localizedContentArray.find((item) => item.lang === defaultLanguage);
-bodyHTML = localizedContent?.content || defaultContent?.content || bodyHTML;
-bodyHTML = parseFloatTags(bodyHTML); // Ensure parseFloatTags is called on the localized content
-bodyHTML = parseCenterTags(bodyHTML); // Ensure parseCenterTags is called on the localized content
 ---
 
 <html lang="en">
   <head>
     <BaseHead
-      title={`${title} | ${t("header.work")} | ${t("site.title")}`}
+      title={`${title} | extra | ${t("header.work")} | ${t("site.title")}`}
       description={`${type}\nServices: ${Array.isArray(services) && services.map((service) => " " + service)}\nYear: ${year}\n\n${parsedSEOContent}`}
-      image={(heroImage as any)?.fields?.file?.url}
+      image={(preview as any)?.fields?.file?.url}
     />
   </head>
 
   <body>
     <Header isWork />
-    <main class="m-0 p-0 flex flex-col items-center">
-      <div class="w-full max-w-[1800px]">
-        <div class="flex items-end justify-end rounded-none z-10 relative">
-          {
-            heroImage && (
-              <div
-                class="expand w-full sm:w-[95%] sm:max-w-[calc(100%-300px)] h-[380px] relative"
-                style={`background-size:cover; background-position:center; background-image: url('${(heroImage as any)?.fields?.file?.url}')`}
-                transition:name={`work-title-${title}-image`}
-              />
-            )
-          }
-        </div>
+    <main
+      class="h-screen m-0 p-0 flex flex-row items-center overflow-scroll snap-x snap-mandatory no-scrollbar"
+    >
+    <div class="absolute">
+      <img
+        id="scrollingImage"
+        class="w-[1000px] max-w-[1000px] opacity-60 z-0 transition-none"
+        style={`filter: drop-shadow(0px 1000px 0 ${blobColor}); transform: translateY(-1250px) translateX(-400px); transition: 0s;`}
+        alt=""
+        src="/img/blobl.webp"
+        transition:name={`work-title-${title}-blob`}
+      />
+    </div>
+      <div id="scrollingText" class="w-full max-w-[1800px]">
         <div class="flex items-center justify-center z-0">
           <div
-            class="top-6 w-[90%] max-w-[1300px] flex sm:flex-row flex-col items-start justify-between gap-5 relative"
+            class="ml-20 mr-32 top-6 w-[600px] max-w-screen flex flex-col items-start justify-between gap-5 relative"
           >
-            <div style="position:absolute;">
-              <img
-                class="hidden sm:block w-[900px] opacity-60 z-0"
-                style={`filter: drop-shadow(0px 1000px 0 ${blobColor}); transform: translateY(-1350px) translateX(-300px);`}
-                alt=""
-                src="/img/blobl.webp"
-                transition:name={`work-title-${title}-blob`}
-              />
+            <div
+              class="mb-6 top-2 left-2 pixel-corners text-white px-3 rounded z-10 absolute"
+            >
+              Extra
             </div>
             <h3
-              class="max-w-[400px] font-[MGNHumble] text-white text-6xl z-10 relative"
+              class="flex flex-row flex-wrap max-w-[400px] font-[MGNHumble] text-white text-6xl z-10 relative"
               transition:name={`work-title-${title}`}
             >
-              {title}
-            </h3>
-            <div>
-              <p class="opacity-60">{t("slug.client")}</p>
-              <p
-                class="font-medium text-white text-2xl"
-                transition:name={`work-title-${title}-type`}
-              >
-                {type}
-              </p>
-            </div>
-            <ul>
-              <p class="opacity-60">{t("slug.services")}</p>
               {
-                Array.isArray(services) &&
-                  services.map((service) => (
-                    <li class="font-medium text-white text-2xl">{service}</li>
+                typeof title === 'string' &&
+                title
+                  .split(" ")
+                  .map((word, index) => (
+                    <span style={`margin-left: ${index * 20}px;`}>{word}</span>
                   ))
               }
-            </ul>
-            <div transition:name={`work-title-${title}-year`}>
-              <p class="opacity-60">{t("slug.year")}</p>
-              <p class="font-medium text-white text-2xl">{year}</p>
+            </h3>
+            <div class="flex flex-row items-start gap-16">
+              <div>
+                <p class="opacity-60">{t("slug.client")}</p>
+                <p
+                  class="font-medium text-white text-2xl"
+                  transition:name={`work-title-${title}-type`}
+                >
+                  {type}
+                </p>
+              </div>
+              <ul>
+                <p class="opacity-60">{t("slug.services")}</p>
+                {
+                  Array.isArray(services) &&
+                    services.map((service) => (
+                      <li class="font-medium text-white text-2xl">{service}</li>
+                    ))
+                }
+              </ul>
+              <div transition:name={`work-title-${title}-year`}>
+                <p class="opacity-60">{t("slug.year")}</p>
+                <p class="font-medium text-white text-2xl">
+                  {typeof year === 'string' ? year.slice(0, 4) : year}
+                </p>
+              </div>
             </div>
+            <div set:html={description} class="prose text-white" />
           </div>
         </div>
       </div>
-      <article class="mt-48 w-[90%] max-w-[1200px] text-white z-10 relative">
-        <div class="prose">
-          <div set:html={bodyHTML} />
-        </div>
-      </article>
+      <div class="mr-20 flex flex-row gap-20">
+        {
+          Array.isArray(content) &&
+            content.map((item) => (
+              <div class="w-[700px] max-w-screen p-2 relative">
+                <img
+                  src={item.fields.file.url}
+                  alt=""
+                  class="w-full object-cover"
+                />
+                <p class="font-bold" style="margin-bottom:8px !important;">
+                  {item.fields.title}
+                </p>
+                <p>{item.fields.description}</p>
+              </div>
+            ))
+        }
+      </div>
+      <div class="bottom-20 right-10 flex flex-row items-center opacity-30 hover:opacity-100 absolute transition-all">
+        <button class="hover:border-2 border-black p-2 hover:bg-white/20 active:scale-95 w-12 invert transition-all" onclick="scrollImp(-400);"><svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> <path d="M20 11v2H8v2H6v-2H4v-2h2V9h2v2h12zM10 7H8v2h2V7zm0 0h2V5h-2v2zm0 10H8v-2h2v2zm0 0h2v2h-2v-2z" fill="currentColor"/> </svg></button>
+        <button class="hover:border-2 border-black p-2 hover:bg-white/20 active:scale-95 w-12 invert transition-all" onclick="scrollImp(400);"><svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> <path d="M4 11v2h12v2h2v-2h2v-2h-2V9h-2v2H4zm10-4h2v2h-2V7zm0 0h-2V5h2v2zm0 10h2v-2h-2v2zm0 0h-2v2h2v-2z" fill="currentColor"/> </svg></button>
+      </div>
     </main>
     <Footer />
   </body>
@@ -214,7 +173,29 @@ bodyHTML = parseCenterTags(bodyHTML); // Ensure parseCenterTags is called on the
     videos.forEach((video) => {
       video.load();
     });
+
+    const main = document.querySelector('main');
+    const scrollingImage = document.getElementById('scrollingImage');
+    const scrollingText = document.getElementById('scrollingText');
+
+    main.addEventListener('scroll', () => {
+      const scrollLeft = main.scrollLeft;
+      const maxScrollLeft = main.scrollWidth - main.clientWidth;
+      const opacity = 1 - (scrollLeft / maxScrollLeft);
+
+      scrollingText.style.transform = `translateX(${scrollLeft * 0.1}px)`;
+      scrollingText.style.opacity = opacity < 0 ? 0 : opacity;
+      scrollingImage.style.transform = `translateY(-1250px) translateX(${(scrollLeft * -0.5) - 400}px)`;
+        scrollingImage.style.opacity = opacity < 0 ? 0 : opacity * 0.6;
+    });
   });
+
+  function scrollImp(amount) {
+    document.querySelector("main").scrollBy({
+      left: amount,
+      behavior: "smooth",
+    });
+  }
 </script>
 
 <style is:global>
@@ -247,13 +228,23 @@ bodyHTML = parseCenterTags(bodyHTML); // Ensure parseCenterTags is called on the
     margin: 0 !important;
   }
 
-  h3, h4 {
+  h3,
+  h4 {
     font-family: "InstrumentSans";
-    font-weight:550;
+    font-weight: 550;
   }
 
   p {
     line-height: 28px;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
   }
 
   .pixel-corners,
@@ -352,7 +343,7 @@ bodyHTML = parseCenterTags(bodyHTML); // Ensure parseCenterTags is called on the
     bottom: 0;
     left: 0;
     right: 0;
-    background: #ffffff10;
+    background: #ffffff;
     display: block;
     pointer-events: none;
   }

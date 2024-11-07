@@ -20,19 +20,19 @@ let posts = entries.items.map((item) => {
 <div class="flex md:flex-row flex-col-reverse items-center gap-10">
   <img src="/img/blob-1.webp" alt="" class="hidden lg:block w-1/3 translate-x-80 -rotate-90 absolute">
   <div class="fadeup md:w-[calc(100%-13rem)] md:max-w-[500px] w-[90%] z-10 relative">
-    <h1 class="text-[MGNHumble] md:text-7xl text-6xl text-white">
+    <h1 class="-translate-y-16 sm:translate-y-0 text-[MGNHumble] md:text-7xl text-6xl text-white">
       {t("header.work")}
     </h1>
-    <p class="leading-7">
+    <p class="-translate-y-16 sm:translate-y-0 leading-7">
       {t("work.catch")}
     </p>
-    <div class="mt-6 relative">
+    <div class="-translate-y-16 sm:translate-y-0 mt-6 relative">
       <Button text={t("work.button")} href="/work" />
     </div>
   </div>
   <ul
         id="work-carousel"
-        class="mb-6 sm:mb-0 w-[90%] aspect-square overflow-hidden sm:overflow-visible sm:w-[400px] sm:h-[400px] grid grid-cols-2 grid-rows-2 gap-6 z-0 relative"
+        class="mb-6 sm:mb-0 w-[90%] aspect-square sm:w-[400px] sm:h-[400px] grid grid-cols-2 grid-rows-2 gap-6 z-0 relative"
       >
       </ul>
 </div>
@@ -44,14 +44,6 @@ let posts = entries.items.map((item) => {
 
   function updateCarousel() {
     let filteredPosts = posts.sort(() => Math.random() - 0.5).slice(0, 4);
-
-    function getRandomTransform() {
-      if (window.innerWidth > 600) {
-        const randomX = Math.floor(Math.random() * 200) - 100; // Random value between -100 and 100
-        const randomY = Math.floor(Math.random() * 200) - 100; // Random value between -100 and 100
-        return `translate(${randomX}px, ${randomY}px)`;
-      } 
-    }
 
     const carousel = document.getElementById("work-carousel");
 
@@ -70,18 +62,43 @@ let posts = entries.items.map((item) => {
       () => {
         carousel.innerHTML = filteredPosts
           .map(
-            (post, index) => `
-              <li transition:name="work-title-${post.title}-image"  class="tile w-full h-full flex flex-col items-center justify-center gap-3 hover:scale-105 hover:border-4 border-0 border-white/20 overflow-hidden" style="transform: ${getRandomTransform()}; animation: fadeIn 0.5s cubic-bezier(0,0,0,1) ${index * 0.1}s forwards; opacity:0; aspect-ratio:1;">
-                <a href="${lang === "en" ? "" : `/${lang}`}/work/${post.slug}" class="w-full h-full">
-                  <img src="${post.preview.fields.file.url}" class="w-full h-full object-cover" alt="${post.title}">
-                </a>
-              </li>
-            `
+            (post, index) => {
+              let translateX, translateY;
+              switch (index) {
+                case 0:
+                  translateX = 0;
+                  translateY = 0;
+                  break;
+                case 1:
+                  translateX = -40;
+                  translateY = -40;
+                  break;
+                case 2:
+                  translateX = 40;
+                  translateY = -40;
+                  break;
+                case 3:
+                  translateX = 0;
+                  translateY = -80;
+                  break;
+                default:
+                  translateX = (index + 1) * 100;
+                  translateY = (index + 1) * 100;
+                  break;
+              }
+              return `
+                <li transition:name="work-title-${post.title}-image" class="tile w-full h-full flex flex-col items-center justify-center gap-3 overflow-hidden" style="transform: translate(${translateX}px, ${translateY}px); animation: fadeIn 0.5s cubic-bezier(0,0,0,1) ${index * 0.1}s forwards; opacity:0; aspect-ratio:1;">
+                  <a href="${lang === "en" ? "" : `/${lang}`}/work/${post.slug}" class="w-full h-full">
+                    <img src="${post.preview.fields.file.url}" class="w-full h-full object-cover" alt="${post.title}">
+                  </a>
+                </li>
+              `;
+            }
           )
           .join("");
       },
       carousel.children.length * 100 + 500
-    ); // Ensure the timeout matches the duration of the fade-out animation
+    );// Ensure the timeout matches the duration of the fade-out animation
     document.querySelectorAll(".tile").forEach((tile) => {
       tile.style.opacity = 1;
     });
