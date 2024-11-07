@@ -17,14 +17,22 @@ let localizedTimeline = timeline[lang];
     <BaseHead title={`${t("header.about")} | ${t("site.title")}`} description={t("site.description")} />
   </head>
   <body>
-    <Header />
-    <main class="w-screen flex flex-col items-center justify-center relative overflow-hidden">
-      <iframe
-        id="frame"
+    <Header isWork />
+    <div class="w-screen h-screen pointer-events-none overflow-hidden absolute">
+      <img
+        src="/img/blob-2.avif"
+        id="blob-2"
+        alt=""
+        class="w-[1300px] max-w-[1300px] sm:max-w-full left-1/2 sm:left-0 -translate-x-1/2 sm:translate-x-0 sm:w-auto translate-y-[0px] sm:-translate-y-[100px] z-10 absolute"
+      />
+    </div>
+    <iframe
+        id="frame2"
         title="Conway's Game of Life Background"
         src="/html/frame_conway.html"
         class="opaquescroll top-0 left-0 w-full h-full z-0 transition-all fixed"
         transition:name="bg-iframe"></iframe>
+    <main class="w-screen flex flex-col items-center justify-center z-20 pointer-events-none relative overflow-hidden">
         <div class="max-w-[600px] mt-[20vh] mb-[150px]">
           <div class="max-w-[700px] flex md:flex-row flex-col-reverse md:items-center gap-3">
             <div
@@ -73,8 +81,21 @@ let localizedTimeline = timeline[lang];
 </html>
 
 <script is:inline>
+  window.addEventListener("scroll", () => {
+    const blob2 = document.getElementById("blob-2");
+    const scrollPosition = window.scrollY;
+    const screenHeight = window.innerHeight;
+    
+    if (blob2 && window.innerWidth > 900) {
+      blob2.style.transform = `translateY(-${scrollPosition * 0.5 + 100}px)`;
+    } else if (blob2) {
+      blob2.style.opacity = `${0.8 - scrollPosition / screenHeight}`;
+      blob2.style.transform = `translate(-50%, -${scrollPosition * 0.5}px)`;
+    }
+  });
+
   function opaqueframe() {
-    const frame = document.getElementById("frame");
+    const frame = document.getElementById("frame2");
     const scroll = window.scrollY;
     const maxScroll = 1000;
     const opacity = 1 - (scroll / maxScroll);
