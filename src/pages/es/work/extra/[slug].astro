@@ -94,7 +94,7 @@ if (parsedSEOContent.length > 60) {
       <div id="scrollingText" class="w-full max-w-[1800px] pointer-events-none">
         <div class="flex items-center justify-center z-0">
           <div
-            class="ml-10 sm:ml-20 sm:mr-32 2xl:ml-32 top-6 w-[calc(100vw-80px)] sm:w-[600px] max-w-screen flex flex-col items-start justify-between gap-5 relative"
+            class="ml-5 sm:ml-20 sm:mr-32 2xl:ml-32 top-6 w-[calc(100vw-40px)] sm:w-[600px] max-w-screen flex flex-col items-start justify-between gap-5 relative"
           >
             <div class="w-full flex flex-row items-center justify-between gap-6">
               <div
@@ -115,7 +115,7 @@ if (parsedSEOContent.length > 60) {
               </svg>
             </div>
             <h3
-              class="flex flex-row flex-wrap max-w-[400px] font-[MGNHumble] text-white text-6xl z-10 relative"
+              class="flex flex-row flex-wrap max-w-[400px] font-[MGNHumble] text-white text-5xl sm:text-6xl z-10 relative"
               transition:name={`work-title-${title}`}
             >
               {
@@ -129,11 +129,11 @@ if (parsedSEOContent.length > 60) {
                     ))
               }
             </h3>
-            <div class="flex flex-row items-start gap-16">
+            <div class="flex flex-row items-start gap-6 sm:gap-16">
               <div>
                 <p class="opacity-60">{t("slug.client")}</p>
                 <p
-                  class="font-medium text-white text-2xl"
+                  class="font-medium text-white text-xl sm:text-2xl"
                   transition:name={`work-title-${title}-type`}
                 >
                   {type}
@@ -144,13 +144,13 @@ if (parsedSEOContent.length > 60) {
                 {
                   Array.isArray(services) &&
                     services.map((service) => (
-                      <li class="font-medium text-white text-2xl">{service}</li>
+                      <li class="font-medium text-white text-xl sm:text-2xl">{service}</li>
                     ))
                 }
               </ul>
               <div transition:name={`work-title-${title}-year`}>
                 <p class="opacity-60">{t("slug.year")}</p>
-                <p class="font-medium text-white text-2xl">
+                <p class="font-medium text-white text-xl sm:text-2xl">
                   {typeof year === "string" ? year.slice(0, 4) : year}
                 </p>
               </div>
