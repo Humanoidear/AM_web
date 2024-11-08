@@ -229,13 +229,21 @@ const { isIndex, isWork } = Astro.props;
 
 <script is:inline>
   function toggleMobileMenu() {
+    const hamburgerMenu = document.getElementById("hamburgerMenu");
+
     if (mobileMenu.classList.contains("hidden")) {
       document.getElementById("closebtn").style.transform = "rotate(0deg)";
       mobileMenu.classList.remove("fadeout");
       mobileMenu.classList.toggle("hidden");
+      hamburgerMenu.style.transform = "rotate(-90deg)";
+      hamburgerMenu.style.opacity = "0";
+      hamburgerMenu.style.transition = "0.3s cubic-bezier(0, 0, 0, 1)";
     } else {
       document.getElementById("closebtn").style.transform = "rotate(90deg)";
       mobileMenu.classList.add("fadeout");
+      hamburgerMenu.style.transform = "rotate(0deg)";
+      hamburgerMenu.style.opacity = "1";
+      hamburgerMenu.style.transition = "0.3s cubic-bezier(0, 0, 0, 1)";
       setTimeout(() => {
         mobileMenu.classList.toggle("hidden");
       }, 200);
