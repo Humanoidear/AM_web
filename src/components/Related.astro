@@ -2,6 +2,7 @@
 import { contentfulClient } from "../lib/contentful";
 import type { work } from "../lib/contentful";
 import { localizePath } from "astro-i18next";
+import i18next, { t, changeLanguage } from "i18next";
 
 const entries = await contentfulClient.getEntries<work>({
   content_type: "work",
@@ -54,8 +55,8 @@ const services = Astro.props.services;
 
 // Filter posts based on type and extraPosts based on services
 const filteredPosts = combinedPosts.filter((post) => {
-  if (post.services) {
-    return post.services.some((service) => services.includes(service));
+  if ('services' in post && post.services) {
+    return Array.isArray(post.services) && post.services.some((service) => services.includes(service));
   } else if (post.type) {
     return services.includes(post.type);
   }
@@ -70,7 +71,7 @@ console.log(filteredPosts);
       <div class="fadeInScale mt-20 w-screen py-10 border-t-2 border-white/10 flex flex-col items-center">
       <div class="w-[90%] max-w-[1200px] flex flex-col sm:flex-row items-center justify-between gap-3">
         <p class="text-left text-3xl font-[MGNHumble]">
-          Related projects
+          {t("work.related")}
         </p>
         <ul class="flex flex-row items-center gap-3">
           {services.map((service, index) => (
