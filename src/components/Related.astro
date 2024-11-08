@@ -1,0 +1,382 @@
+---
+import { contentfulClient } from "../lib/contentful";
+import type { work } from "../lib/contentful";
+import { localizePath } from "astro-i18next";
+
+const entries = await contentfulClient.getEntries<work>({
+  content_type: "work",
+});
+const extra = await contentfulClient.getEntries({
+  content_type: "extra",
+});
+const posts = entries.items.map((item) => {
+  const { title, slug, type, year, preview, gif, blobColor } = item.fields;
+  return {
+    title,
+    slug,
+    type,
+    year,
+    preview,
+    gif,
+    splitTitle: typeof title === "string" ? title.split(" ") : [],
+    blobColor,
+  };
+});
+const extraPosts = extra.items.map((item) => {
+  const {
+    title,
+    slug,
+    type,
+    color,
+    year,
+    services,
+    preview,
+    gif,
+    description,
+    content,
+  } = item.fields;
+  return {
+    title,
+    splitTitle: typeof title === "string" ? title.split(" ") : [],
+    slug,
+    type,
+    color,
+    year,
+    services,
+    preview,
+    gif,
+    description,
+    content,
+  };
+});
+const combinedPosts = [...posts, ...extraPosts];
+const services = Astro.props.services;
+
+// Filter posts based on type and extraPosts based on services
+const filteredPosts = combinedPosts.filter((post) => {
+  if (post.services) {
+    return post.services.some((service) => services.includes(service));
+  } else if (post.type) {
+    return services.includes(post.type);
+  }
+  return false;
+});
+console.log(filteredPosts);
+---
+
+{
+  filteredPosts.length > 0 && (
+    <>
+      <div class="fadeInScale mt-20 w-screen py-10 border-t-2 border-white/10 flex flex-col items-center">
+      <div class="w-[90%] max-w-[1200px] flex flex-col sm:flex-row items-center justify-between gap-3">
+        <p class="text-left text-3xl font-[MGNHumble]">
+          Related projects
+        </p>
+        <ul class="flex flex-row items-center gap-3">
+          {services.map((service, index) => (
+            <>
+              <li class="text-white text-lg">{service}</li>
+              {index < services.length - 1 && <span class="text-white"> / </span>}
+            </>
+          ))}
+        </ul>
+    </div>
+        <ul class="w-[90%] max-w-[1200px] mt-10 grid grid-cols-2 lg:grid-cols-4 gap-6">
+          {filteredPosts.map((post, index) => (
+            <li
+              data-type={post.type}
+              class={`sm:mb-6 hover:shadow-xl shadow-white z-0 hover:z-10 relative`}
+              style="aspect-ratio: 1 / 1;"
+            >
+              <a
+                class="flex flex-row items-start justify-between sm:gap-5 relative"
+                href={localizePath(
+                  `/work/${"color" in post ? "extra" : ""}/${post.slug}/`
+                )}
+              >
+                <div
+                  class={`img-${index} work-hover w-full h-full overflow-hidden transition-all z-10 relative`}
+                  onmousemove={`handleMouseMove(${index})`}
+                  onmouseleave={`resetTransform(${index})`}
+                >
+                  {post.preview && (
+                    <>
+                      <img
+                        src={(post.preview as any)?.fields?.file?.url}
+                        alt=""
+                        class={`w-full h-full object-cover ${post.gif ? "img" : ""}`}
+                        transition:name={`work-title-${post.title}-image`}
+                      />
+                      {post.gif && (
+                        <img
+                          src={(post.gif as any)?.fields?.file?.url}
+                          alt=""
+                          class="gif top-0 w-full h-full object-cover absolute"
+                          transition:name={`work-title-${post.title}-gif`}
+                        />
+                      )}
+                    </>
+                  )}
+                </div>
+                <div style="opacity:0.7; overflow:hidden;">
+                  <img
+                    src="/img/blob-1.webp"
+                    alt=""
+                    transition:name={`work-title-${post.title}-blob`}
+                    class="blob hover-show -translate-x-1/2 translate-y-1/3 pointer-events-none z-0 absolute"
+                    style={`filter: drop-shadow(0px 1000px 0 ${"blobColor" in post ? post.blobColor : post.color});`}
+                  />
+                </div>
+                <div class="hover-show bottom-0 right-0 translate-y-[80%] w-full items-center justify-end flex flex-row pointer-events-none z-10 absolute">
+                  <h2
+                    class="sm:flex hidden bottom-0 left-0 w-[230px] -translate-x-1/2 -translate-y-6 flex-wrap text-left m-0 fadeup leading-tight font-[MGNHumble] text-white z-10 absolute"
+                    transition:name={`work-title-${post.title}`}
+                  >
+                    {post.splitTitle.map((word, index) => (
+                      <span
+                        style={`animation: fadeupword 0.3s cubic-bezier(0, 0, 0, 1) ${index * 0.4}s forwards; opacity: 0; margin-left: ${index * 10}px;`}
+                      >
+                        {word}
+                      </span>
+                    ))}
+                  </h2>
+                  <div class="sm:-translate-x-4 translate-y-5 flex flex-col items-end">
+                    <p
+                      class={`m-0 text-white text-right text-2xl font-medium`}
+                      transition:name={`work-title-${post.title}-type`}
+                    >
+                      {post.type}
+                    </p>
+                    {"color" in post ? (
+                      <div
+                        class="mt-1 pixel-corners text-white font-semibold px-3 rounded z-10 masked-div relative"
+                        transition:name={`work-${post.title}-extra`}
+                      >
+                        Extra
+                      </div>
+                    ) : (
+                      <p
+                        class={`m-0 text-white text-right text-lg opacity-60`}
+                        transition:name={`work-title-${post.title}-year`}
+                      >
+                        {post.year}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
+  )
+}
+
+<style>
+  @supports (animation-timeline: view()) {
+    @keyframes animate-in-and-out {
+      entry 0% {
+        opacity: 0;
+        scale: 0.8;
+      }
+      entry 100% {
+        opacity: 1;
+        scale: 1;
+      }
+      exit 0% {
+        opacity: 1;
+        scale: 1;
+      }
+      exit 100% {
+        opacity: 0;
+        scale: 0.8;
+      }
+    }
+
+    ul li {
+      opacity: 0;
+      scale: 0.8;
+      animation: linear animate-in-and-out;
+      animation-timeline: view();
+    }
+  }
+
+  @keyframes fadeupword {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animatein {
+    animation: slidedown 0.3s cubic-bezier(0, 0, 0, 1) both;
+  }
+
+  .animateout {
+    animation: slideup 0.3s cubic-bezier(0, 0, 0, 1) both;
+  }
+
+  @keyframes slidedown {
+    0% {
+      height: 0;
+    }
+    100% {
+      content-visibility: auto;
+      height: calc-size(auto, size);
+    }
+  }
+
+  @keyframes slideup {
+    0% {
+      height: calc-size(auto, size);
+    }
+    100% {
+      height: 0;
+    }
+  }
+
+  .mainoverride {
+    overflow: visible !important;
+  }
+
+  .pixel-corners,
+  .pixel-corners--wrapper {
+    clip-path: polygon(
+      0px calc(100% - 6px),
+      3px calc(100% - 6px),
+      3px calc(100% - 3px),
+      6px calc(100% - 3px),
+      6px 100%,
+      calc(100% - 6px) 100%,
+      calc(100% - 6px) calc(100% - 3px),
+      calc(100% - 3px) calc(100% - 3px),
+      calc(100% - 3px) calc(100% - 6px),
+      100% calc(100% - 6px),
+      100% 6px,
+      calc(100% - 3px) 6px,
+      calc(100% - 3px) 3px,
+      calc(100% - 6px) 3px,
+      calc(100% - 6px) 0px,
+      6px 0px,
+      6px 3px,
+      3px 3px,
+      3px 6px,
+      0px 6px
+    );
+  }
+  .pixel-corners {
+    border: 3px solid transparent;
+  }
+  .pixel-corners--wrapper {
+    width: fit-content;
+    height: fit-content;
+  }
+  .pixel-corners--wrapper .pixel-corners {
+    display: block;
+    clip-path: polygon(
+      3px 6px,
+      6px 6px,
+      6px 3px,
+      calc(100% - 6px) 3px,
+      calc(100% - 6px) 6px,
+      calc(100% - 3px) 6px,
+      calc(100% - 3px) calc(100% - 6px),
+      calc(100% - 6px) calc(100% - 6px),
+      calc(100% - 6px) calc(100% - 3px),
+      6px calc(100% - 3px),
+      6px calc(100% - 6px),
+      3px calc(100% - 6px)
+    );
+  }
+  .pixel-corners::after,
+  .pixel-corners--wrapper::after {
+    content: "";
+    position: absolute;
+    clip-path: polygon(
+      0px calc(100% - 6px),
+      3px calc(100% - 6px),
+      3px calc(100% - 3px),
+      6px calc(100% - 3px),
+      6px 100%,
+      calc(100% - 6px) 100%,
+      calc(100% - 6px) calc(100% - 3px),
+      calc(100% - 3px) calc(100% - 3px),
+      calc(100% - 3px) calc(100% - 6px),
+      100% calc(100% - 6px),
+      100% 6px,
+      calc(100% - 3px) 6px,
+      calc(100% - 3px) 3px,
+      calc(100% - 6px) 3px,
+      calc(100% - 6px) 0px,
+      6px 0px,
+      6px 3px,
+      3px 3px,
+      3px 6px,
+      0px 6px,
+      0px 50%,
+      3px 50%,
+      3px 6px,
+      6px 6px,
+      6px 3px,
+      calc(100% - 6px) 3px,
+      calc(100% - 6px) 6px,
+      calc(100% - 3px) 6px,
+      calc(100% - 3px) calc(100% - 6px),
+      calc(100% - 6px) calc(100% - 6px),
+      calc(100% - 6px) calc(100% - 3px),
+      6px calc(100% - 3px),
+      6px calc(100% - 6px),
+      3px calc(100% - 6px),
+      3px 50%,
+      0px 50%
+    );
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--mask-color, #ffffff);
+    display: block;
+    pointer-events: none;
+  }
+  .pixel-corners::after {
+    margin: -3px;
+  }
+  .pixel-corners:active {
+    transform: translate(0, 3px);
+  }
+
+  .work-hover:hover .gif {
+    opacity: 1;
+    transition: 0.3s cubic-bezier(0, 0, 0, 1);
+  }
+  .work-hover:hover .img {
+    opacity: 0;
+    transition: 0.3s cubic-bezier(0, 0, 0, 1);
+  }
+  .work-hover .img {
+    opacity: 1;
+    transition: 0.3s cubic-bezier(0, 0, 0, 1);
+  }
+  .work-hover .gif {
+    opacity: 0;
+    transition: 0.3s cubic-bezier(0, 0, 0, 1);
+  }
+
+  .blob {
+    transform: scale(150%) translateY(-930px) translateX(-300px);
+  }
+
+  @media screen and (max-width: 900px) {
+    .blob {
+      transform: scale(150%) translateY(-930px) translateX(-23vw);
+    }
+    .mainoverride {
+      overflow: hidden !important;
+    }
+  }
+</style>

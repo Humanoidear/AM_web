@@ -5,6 +5,7 @@ import { documentToPlainTextString } from "@contentful/rich-text-plain-text-rend
 import type { work } from "../../lib/contentful";
 import BaseHead from "../../components/BaseHead.astro";
 import Header from "../../components/Header.astro";
+import Related from "../../components/Related.astro";
 import Footer from "../../components/Footer.astro";
 import i18next, { t, changeLanguage } from "i18next";
 
@@ -141,7 +142,10 @@ bodyHTML = parseCenterTags(bodyHTML); // Ensure parseCenterTags is called on the
 
   <body>
     <Header isWork />
-    <main class="m-0 p-0 flex flex-col items-center">
+    <main
+      class="m-0 p-0 flex flex-col items-center"
+      style="overflow:visible !important;"
+    >
       <div class="w-full max-w-[1800px]">
         <div class="flex items-end justify-end rounded-none z-10 relative">
           {
@@ -203,6 +207,7 @@ bodyHTML = parseCenterTags(bodyHTML); // Ensure parseCenterTags is called on the
           <div set:html={bodyHTML} />
         </div>
       </article>
+      <Related services={services} />
     </main>
     <Footer />
   </body>
@@ -247,13 +252,31 @@ bodyHTML = parseCenterTags(bodyHTML); // Ensure parseCenterTags is called on the
     margin: 0 !important;
   }
 
-  h3, h4 {
+  h3,
+  h4 {
     font-family: "InstrumentSans";
-    font-weight:550;
+    font-weight: 550;
   }
 
   p {
     line-height: 1.5;
+  }
+
+  .fadeInScale {
+        animation: auto linear fadeInScale both;
+        animation-timeline: view();
+        animation-range: entry 25% cover 50%;
+      }
+
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .pixel-corners,
