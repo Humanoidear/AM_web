@@ -14,7 +14,8 @@
     "work": {
         "catch": "Como diseñador freelance, he desarrollado un portafolio diverso enfocado en ofrecer diseño y gráficos de movimiento claros e impactantes en diversos sectores y clientes, así como proyectos personales y algunos pequeños experimentos.",
         "button": "ver todos los trabajos",
-        "related": "Proyectos relacionados"
+        "related": "Proyectos relacionados",
+        "nomatch": "No se han encontrado proyectos relacionados."
     },
     "contact": {
         "catch": "¿Tienes un proyecto, una idea o simplemente quieres obtener información? En cualquier caso, no dudes en ponerte en contacto conmigo y lo solucionaremos."

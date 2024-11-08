@@ -19,6 +19,7 @@ export async function getStaticPaths() {
         params: { slug: item.fields.slug },
         props: {
             title: item.fields.title,
+            slug: item.fields.slug,
             content: item.fields.content,
             year: item.fields.year,
             type: item.fields.type,
@@ -30,7 +31,7 @@ export async function getStaticPaths() {
     }));
     return pages;
 }
-const { content, title, year, type, services, heroImage, blobColor } = Astro.props;
+const { content, title, slug, year, type, services, heroImage, blobColor } = Astro.props;
 let options = {
     renderNode: {
         "embedded-asset-block": (node: any) => {
@@ -207,7 +208,7 @@ bodyHTML = parseCenterTags(bodyHTML); // Ensure parseCenterTags is called on the
           <div set:html={bodyHTML} />
         </div>
       </article>
-      <Related services={services} />
+      <Related services={services} slug={slug} />
     </main>
     <Footer />
   </body>
