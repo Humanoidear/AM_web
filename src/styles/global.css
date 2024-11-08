@@ -152,8 +152,8 @@ sup::before {
   position: absolute;
   filter: invert(1);
   left: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 0;
+  transform: translateY(2px);
 }
 
 .transition-all {
