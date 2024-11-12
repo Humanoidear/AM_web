@@ -29,12 +29,6 @@ let localizedTimeline = timeline[lang];
         class="w-[1300px] max-w-[1300px] sm:max-w-full left-1/2 sm:left-0 -translate-x-1/2 sm:translate-x-0 sm:w-auto translate-y-[0px] sm:-translate-y-[100px] z-10 absolute"
       />
     </div>
-    <iframe
-      id="frame2"
-      title="Conway's Game of Life Background"
-      src="/html/frame_conway.html"
-      class="opaquescroll top-0 left-0 w-full h-full z-0 transition-all fixed"
-      transition:name="bg-iframe"></iframe>
     <main
       class="w-screen flex flex-col items-center justify-center z-20 pointer-events-none relative overflow-hidden"
     >
@@ -120,16 +114,6 @@ let localizedTimeline = timeline[lang];
       blob2.style.transform = `translate(-50%, -${scrollPosition * 0.5}px)`;
     }
   });
-
-  function opaqueframe() {
-    const frame = document.getElementById("frame2");
-    const scroll = window.scrollY;
-    const maxScroll = 1000;
-    const opacity = 1 - scroll / maxScroll;
-    frame.style.opacity = opacity < 0.3 ? 0.3 : opacity;
-  }
-
-  window.addEventListener("scroll", opaqueframe);
 </script>
 
 <style>

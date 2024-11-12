@@ -28,6 +28,14 @@ const isActive = href === pathname || href === "/" + subpath?.[0];
     display: inline-block;
     text-decoration: none;
   }
+  
+  @media (max-width: 768px) {
+    a {
+      font-family: "MGNHumble", system-ui !important;
+      font-size: 50px !important;
+    }
+  }
+
   a:hover {
     color: #ffffff90;
   }

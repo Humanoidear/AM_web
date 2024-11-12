@@ -142,12 +142,6 @@ const combinedPosts = [...posts, ...extraPosts];
                       ))}
                     </h2>
                     <div class="sm:-translate-x-4 translate-y-5 flex flex-col items-end">
-                      <p
-                        class={`m-0 text-white text-right text-2xl font-medium`}
-                        transition:name={`work-title-${post.title}-type`}
-                      >
-                        {post.type}
-                      </p>
                       {"color" in post ? (
                         <div
                           class="mt-1 pixel-corners text-white font-semibold px-3 rounded z-10 masked-div relative"
@@ -155,7 +149,19 @@ const combinedPosts = [...posts, ...extraPosts];
                         >
                           Extra
                         </div>
+                      <p
+                        class={`mt-2 text-white text-right text-lg opacity-60`}
+                        transition:name={`work-title-${post.title}-year`}
+                      >
+                        {typeof post.year === 'string' ? post.year.slice(0, 4) : post.year}
+                      </p>
                       ) : (
+                      <p
+                        class={`m-0 text-white text-right text-2xl font-medium`}
+                        transition:name={`work-title-${post.title}-type`}
+                      >
+                        {post.type}
+                      </p>
                         <p
                           class={`m-0 text-white text-right text-lg opacity-60`}
                           transition:name={`work-title-${post.title}-year`}
