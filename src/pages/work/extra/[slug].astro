@@ -101,7 +101,7 @@ if (parsedSEOContent.length > 60) {
               class="w-full flex flex-row items-center justify-between gap-6"
             >
               <div
-                class="left-2 pixel-corners text-white font-semibold px-3 rounded z-10 absolute"
+                class="-translate-x-2 pixel-corners text-white font-semibold px-3 rounded z-10 absolute"
                 transition:name={`work-${title}-extra`}
               >
                 Extra
@@ -169,10 +169,7 @@ if (parsedSEOContent.length > 60) {
                     index === 0 ? `work-title-${title}-image` : undefined
                   }
                 />
-                <p class="font-bold" style="margin-bottom:8px !important;">
-                  {item.fields.title}
-                </p>
-                <p>{item.fields.description}</p>
+                <p class="mt-3">{item.fields.description}</p>
               </div>
             ))
         }
