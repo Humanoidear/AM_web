@@ -11,7 +11,7 @@ const { blob } = Astro.props;
   <img
     src="/img/blob-1.webp"
     alt=""
-    class={`${blob ? "visible" : "hidden"} w-[1200px] sm:w-[600px] -translate-x-32 translate-y-16 sm:translate-y-0 rotate-180 absolute`}
+    class={`${blob ? "visible" : "hidden"} w-[2000px] sm:w-[600px] -translate-x-32 -translate-y-16 sm:translate-y-0 rotate-180 absolute`}
   />
   <div class="fadeup md:w-[calc(100%-13rem)] w-[95%] z-10 relative">
     <h1
@@ -22,7 +22,7 @@ const { blob } = Astro.props;
     <p
       class="md:text-right flex flex-col items-begin justify-end relative leading-7 font-medium"
     >
-      {t("about.catch")}
+      {t("about.catchHome")}
       <span
         class={`${blob} ? "visible" : "hidden"} mt-3 inline-block relative`}
       >
@@ -43,7 +43,7 @@ const { blob } = Astro.props;
     <img
       alt="alex malvehy face"
       src="/img/am_face.png"
-      class="left-1/2 sm:left-auto -translate-x-1/2 scale-110 sm:scale-100 translate-y-6 sm:translate-y-3 sm:translate-x-0 w-52 sm:w-72 h-52 sm:h-72 z-10 relative"
+      class="left-1/2 sm:left-auto -translate-x-1/2 scale-110 sm:scale-100 translate-y-3 sm:translate-y-0 sm:translate-x-0 w-32 sm:w-64 h-32 sm:h-64 z-10 relative"
     />
     <img
       alt="alex malbehy background"

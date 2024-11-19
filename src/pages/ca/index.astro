@@ -66,7 +66,12 @@ let posts = entries.items.map((item) => {
         >
       </h1>
       <div class="lg:block hidden">
-        <iframe
+        <ul
+        id="work-carousel2"
+        class="mb-6 sm:mb-0 w-[90%] aspect-square sm:w-[400px] sm:h-[400px] grid grid-cols-2 grid-rows-2 gap-6 z-0 relative"
+      >
+      </ul>
+        <!-- <iframe
           title="Youtube Video"
           class="xl:w-[610px] xl:h-[350px] w-[440px] h-[250px] pointer-events-none z-1 relative"
           allow="presentation; fullscreen; accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
@@ -87,7 +92,7 @@ let posts = entries.items.map((item) => {
             icon="https://framerusercontent.com/images/xKobCNxK5DGcLCya2LaxhCSpPsA.svg"
             white
           />
-        </span>
+        </span> -->
       </div>
       <a
         href="#about"
@@ -173,6 +178,75 @@ let posts = entries.items.map((item) => {
         frame.style.opacity = opacity < 0 ? 0 : opacity;
       });
     </script>
+
+<script data-astro-rerun define:vars={{ posts, lang }}>
+  document.addEventListener("astro:before-preparation", (event) => {
+    clearInterval(carouselInterval);
+  });
+
+  function updateCarousel() {
+    let filteredPosts = posts.sort(() => Math.random() - 0.5).slice(0, 4);
+
+    const carousel2 = document.getElementById("work-carousel2");
+
+    // Check if the carousel is being hovered
+    if (carousel2.matches(":hover")) {
+      return; // Do not update if the carousel is being hovered
+    }
+
+    // Add fade-out class to all children
+    Array.from(carousel2.children).forEach((child, index) => {
+      child.style.animation = `fadeOut 0.5s cubic-bezier(0,0,0,1) ${index * 0.1}s forwards`;
+    });
+
+    // Wait for the fade-out animation to complete before updating the content
+    setTimeout(
+      () => {
+        carousel2.innerHTML = filteredPosts
+          .map((post, index) => {
+            let translateX, translateY;
+            switch (index) {
+              case 0:
+                translateX = 0;
+                translateY = 0;
+                break;
+              case 1:
+                translateX = -40;
+                translateY = -40;
+                break;
+              case 2:
+                translateX = 40;
+                translateY = -40;
+                break;
+              case 3:
+                translateX = 0;
+                translateY = -80;
+                break;
+              default:
+                translateX = (index + 1) * 100;
+                translateY = (index + 1) * 100;
+                break;
+            }
+            return `
+                <li transition:name="work-title-${post.title}-image" class="tile w-full h-full flex flex-col items-center justify-center gap-3 overflow-hidden" style="transform: translate(${translateX}px, ${translateY}px); animation: fadeIn 0.5s cubic-bezier(0,0,0,1) ${index * 0.1}s forwards; opacity:0; aspect-ratio:1;">
+                  <a href="${lang === "en" ? "" : `/${lang}`}/work/${post.slug}" class="w-full h-full">
+                    <img src="${post.preview.fields.file.url}" class="w-full h-full object-cover" alt="${post.title}">
+                  </a>
+                </li>
+              `;
+          })
+          .join("");
+      },
+      carousel2.children.length * 100 + 500
+    ); // Ensure the timeout matches the duration of the fade-out animation
+    document.querySelectorAll(".tile").forEach((tile) => {
+      tile.style.opacity = 1;
+    });
+  }
+
+  updateCarousel();
+  carouselInterval = setInterval(updateCarousel, 5000);
+</script>
 
     <style>
       .catchphrase-container {
