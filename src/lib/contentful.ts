@@ -14,6 +14,7 @@ export interface work {
     heroImage: EntryFieldTypes.AssetLink;
     content: EntryFieldTypes.RichText;
     blobColor: EntryFieldTypes.Text;
+    order: EntryFieldTypes.Number;
   };
 }
 
@@ -30,6 +31,7 @@ export interface extra {
     preview: EntryFieldTypes.AssetLink;
     description: EntryFieldTypes.Text;
     content: EntryFieldTypes.RichText;
+    order: EntryFieldTypes.Number;
   };
 }
 
