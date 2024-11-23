@@ -47,7 +47,6 @@ const extraPosts = extra.items.map((item) => {
     };
 });
 const combinedPosts = [...posts, ...extraPosts];
-
 combinedPosts.sort((a, b) => {
     if (a.order && b.order) {
         return Number(a.order) - Number(b.order);

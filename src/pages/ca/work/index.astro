@@ -16,7 +16,7 @@ const extra = await contentfulClient.getEntries({
     content_type: "extra",
 });
 const posts = entries.items.map((item) => {
-    const { title, slug, type, year, preview, gif, blobColor } = item.fields;
+    const { title, slug, type, year, preview, gif, blobColor, order } = item.fields;
     return {
         title,
         slug,
@@ -26,10 +26,11 @@ const posts = entries.items.map((item) => {
         gif,
         splitTitle: typeof title === "string" ? title.split(" ") : [],
         blobColor,
+        order
     };
 });
 const extraPosts = extra.items.map((item) => {
-    const { title, slug, type, color, year, services, preview, gif, description, content, } = item.fields;
+    const { title, slug, type, color, year, services, preview, gif, description, content, order } = item.fields;
     return {
         title,
         splitTitle: typeof title === "string" ? title.split(" ") : [],
@@ -42,9 +43,16 @@ const extraPosts = extra.items.map((item) => {
         gif,
         description,
         content,
+        order
     };
 });
 const combinedPosts = [...posts, ...extraPosts];
+combinedPosts.sort((a, b) => {
+    if (a.order && b.order) {
+        return Number(a.order) - Number(b.order);
+    }
+    return 0;
+});
 ---
 
 <!doctype html>
