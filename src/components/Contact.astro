@@ -82,7 +82,7 @@ const formattedReviews = localizedReviews.map((review) => {
               style="transform: scaleX(-1);"
               alt="Quote Icon"
             />{" "}
-            "{review.quote}"
+            <span set:html={'" ' + review.quote + ' "'} />
           </p>
         </div>
       ))
