@@ -79,8 +79,8 @@ function parseLocalizedContent(html) {
 function parseFloatTags(html) {
     const embedRegex = /<p>&lt;embed(.*?)&gt;<\/p>(.*?)<p>&lt;end-embed&gt;<\/p>/gs;
     const floatRegex = /<p>&lt;float(.*?)&gt;<\/p>(.*?)<p>&lt;end-float&gt;<\/p>/gs;
-    const floatLeftRegex = /<p>&lt;float-left&gt;<\/p>(.*?)<p>&lt;end-float-left&gt;<\/p>/gs;
-    const floatRightRegex = /<p>&lt;float-right&gt;<\/p>(.*?)<p>&lt;end-float-right&gt;<\/p>/gs;
+    const floatLeftRegex = /<p>&lt;float-left(.*?)&gt;<\/p>(.*?)<p>&lt;end-float-left&gt;<\/p>/gs;
+    const floatRightRegex = /<p>&lt;float-right(.*?)&gt;<\/p>(.*?)<p>&lt;end-float-right&gt;<\/p>/gs;
     let match;
     let floatHTML = html;
     while ((match = floatRegex.exec(html)) !== null) {
@@ -88,17 +88,15 @@ function parseFloatTags(html) {
         const style = styleMatch
             ? `style="${styleMatch[1]} display:flex; justify-content:space-between; background-color:var(--bg-color); box-shadow: 0 0 0 100vmax var(--bg-color); clip-path: inset(0 -100vmax);"`
             : "style=\"display:flex; justify-content:space-between;\"";
-        // Check if content contains float-left or float-right
         let content = match[2];
         const hasFloats = floatLeftRegex.test(content) || floatRightRegex.test(content);
         if (hasFloats) {
             const processedContent = content
-                .replace(floatLeftRegex, "<div class=\"float\">$1</div>")
-                .replace(floatRightRegex, "<div class=\"float\">$1</div>");
+                .replace(floatLeftRegex, (m, s, c) => `<div class="float float-left" style="${s.replace(/&quot;/g, "")}">${c}</div>`)
+                .replace(floatRightRegex, (m, s, c) => `<div class="float float-right" style="${s.replace(/&quot;/g, "")}">${c}</div>`);
             floatHTML = floatHTML.replace(match[0], `<div class="float-container" ${style}>${processedContent}</div>`);
         }
         else {
-            // Handle direct content without floats
             floatHTML = floatHTML.replace(match[0], `<div class="float-container" ${style}>${content}</div>`);
         }
     }
