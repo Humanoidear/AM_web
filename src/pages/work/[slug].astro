@@ -92,8 +92,8 @@ function parseFloatTags(html) {
         const hasFloats = floatLeftRegex.test(content) || floatRightRegex.test(content);
         if (hasFloats) {
             const processedContent = content
-                .replace(floatLeftRegex, (m, s, c) => `<div class="float float-left" style="${s.replace(/&quot;/g, "")}">${c}</div>`)
-                .replace(floatRightRegex, (m, s, c) => `<div class="float float-right" style="${s.replace(/&quot;/g, "")}">${c}</div>`);
+                .replace(floatLeftRegex, (m, s, c) => `<div class="float float-left" ${s.replace(/&quot;/g, "")}">${c}</div>`)
+                .replace(floatRightRegex, (m, s, c) => `<div class="float float-right" ${s.replace(/&quot;/g, "")}">${c}</div>`);
             floatHTML = floatHTML.replace(match[0], `<div class="float-container" ${style}>${processedContent}</div>`);
         }
         else {
