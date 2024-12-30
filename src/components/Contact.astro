@@ -164,14 +164,10 @@ const formattedReviews = localizedReviews.map((review) => {
   }
 
   .quote {
-    height: 4.5em;
+    height: 6em;
     overflow: hidden;
     position: relative;
-    transition: all 0.3s ease-in-out;
-
-    &:hover {
-      height: max-content;
-    }
+    transition: all 0.3s cubic-bezier(0, 0, 0, 1);
   }
 
   .quote::after {
@@ -180,17 +176,18 @@ const formattedReviews = localizedReviews.map((review) => {
     bottom: 0;
     right: 0;
     width: 100%;
-    height: 1.5em;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgb(0, 0, 0) 90%);
-    transition: all 0.3s ease-in-out;
+    height: 4em;
+    opacity: 1;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgb(0, 0, 0) 80%);
+    transition: all 0.3s cubic-bezier(0, 0, 0, 1);
   }
 
   .quote:hover {
     height: 20em;
-    transition: 0.2s;
+    transition: all 0.3s cubic-bezier(0, 0, 0, 1);
   }
 
   .quote:hover::after {
-    display: none;
+    opacity: 0;
   }
 </style>
