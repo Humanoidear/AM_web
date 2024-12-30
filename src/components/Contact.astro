@@ -84,7 +84,7 @@ const formattedReviews = localizedReviews.map((review) => {
               style="transform: scaleX(-1);"
               alt="Quote Icon"
             />{" "}
-            <span set:html={'"' + review.quote + '"'} />
+            <span class="quote" set:html={'"' + review.quote + '"'} />
           </p>
         </div>
       ))
@@ -161,5 +161,36 @@ const formattedReviews = localizedReviews.map((review) => {
       opacity: 1;
       transform: translateY(0);
     }
+  }
+
+  .quote {
+    height: 4.5em;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      height: max-content;
+    }
+  }
+
+  .quote::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 1.5em;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgb(0, 0, 0) 90%);
+    transition: all 0.3s ease-in-out;
+  }
+
+  .quote:hover {
+    height: 20em;
+    transition: 0.2s;
+  }
+
+  .quote:hover::after {
+    display: none;
   }
 </style>

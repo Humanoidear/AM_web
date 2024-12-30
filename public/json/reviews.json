@@ -7,6 +7,12 @@
       "quote": "Working with Alex has been a great success. His creativity and efficiency always stand out in each project. In the two galas of 'Pequeño Valiente', broadcast live on La 2, he was in charge of the graphics, giving them a unique and professional touch. In addition, he designed the new chyron package for the daily magazine 'Cerca de ti', directed and presented by Roberto Herrera on La 1, achieving a fresh and modern style that fits perfectly with the program. \n He is a committed professional, with a great eye for detail and a always positive attitude. Without a doubt, having Alex on any project is a guarantee of quality."
     },
     {
+      "name": "Laura Arias",
+      "pfp": "https://images.ctfassets.net/sd3w8n4shl90/1UGU7PTarcPOmkBOIAyyqF/cafbf0e67f99e40d963222621f03b5bd/laura_arias_pfp.jpg",
+      "career": "Journalist at betevé",
+      "quote": "Alex is restless, intelligent, curious, persevering, and self-sufficient. He understands the audiovisual world. Not only does he master it, but he also transforms it: making it both accessible and innovative. Working with him is easy, comfortable, and pleasant—essential qualities for teamwork. From the very first moment I met him, I knew he was a young talent, and I hope to cross paths with him in the professional world."
+    },
+    {
       "name": "Alejandro González",
       "pfp": "https://images.ctfassets.net/sd3w8n4shl90/1H5wDyO3CuLUMhUDXj6N1M/7efb15824643505dc949531f9c603081/alejandro_gonzalez_pfp.jpg",
       "career": "Web developer and designer at crosss and WiiLink",
@@ -21,16 +27,16 @@
       "quote": "Trabajar con Alex ha sido todo un acierto. Su creatividad y eficiencia siempre destacan en cada proyecto. En las dos galas de Pequeño Valiente, emitidas en directo por La 2, se encargó de los grafismos, dándoles un toque único y profesional. Además, diseñó la nueva rotulación del magazine diario Cerca de ti, que dirige y presenta Roberto Herrera en La 1, logrando un estilo fresco y moderno que encaja perfectamente con el programa. \n Es un profesional comprometido, con un gran ojo para los detalles y una actitud siempre positiva. Sin duda, contar con Alex en cualquier proyecto es garantía de calidad."
     },
     {
+      "name": "Laura Arias",
+      "pfp": "https://images.ctfassets.net/sd3w8n4shl90/1UGU7PTarcPOmkBOIAyyqF/cafbf0e67f99e40d963222621f03b5bd/laura_arias_pfp.jpg",
+      "career": "Periodista en betevé",
+      "quote": "Alex es inquieto, inteligente, curioso, perseverante y autosuficiente. Comprende el medio audiovisual. No solo lo domina, sino que lo transforma: lo hace accesible y, al mismo tiempo, innovador. Trabajar con él es fácil, cómodo y agradable, cualidades indispensables para un trabajo en equipo. Desde el primer momento en que lo conocí, supe que es una joven promesa y espero coincidir con él en el ámbito laboral."
+    },
+    {
       "name": "Alejandro González",
       "pfp": "https://images.ctfassets.net/sd3w8n4shl90/1H5wDyO3CuLUMhUDXj6N1M/7efb15824643505dc949531f9c603081/alejandro_gonzalez_pfp.jpg",
       "career": "Desarrollador web y diseñador en crosss y WiiLink",
       "quote": "Trabajar con Alex Malvehy para la realización de mi marca ha sido un proceso muy fácil y profesional. Es una persona que se implica personalmente en todos sus trabajos, haciendo que todo su trabajo destaque de forma considerable."
-    },
-    {
-      "name": "Jane Doe",
-      "pfp": "https://via.placeholder.com/150?text=Jane+Doe",
-      "career": "Diseñadora Gráfica",
-      "quote": "La creatividad es inteligencia divirtiéndose."
     }
   ],
   "ca": [
@@ -41,17 +47,16 @@
       "quote": "Treballar amb l'Alex ha estat tot un encert. La seva creativitat i eficiència sempre destaquen a cada projecte. A les dues gales de 'Pequeño Valiente', emeses en directe per La 2, es va encarregar dels grafismes, donant-los un toc únic i professional. A més, va dissenyar la nova retolació del magazine diari 'Cerca de ti', que dirigeix ​​i presenta Roberto Herrera a La 1, aconseguint un estil fresc i modern que encaixa perfectament amb el programa.<br> És un professional compromès, amb un gran ull pels detalls i una actitud sempre positiva. Sens dubte, comptar amb l'Alex en qualsevol projecte és garantia de qualitat."
     },
     {
+      "name": "Laura Arias",
+      "pfp": "https://images.ctfassets.net/sd3w8n4shl90/1UGU7PTarcPOmkBOIAyyqF/cafbf0e67f99e40d963222621f03b5bd/laura_arias_pfp.jpg",
+      "career": "Periodista a betevé",
+      "quote": "L’Alex és inquiet, intel·ligent, curiós, perseverant i autosuficient. Comprèn el medi audiovisual. No només el domina sinó que el transforma: el fa accessible i alhora innovador. Treballar amb ell és fàcil, còmode i agradable, qualitats indispensables per a una feina en equip. Des del primer moment que el vaig conèixer vaig saber que és una jove promesa i espero coincidir-hi al món laboral."
+    },
+    {
       "name": "Alejandro González",
       "pfp": "https://images.ctfassets.net/sd3w8n4shl90/1H5wDyO3CuLUMhUDXj6N1M/7efb15824643505dc949531f9c603081/alejandro_gonzalez_pfp.jpg",
       "career": "Desenvolupador web i dissenyador a crosss i WiiLink",
       "quote": "Treballar amb l'Alex Malvehy per la realització de la meua marca ha sigut un procés molt fàcil i professional. Es una persona que s'implica personalment en tots els seus treballs, fent que tota la seua feina destaqui de manera considerable."
-    },
-    {
-      "name": "Jane Doe",
-      "pfp": "https://via.placeholder.com/150?text=Jane+Doe",
-      "career": "Dissenyadora Gràfica",
-      "quote": "La creativitat és intel·ligència divertint-se."
     }
-
   ]
 }
