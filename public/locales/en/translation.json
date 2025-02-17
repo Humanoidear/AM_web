@@ -16,7 +16,8 @@
     "catch": "As a freelance designer, I've developed a diverse portfolio focused on delivering clear, impactful design and motion graphics across various sectors and clients, as well as personal projects and some little experiments.",
     "button": "view all work",
     "related": "Related projects",
-    "nomatch": "No related projects found."
+    "nomatch": "No related projects found.",
+    "comingSoon": "Coming<0><1>soon</1>"
   },
   "contact": {
     "catch": "Do you have a project, idea, or just want to get some info? In either case, don't hesitate to reach out to me, and we'll figure things out."

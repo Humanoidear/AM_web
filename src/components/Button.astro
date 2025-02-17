@@ -86,31 +86,31 @@ const { icon, text, href, externalhref, white, nohide } = Astro.props;
   .pixel-corners,
   .pixel-corners--wrapper {
     clip-path: polygon(
-      0px calc(100% - 6px),
-      3px calc(100% - 6px),
-      3px calc(100% - 3px),
-      6px calc(100% - 3px),
-      6px 100%,
-      calc(100% - 6px) 100%,
-      calc(100% - 6px) calc(100% - 3px),
-      calc(100% - 3px) calc(100% - 3px),
-      calc(100% - 3px) calc(100% - 6px),
-      100% calc(100% - 6px),
-      100% 6px,
-      calc(100% - 3px) 6px,
-      calc(100% - 3px) 3px,
-      calc(100% - 6px) 3px,
-      calc(100% - 6px) 0px,
-      6px 0px,
-      6px 3px,
-      3px 3px,
-      3px 6px,
-      0px 6px
+      0px calc(100% - 4px),
+      2px calc(100% - 4px),
+      2px calc(100% - 2px),
+      4px calc(100% - 2px),
+      4px 100%,
+      calc(100% - 4px) 100%,
+      calc(100% - 4px) calc(100% - 2px),
+      calc(100% - 2px) calc(100% - 2px),
+      calc(100% - 2px) calc(100% - 4px),
+      100% calc(100% - 4px),
+      100% 4px,
+      calc(100% - 2px) 4px,
+      calc(100% - 2px) 2px,
+      calc(100% - 4px) 2px,
+      calc(100% - 4px) 0px,
+      4px 0px,
+      4px 2px,
+      2px 2px,
+      2px 4px,
+      0px 4px
     );
     position: relative;
   }
   .pixel-corners {
-    border: 3px solid transparent;
+    border: 2px solid transparent;
   }
   .pixel-corners--wrapper {
     width: fit-content;
@@ -119,18 +119,18 @@ const { icon, text, href, externalhref, white, nohide } = Astro.props;
   .pixel-corners--wrapper .pixel-corners {
     display: block;
     clip-path: polygon(
-      3px 6px,
-      6px 6px,
-      6px 3px,
-      calc(100% - 6px) 3px,
-      calc(100% - 6px) 6px,
-      calc(100% - 3px) 6px,
-      calc(100% - 3px) calc(100% - 6px),
-      calc(100% - 6px) calc(100% - 6px),
-      calc(100% - 6px) calc(100% - 3px),
-      6px calc(100% - 3px),
-      6px calc(100% - 6px),
-      3px calc(100% - 6px)
+      2px 4px,
+      4px 4px,
+      4px 2px,
+      calc(100% - 4px) 2px,
+      calc(100% - 4px) 4px,
+      calc(100% - 2px) 4px,
+      calc(100% - 2px) calc(100% - 4px),
+      calc(100% - 4px) calc(100% - 4px),
+      calc(100% - 4px) calc(100% - 2px),
+      4px calc(100% - 2px),
+      4px calc(100% - 4px),
+      2px calc(100% - 4px)
     );
   }
   .pixel-corners::after,
@@ -138,41 +138,41 @@ const { icon, text, href, externalhref, white, nohide } = Astro.props;
     content: "";
     position: absolute;
     clip-path: polygon(
-      0px calc(100% - 6px),
-      3px calc(100% - 6px),
-      3px calc(100% - 3px),
-      6px calc(100% - 3px),
-      6px 100%,
-      calc(100% - 6px) 100%,
-      calc(100% - 6px) calc(100% - 3px),
-      calc(100% - 3px) calc(100% - 3px),
-      calc(100% - 3px) calc(100% - 6px),
-      100% calc(100% - 6px),
-      100% 6px,
-      calc(100% - 3px) 6px,
-      calc(100% - 3px) 3px,
-      calc(100% - 6px) 3px,
-      calc(100% - 6px) 0px,
-      6px 0px,
-      6px 3px,
-      3px 3px,
-      3px 6px,
-      0px 6px,
+      0px calc(100% - 4px),
+      2px calc(100% - 4px),
+      2px calc(100% - 2px),
+      4px calc(100% - 2px),
+      4px 100%,
+      calc(100% - 4px) 100%,
+      calc(100% - 4px) calc(100% - 2px),
+      calc(100% - 2px) calc(100% - 2px),
+      calc(100% - 2px) calc(100% - 4px),
+      100% calc(100% - 4px),
+      100% 4px,
+      calc(100% - 2px) 4px,
+      calc(100% - 2px) 2px,
+      calc(100% - 4px) 2px,
+      calc(100% - 4px) 0px,
+      4px 0px,
+      4px 2px,
+      2px 2px,
+      2px 4px,
+      0px 4px,
       0px 50%,
-      3px 50%,
-      3px 6px,
-      6px 6px,
-      6px 3px,
-      calc(100% - 6px) 3px,
-      calc(100% - 6px) 6px,
-      calc(100% - 3px) 6px,
-      calc(100% - 3px) calc(100% - 6px),
-      calc(100% - 6px) calc(100% - 6px),
-      calc(100% - 6px) calc(100% - 3px),
-      6px calc(100% - 3px),
-      6px calc(100% - 6px),
-      3px calc(100% - 6px),
-      3px 50%,
+      2px 50%,
+      2px 4px,
+      4px 4px,
+      4px 2px,
+      calc(100% - 4px) 2px,
+      calc(100% - 4px) 4px,
+      calc(100% - 2px) 4px,
+      calc(100% - 2px) calc(100% - 4px),
+      calc(100% - 4px) calc(100% - 4px),
+      calc(100% - 4px) calc(100% - 2px),
+      4px calc(100% - 2px),
+      4px calc(100% - 4px),
+      2px calc(100% - 4px),
+      2px 50%,
       0px 50%
     );
     top: 0;
@@ -184,9 +184,9 @@ const { icon, text, href, externalhref, white, nohide } = Astro.props;
     pointer-events: none;
   }
   .pixel-corners::after {
-    margin: -3px;
+    margin: -2px;
   }
   .pixel-corners:active {
-    transform: translate(0, 3px);
+    transform: translate(0, 2px);
   }
 </style>

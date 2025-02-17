@@ -2,6 +2,7 @@
 import BaseHead from "../../components/BaseHead.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
+import Button from "../../components/Button.astro";
 import i18next, { t, changeLanguage } from "i18next";
 import timeline from "../../../public/json/timeline.json";
 
@@ -21,7 +22,7 @@ let localizedTimeline = timeline[lang];
   </head>
   <body>
     <Header isWork />
-    <div class="w-screen h-screen pointer-events-none overflow-hidden absolute">
+    <div class="w-screen h-screen overflow-hidden absolute">
       <img
         src="/img/blob-2.avif"
         id="blob-2"
@@ -30,9 +31,9 @@ let localizedTimeline = timeline[lang];
       />
     </div>
     <main
-      class="w-screen flex flex-col items-center justify-center z-20 pointer-events-none relative overflow-hidden"
+      class="w-screen flex flex-col items-center justify-center z-20 relative overflow-hidden"
     >
-      <div class="max-w-[600px] mt-[20vh] mb-[150px]">
+      <div class="max-w-[600px] mt-[20vh] mb-[30px]">
         <div
           class="max-w-[700px] flex md:flex-row flex-col-reverse md:items-center gap-3"
         >
@@ -62,6 +63,18 @@ let localizedTimeline = timeline[lang];
           {t("about.catchPage")}
         </p>
       </div>
+      <div class="w-full max-w-[600px] mb-[120px] flex flex-row items-center gap-6 z-10">
+      <Button
+      text="Portfolio"
+      href="/pdf/Portfolio-alexmalvehy.pdf"
+      icon="https://raw.githubusercontent.com/halfmage/pixelarticons/cd361925cb272ef38036f81d82ca7eb1984f0445/svg/article.svg"
+    />
+    <Button
+      text="CV"
+      href="/pdf/CV-alexmalvehy.pdf"
+      icon="https://raw.githubusercontent.com/halfmage/pixelarticons/cd361925cb272ef38036f81d82ca7eb1984f0445/svg/user.svg"
+    />
+  </div>
       <div
         class="-translate-x-18 sm:-translate-x-10 md:translate-x-0 max-w-[600px] sm:max-w-[1100px] flex flex-col items-start justify-start z-10"
       >

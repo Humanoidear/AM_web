@@ -8,6 +8,7 @@ import Header from "../../../components/Header.astro";
 import Related from "../../../components/Related.astro";
 import Footer from "../../../components/Footer.astro";
 import i18next, { t, changeLanguage } from "i18next";
+import { Trans } from "astro-i18next/components";
 
 changeLanguage("es");
 
@@ -25,13 +26,14 @@ export async function getStaticPaths() {
             type: item.fields.type,
             services: item.fields.services,
             preview: item.fields.preview,
+            comingSoon: item.fields.comingSoon,
             heroImage: item.fields.heroImage,
             blobColor: item.fields.blobColor,
         },
     }));
     return pages;
 }
-const { content, title, slug, year, type, services, heroImage, blobColor } = Astro.props;
+const { content, title, slug, year, type, preview, services, comingSoon, heroImage, blobColor } = Astro.props;
 let options = {
     renderNode: {
         "embedded-asset-block": (node: any) => {
@@ -142,9 +144,68 @@ bodyHTML = parseCenterTags(bodyHTML); // Ensure parseCenterTags is called on the
   <body>
     <Header isWork />
     <main
-      class="m-0 p-0 flex flex-col items-center"
+      class={`m-0 p-0 flex flex-col items-center ${comingSoon ? "h-screen justify-center" : "justify-start"}`}
       style="overflow:visible !important;"
     >
+    { comingSoon ? (
+      <img
+          id="scrollingImage"
+          class="top-[200px] w-[1500px] max-w[1500px] opacity-60 z-0 transition-none absolute"
+          style={`filter: drop-shadow(0px 1000px 0 ${blobColor}); transform: translateY(-1250px) translateX(-400px); transition: 0s;`}
+          alt=""
+          src="/img/blob-2.avif"
+        />
+      <div class="w-full max-w-[1300px] flex flex-row items-center justify-between gap-28 relative">
+        <h1 class="text-8xl">
+          <Trans i18nKey="work.comingSoon">Coming <br><span class="ml-8">soon</span>
+          </Trans>
+          </h1>
+          <li
+                data-type={type}
+                class="hover:shadow-xl shadow-white list-none z-10 relative"
+                style="aspect-ratio: 1 / 1;"
+              >
+                <a
+                  class="flex flex-row items-start justify-between sm:gap-5 relative"
+                >
+                  <div
+                    class={`work-hover w-full h-full overflow-hidden transition-all z-10 relative`}
+                  >
+                    {preview && (
+                        <img
+                          src={(preview as any)?.fields?.file?.url}
+                          alt=""
+                          class={`w-[300px] h-[300px] object-cover`}
+                          transition:name={`work-title-${title}-image`}
+                        />
+                    )}
+                  </div>
+                  <div class="bottom-0 right-0 translate-y-[80%] w-full items-center justify-end flex flex-row pointer-events-none z-10 absolute">
+                    <h2
+                      class="2xl:flex hidden bottom-0 left-0 w-[230px] -translate-x-1/2 -translate-y-20 flex-wrap text-left m-0 fadeup leading-tight font-[MGNHumble] text-white z-10 absolute"
+                      transition:name={`work-title-${title}`}
+                    >
+                      {title.split(" ").map((word, index) => (
+                        <span style={`margin-left: ${index * 20}px;`}>
+                          {word}
+                        </span>
+                      ))}
+                    </h2>
+                    <div class="sm:-translate-x-4 translate-y-5 flex flex-col items-end text-white/60">
+                      {typeof year === "string" ? year.slice(0, 4) : year}
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <img
+          class="top-[150px] right-0 w-[1000px] opacity-60 transition-none z-0 absolute"
+          style={`filter: drop-shadow(0px 1000px 0 ${blobColor}); transform: translateY(-1250px) translateX(400px); transition: 0s;`}
+          alt=""
+          src="/img/blobl.webp"
+          transition:name={`work-title-${title}-blob`}
+        />
+      </div>
+    ) : (
       <div class="w-full max-w-[1800px]">
         <div class="flex items-end justify-end rounded-none z-10 relative">
           {
@@ -207,6 +268,7 @@ bodyHTML = parseCenterTags(bodyHTML); // Ensure parseCenterTags is called on the
         </div>
       </article>
       <Related services={services} slug={slug} />
+    )}
     </main>
     <Footer />
   </body>

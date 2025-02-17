@@ -16,7 +16,8 @@
         "catch": "Com a dissenyador freelance, he desenvolupat un portfoli divers enfocat a oferir disseny i gràfics de moviment clars i impactants en diversos sectors i clients, així com projectes personals i alguns petits experiments.",
         "button": "veure tots els treballs",
         "related": "Projectes relacionats",
-        "nomatch": "No s'han trobat projectes relacionats."
+        "nomatch": "No s'han trobat projectes relacionats.",
+        "comingSoon": "Propera<0><1>ment</1>"
     },
     "contact": {
         "catch": "Tens un projecte, una idea o només vols obtenir informació? En qualsevol cas, no dubtes a posar-te en contacte amb mi i ens entendrem."

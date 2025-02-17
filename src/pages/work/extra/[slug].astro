@@ -1,6 +1,5 @@
 ---
 import { contentfulClient } from "../../../lib/contentful";
-import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer";
 import type { extra } from "../../../lib/contentful";
 import BaseHead from "../../../components/BaseHead.astro";
@@ -23,13 +22,14 @@ export async function getStaticPaths() {
             year: item.fields.year,
             type: item.fields.type,
             services: item.fields.services,
+            comingSoon: item.fields.comingSoon,
             preview: item.fields.preview,
             blobColor: item.fields.color,
         },
     }));
     return pages;
 }
-const { content, title, description, year, type, services, blobColor, preview, } = Astro.props;
+const { content, title, description, year, type, services, blobColor, comingSoon, preview } = Astro.props;
 let options = {
     renderNode: {
         "embedded-asset-block": (node: any) => {
@@ -79,7 +79,63 @@ if (parsedSEOContent.length > 60) {
       onmouseleave="unfollower()"
       class="sm:h-screen m-0 p-0 flex flex-col sm:flex-row items-center overflow-visible sm:overflow-scroll snap-x snap-mandatory no-scrollbar"
     >
-      <div class="w-screen pointer-events-none overflow-hidden sm:overflow-visible absolute">
+    { comingSoon ? (
+      <img
+          id="scrollingImage"
+          class="top-[200px] w-[1500px] max-w[1500px] opacity-60 z-0 transition-none absolute"
+          style={`filter: drop-shadow(0px 1000px 0 ${blobColor}); transform: translateY(-1250px) translateX(-400px); transition: 0s;`}
+          alt=""
+          src="/img/blob-2.avif"
+        />
+      <div class="left-1/2 -translate-x-1/2 w-full max-w-[1300px] flex flex-row items-center justify-between gap-28 relative">
+        <h1 class="text-8xl">Coming <br><span class="ml-8">soon</span></h1>
+          <li
+                data-type={type}
+                class="hover:shadow-xl shadow-white list-none z-10 relative"
+                style="aspect-ratio: 1 / 1;"
+              >
+                <a
+                  class="flex flex-row items-start justify-between sm:gap-5 relative"
+                >
+                  <div
+                    class={`work-hover w-full h-full overflow-hidden transition-all z-10 relative`}
+                  >
+                    {preview && (
+                        <img
+                          src={(preview as any)?.fields?.file?.url}
+                          alt=""
+                          class={`w-[300px] h-[300px] object-cover`}
+                          transition:name={`work-title-${title}-image`}
+                        />
+                    )}
+                  </div>
+                  <div class="bottom-0 right-0 translate-y-[80%] w-full items-center justify-end flex flex-row pointer-events-none z-10 absolute">
+                    <h2
+                      class="2xl:flex hidden bottom-0 left-0 w-[230px] -translate-x-1/2 -translate-y-20 flex-wrap text-left m-0 fadeup leading-tight font-[MGNHumble] text-white z-10 absolute"
+                      transition:name={`work-title-${title}`}
+                    >
+                      {title.split(" ").map((word, index) => (
+                        <span style={`margin-left: ${index * 20}px;`}>
+                          {word}
+                        </span>
+                      ))}
+                    </h2>
+                    <div class="sm:-translate-x-4 translate-y-5 flex flex-col items-end text-white/60">
+                      {typeof year === "string" ? year.slice(0, 4) : year}
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <img
+          class="top-[150px] right-0 w-[1000px] opacity-60 transition-none z-0 absolute"
+          style={`filter: drop-shadow(0px 1000px 0 ${blobColor}); transform: translateY(-1250px) translateX(400px); transition: 0s;`}
+          alt=""
+          src="/img/blobl.webp"
+          transition:name={`work-title-${title}-blob`}
+        />
+      </div>
+    ) : (
+    <div class="w-screen pointer-events-none overflow-hidden sm:overflow-visible absolute">
         <img
           id="scrollingImage"
           class="w-[1000px] max-w-[1000px] opacity-60 z-0 transition-none"
@@ -174,7 +230,10 @@ if (parsedSEOContent.length > 60) {
             ))
         }
       </div>
+    )}
     </main>
+    { !comingSoon &&
+ (
     <div
       class="hidden bottom-20 right-10 sm:flex flex-row items-center opacity-30 hover:opacity-100 absolute transition-all"
     >
@@ -189,8 +248,7 @@ if (parsedSEOContent.length > 60) {
           <path
             d="M20 11v2H8v2H6v-2H4v-2h2V9h2v2h12zM10 7H8v2h2V7zm0 0h2V5h-2v2zm0 10H8v-2h2v2zm0 0h2v2h-2v-2z"
             fill="currentColor"></path>
-        </svg></button
-      >
+        </svg></button>
       <button
         class="hover:border-2 border-black p-2 hover:bg-white/20 active:scale-95 w-12 invert transition-all"
         onclick="scrollImp(400);"
@@ -202,9 +260,9 @@ if (parsedSEOContent.length > 60) {
           <path
             d="M4 11v2h12v2h2v-2h2v-2h-2V9h-2v2H4zm10-4h2v2h-2V7zm0 0h-2V5h2v2zm0 10h2v-2h-2v2zm0 0h-2v2h2v-2z"
             fill="currentColor"></path>
-        </svg></button
-      >
+        </svg></button>
     </div>
+    )}
     <Footer />
   </body><div
     id="follower"

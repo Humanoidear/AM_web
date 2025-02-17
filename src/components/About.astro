@@ -24,7 +24,7 @@ const { blob } = Astro.props;
     >
       {t("about.catchHome")}
       <span
-        class={`${blob} ? "visible" : "hidden"} mt-3 inline-block relative`}
+        class={`${blob} ? "visible" : "hidden"} mt-3 flex items-center justify-end gap-1 relative`}
       >
         <Button
           text={t("button.more")}

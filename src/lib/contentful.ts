@@ -13,6 +13,7 @@ export interface work {
     gif: EntryFieldTypes.AssetLink;
     heroImage: EntryFieldTypes.AssetLink;
     content: EntryFieldTypes.RichText;
+    comingSoon: EntryFieldTypes.Boolean;
     blobColor: EntryFieldTypes.Text;
     order: EntryFieldTypes.Number;
   };
@@ -30,6 +31,7 @@ export interface extra {
     services: EntryFieldTypes.Object;
     preview: EntryFieldTypes.AssetLink;
     description: EntryFieldTypes.Text;
+    comingSoon: EntryFieldTypes.Boolean;
     content: EntryFieldTypes.RichText;
     order: EntryFieldTypes.Number;
   };
